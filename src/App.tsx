@@ -27,7 +27,18 @@ export const App: React.FC = () => {
           delete parsed.skills;
           changed = true;
         }
+        if (parsed.projects && !parsed.projects.some((p: any) => p.id === 'nexrall-hr-copilot')) {
+          delete parsed.projects;
+          changed = true;
+        }
+        if (parsed.experiences) {
+          delete parsed.experiences;
+          changed = true;
+        }
         if (parsed.profile) {
+          parsed.profile.title = initialPortfolioData.profile.title;
+          parsed.profile.tagline = initialPortfolioData.profile.tagline;
+          parsed.profile.bio = initialPortfolioData.profile.bio;
           parsed.profile.github = initialPortfolioData.profile.github;
           parsed.profile.linkedin = initialPortfolioData.profile.linkedin;
           parsed.profile.stats = initialPortfolioData.profile.stats;
@@ -54,6 +65,9 @@ export const App: React.FC = () => {
           profile: {
             ...initialPortfolioData.profile,
             ...(parsed.profile || {}),
+            title: initialPortfolioData.profile.title,
+            tagline: initialPortfolioData.profile.tagline,
+            bio: initialPortfolioData.profile.bio,
             github: initialPortfolioData.profile.github,
             linkedin: initialPortfolioData.profile.linkedin,
             stats: initialPortfolioData.profile.stats,
@@ -72,53 +86,10 @@ export const App: React.FC = () => {
           activities: initialPortfolioData.activities,
           highSchoolAchievement: initialPortfolioData.highSchoolAchievement,
           skills: initialPortfolioData.skills,
-          experiences: (parsed.experiences || initialPortfolioData.experiences).map((exp: any) => {
-            const initExp = initialPortfolioData.experiences.find(e => e.id === exp.id);
-            if (exp.id === 'netviet' && initExp) {
-              return {
-                ...exp,
-                role: initExp.role,
-                description: initExp.description,
-                responsibilities: initExp.responsibilities,
-                tags: initExp.tags,
-                media: {
-                  ...exp.media,
-                  imageUrl: initExp.media?.imageUrl,
-                  images: initExp.media?.images,
-                  videoUrl: undefined,
-                  videoTitle: undefined,
-                  projectUrl: initExp.media?.projectUrl,
-                }
-              };
-            }
-            if (exp.id === 'rikkei' && initExp) {
-              return {
-                ...exp,
-                media: {
-                  ...exp.media,
-                  imageUrl: initExp.media?.imageUrl || exp.media?.imageUrl,
-                  images: initExp.media?.images || exp.media?.images,
-                  videoUrl: undefined,
-                  videoTitle: undefined,
-                  projectUrl: initExp.media?.projectUrl || exp.media?.projectUrl,
-                }
-              };
-            }
-            if (exp.id === 'vco' && initExp) {
-              return {
-                ...exp,
-                media: {
-                  ...exp.media,
-                  imageUrl: initExp.media?.imageUrl || exp.media?.imageUrl,
-                  videoUrl: initExp.media?.videoUrl || exp.media?.videoUrl,
-                  videoTitle: initExp.media?.videoTitle || exp.media?.videoTitle,
-                  projectUrl: initExp.media?.projectUrl || exp.media?.projectUrl,
-                }
-              };
-            }
-            return exp;
-          }),
-          projects: parsed.projects || initialPortfolioData.projects,
+          experiences: initialPortfolioData.experiences,
+          projects: (parsed.projects && parsed.projects.some((p: any) => p.id === 'nexrall-hr-copilot'))
+            ? parsed.projects
+            : initialPortfolioData.projects,
         };
       }
     } catch (e) {

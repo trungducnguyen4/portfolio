@@ -4,8 +4,8 @@ export const initialPortfolioData: PortfolioData = {
   profile: {
     name: "Trung Đức",
     title: "AI-Augmented Software Engineer",
-    tagline: "Xây dựng sản phẩm phần mềm hiện đại và giải pháp ERP thông minh với tốc độ vượt trội nhờ AI-assisted workflows",
-    bio: "Kỹ sư phần mềm tốt nghiệp loại Giỏi Đại học Tôn Đức Thắng (GPA 8.34). Đam mê ứng dụng các công cụ AI thế hệ mới (Cursor, Claude, Copilot, LLM Integration) kết hợp nền tảng kỹ thuật phần mềm vững chắc để giải quyết bài toán nghiệp vụ doanh nghiệp, tối ưu hóa năng suất lập trình và bàn giao sản phẩm nhanh chóng, chuẩn xác.",
+    tagline: "Xây dựng hệ thống phần mềm doanh nghiệp & AI Agent cấp Production với kiến trúc Serverless hiệu năng cao và chi phí tối ưu",
+    bio: "Kỹ sư phần mềm tốt nghiệp loại Giỏi Đại học Tôn Đức Thắng (GPA 8.34). Đam mê ứng dụng các công cụ AI thế hệ mới (Cursor, Claude, Antigravity, LLM Integration) kết hợp nền tảng kỹ thuật phần mềm vững chắc và kiến trúc Multi-Provider AI Gateway, Agentic Tools để giải quyết bài toán nghiệp vụ doanh nghiệp, tối ưu hóa năng suất lập trình và bàn giao sản phẩm nhanh chóng, chuẩn xác.",
     status: "Sẵn sàng đón nhận cơ hội việc làm mới",
     location: "TP. Hồ Chí Minh, Việt Nam",
     email: "nguyentrungduc.forwork@gmail.com",
@@ -267,23 +267,36 @@ export const initialPortfolioData: PortfolioData = {
     {
       id: "netviet",
       company: "NetViet",
-      role: "ERP & Internal Systems Developer",
+      role: "ERP & AI Systems Developer",
       period: "Tháng 07/2026 - Hiện tại",
       duration: "3 tháng",
       location: "TP. Hồ Chí Minh · On-site",
       workType: "Internship",
       logo: "/logos/netviet-logo.svg",
-      description: "Chủ động khảo sát và bám sát quy trình làm việc thực tế tại doanh nghiệp để phát triển hệ thống NetViet HR Pro (hr.netviet.live). Tối ưu hóa triệt để chi phí hạ tầng với kiến trúc Zero Cost và chuyển dịch từ ứng dụng CRUD thông thường sang hệ thống cung cấp Data & Insights chuyên sâu cho Ban Giám đốc và bộ phận Nhân sự.",
+      description: "Chủ động khảo sát và bám sát quy trình làm việc thực tế tại doanh nghiệp để phát triển hệ thống NetViet HR Pro (hr.netviet.live) kết hợp Enterprise AI Copilot. Tối ưu hóa triệt để chi phí hạ tầng với kiến trúc Serverless Zero Cost ($0/tháng), chuyển dịch từ CRUD thông thường sang hệ thống phân tích dữ liệu chuyên sâu và tích hợp AI Agent thông minh hỗ trợ Ban Giám đốc và bộ phận Nhân sự.",
       responsibilities: [
-        "Khảo sát và bám sát thực tế vận hành: Đi sâu vào từng phòng ban để xây dựng quy trình số hóa chuẩn xác theo thực tế công việc hàng ngày của công ty, thay vì áp dụng máy móc lý thuyết trên giấy tờ.",
-        "Kiến trúc giải pháp Zero Cost cho SME: Giải quyết bài toán công ty SME không có IP tĩnh và không có máy chủ on-premise. Chủ động đo lường lưu lượng request hàng ngày để thiết kế kiến trúc Serverless (Cloudflare Workers & Cloud Edge) vận hành với chi phí 0 đồng (ZERO COST), giúp doanh nghiệp tiết kiệm ngân sách đáng kể.",
-        "Thay thế chấm công Wifi bằng GPS Radar: Thay vì tốn kém chi phí IP tĩnh cho mạng Wifi, phát triển tính năng chấm công GPS đa địa điểm (Văn phòng HCM, Hà Nội) với bán kính radar thông minh, độ chính xác cao.",
-        "Tập trung Data & Insight cho HR và Sếp tổng: Vượt qua các tính năng CRUD đơn thuần để tập trung khai thác và trực quan hóa dữ liệu (tỷ lệ check-in thời gian thực, phân tích đi muộn, thống kê tiến độ Kanban và tính lương tự động), hỗ trợ Ban Giám đốc ra quyết định điều hành chính xác."
+        "Khảo sát & số hóa vận hành SME: Đi sâu vào từng phòng ban để xây dựng quy trình số hóa chuẩn xác cho 12 phân hệ nhân sự (chấm công, nghỉ phép, công việc Kanban, tính lương, bàn giao dự án), thay vì áp dụng máy móc lý thuyết.",
+        "Kiến trúc Serverless Zero-Cost ($0/tháng): Thiết kế toàn bộ hạ tầng trên Cloudflare Workers, Cloudflare D1 (SQLite), R2 Bucket và Durable Objects, xử lý lưu lượng request cao với chi phí 0 đồng, tiết kiệm ngân sách tối đa cho doanh nghiệp.",
+        "Phát triển Enterprise AI Copilot & Multi-Provider Gateway: Xây dựng AI Copilot với 24 Native Function Calling Tools, Stateful Circuit Breaker (cooldown 30s) chống cascading outages, rate limiting đa tầng và tự động fallback giữa Gemini, OpenAI và Edge Heuristics, bảo vệ 100% ngân sách token.",
+        "Bảo mật Tool-Layer RBAC & Chống Hallucination: Triển khai kiểm soát quyền độc lập khỏi prompt ở tầng mã nguồn, loại bỏ nguy cơ Prompt Injection / Jailbreak đối với dữ liệu lương nhạy cảm; tích hợp Citation Grounding lọc trích dẫn giả mạo và Human-in-the-Loop Action Cards.",
+        "Streaming SSE & Chấm công Radar GPS: Xây dựng cơ chế truyền phát Server-Sent Events (SSE) kèm đo lường True TTFT, kết hợp tính năng chấm công GPS đa địa điểm (văn phòng HCM, Hà Nội) với radar bán kính thông minh thay thế mạng Wifi IP tĩnh."
       ],
-      tags: ["NetViet HR Pro", "Serverless Architecture", "Zero Cost Optimization", "Data & Insights", "GPS Attendance", "Kanban & Payroll", "Cloudflare Workers"],
+      tags: ["NetViet HR Pro", "Enterprise AI Copilot", "Multi-Provider AI Gateway", "Function Calling (24 Tools)", "Server-Sent Events (SSE)", "Serverless Zero Cost", "Cloudflare Workers & D1", "GPS Radar Geofence", "Tool-Layer RBAC"],
       media: {
-        imageUrl: "/images/netviet-hr-dashboard.png",
+        imageUrl: "/images/netviet-ai-copilot-desktop.png",
         images: [
+          {
+            url: "/images/netviet-ai-copilot-desktop.png",
+            caption: "Dashboard Vận hành NetViet HR Pro tích hợp Enterprise AI Copilot & Radar Chấm công GPS"
+          },
+          {
+            url: "/images/netviet-ai-copilot-chat.png",
+            caption: "Giao diện Trợ lý ảo AI Copilot: Đa phân hệ, điều hướng thông minh & Telemetry thời gian thực"
+          },
+          {
+            url: "/images/netviet-ai-copilot-telemetry.png",
+            caption: "Multi-Provider AI Gateway Telemetry: Đo lường độ trễ (1262ms), chi phí token và mô hình Gemini"
+          },
           {
             url: "/images/netviet-hr-dashboard.png",
             caption: "Dashboard Tổng quan Vận hành & Radar Chấm công GPS (NetViet HR Pro)"
@@ -310,6 +323,7 @@ export const initialPortfolioData: PortfolioData = {
           }
         ],
         projectUrl: "https://hr.netviet.live",
+        repoUrl: "https://github.com/trungducnguyen4/nexrall-hr-manager---marketing"
       }
     },
     {
@@ -374,22 +388,22 @@ export const initialPortfolioData: PortfolioData = {
   ],
   projects: [
     {
-      id: "erp-ai-assistant",
-      title: "ERP Workflow AI Assistant",
-      tagline: "Trợ lý AI tự động hóa xử lý chứng từ và tổng hợp dữ liệu ERP",
-      category: "ERP / Enterprise",
+      id: "nexrall-hr-copilot",
+      title: "Nexrall Enterprise HR Copilot",
+      tagline: "Production AI Copilot: 24 Native Tools & Multi-Provider AI Gateway",
+      category: "AI Workflow",
       featured: true,
-      description: "Hệ thống AI tích hợp vào ERP doanh nghiệp giúp tự động hóa khâu đọc hiểu chứng từ, trích xuất dữ liệu bán hàng và sinh báo cáo tài chính tự động bằng các mô hình LLM chuyên biệt.",
+      description: "Hệ thống AI Agent nhân sự cấp doanh nghiệp tích hợp vào nền tảng NetViet HR Pro. Trang bị Multi-Provider AI Gateway (Gemini, OpenAI, Workers AI) có Circuit Breaker tự phục hồi, 24 Native Function Calling Tools, bảo mật Tool-Layer RBAC chống Jailbreak và streaming SSE thời gian thực.",
       features: [
-        "Trích xuất thực thể từ tài liệu PDF/Hóa đơn với độ chính xác >98%",
-        "Chatbot nội bộ tra cứu trạng thái đơn hàng và tồn kho realtime",
-        "Tích hợp quy trình kiểm thử tự động xác thực dữ liệu đầu ra"
+        "Multi-Provider AI Gateway: Circuit Breaker ngắt 30s chống sập, Rate Limiting & Fast-fail 429",
+        "24 Native Function Calling Tools: Phê duyệt đơn, kiểm toán bảng lương, chấm công GPS & Action Cards",
+        "Bảo mật Zero-Trust Tool-Layer RBAC: Chặn đứng Prompt Injection, kiểm soát quyền truy cập cấp DB",
+        "Server-Sent Events (SSE) & True TTFT Telemetry: Trực quan hóa tốc độ sinh token và Citation Grounding"
       ],
-      techStack: ["Python", "FastAPI", "React", "OpenAI API", "Tailwind CSS", "PostgreSQL"],
-      imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80",
-      videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      liveUrl: "https://demo.example.com/erp-assistant",
-      githubUrl: "https://github.com/example/erp-ai-assistant"
+      techStack: ["Cloudflare Workers", "D1 Database", "Gemini & OpenAI API", "SSE Streaming", "Vector Search", "TypeScript/ESM"],
+      imageUrl: "/images/netviet-ai-copilot-desktop.png",
+      liveUrl: "https://hrnetviet.live",
+      githubUrl: "https://github.com/trungducnguyen4/nexrall-hr-manager---marketing"
     },
     {
       id: "rag-knowledge-hub",
@@ -430,23 +444,27 @@ export const initialPortfolioData: PortfolioData = {
   ],
   skills: {
     aiArsenal: [
-      "AI-Assisted Coding (Cursor, Claude, Copilot)",
-      "Prompt Engineering & Chain-of-Thought",
-      "LLM Integration & Agentic Reasoning",
-      "RAG & Vector Search Concepts"
+      "Multi-Provider AI Gateway & Resilient Circuit Breakers",
+      "Native Function Calling & Agentic Action Engine (HITL)",
+      "Zero-Trust Tool-Layer RBAC & Prompt-Injection Defense",
+      "Server-Sent Events (SSE) Streaming & True TTFT Telemetry",
+      "Vector Embeddings, Cosine Similarity & Citation Grounding",
+      "AI-Assisted Coding (Cursor, Claude, Antigravity, Copilot)"
     ],
     languages: [
-      "TypeScript & JavaScript (ES6+)",
+      "TypeScript & JavaScript (ES6+ / ESM)",
       "Python (Automation & API)",
-      "SQL (PostgreSQL, MySQL)"
+      "SQL (SQLite / D1, PostgreSQL, MySQL)"
     ],
     frameworks: [
+      "Cloudflare Workers & Serverless Edge",
       "NestJS (Modular Architecture)",
       "Next.js & React.js",
-      "RESTful API Architecture"
+      "RESTful API & OpenAPI / Swagger"
     ],
     toolsAndDevops: [
-      "Git & GitHub (Branching, PRs)",
+      "Cloudflare D1, R2 & Durable Objects",
+      "Git & GitHub (Branching, PRs, CI/CD)",
       "Docker & Containerization basics",
       "Postman API Testing",
       "Scrum / Agile Methodology"
