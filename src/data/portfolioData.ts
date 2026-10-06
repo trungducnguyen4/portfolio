@@ -272,131 +272,91 @@ export const initialPortfolioData: PortfolioData = {
     }
   },
   agenticWorkflow: {
-    badge: "AI-Augmented Software Engineering & PR Verification",
-    title: "Agentic Workflow trong Kỹ thuật Phần mềm & Quy trình Pull Request (PR)",
-    subtitle: "Đối chiếu sự khác biệt cốt lõi giữa việc sử dụng AI thông thường (thụ động, copy-paste) và Quy trình Kỹ thuật Agentic tự động hóa gắn liền với Minh chứng Kiểm thử (Proof of Work) trong từng Pull Request trên GitHub",
-    manifesto: "AI không thể thay thế tư duy kỹ sư. Khi đặt vào tay một Software Engineer có nền tảng học thuật bài bản (Tốt nghiệp loại Giỏi TDTU, GPA 8.34), công nghệ Agentic trở thành đòn bẩy gia tăng năng suất gấp 3 - 5 lần mà vẫn kiểm soát 100% tính toàn vẹn kiến trúc, type safety và không bao giờ merge mã nguồn thiếu minh chứng kiểm thử.",
+    badge: "Git Flow & Pull Request Verification Standard",
+    title: "Kỷ luật Pull Request & Minh chứng Kiểm thử (Proof of Work)",
+    subtitle: "Đối chiếu sự khác biệt cốt lõi giữa việc dùng AI thiếu kiểm chứng (Commit bừa bãi) và Quy chuẩn Kỹ thuật chuyên nghiệp: Bắt buộc khởi chạy server thực tế, đính kèm Screenshot UI và Video demo trực tiếp trong mô tả PR trên GitHub trước khi merge.",
+    manifesto: "AI giúp gia tốc viết code gấp 3 - 5 lần, nhưng kỷ luật kỹ sư quyết định chất lượng production. Không bao giờ commit mù quáng hay merge mã nguồn mà không có ảnh chụp hoặc video minh chứng luồng người dùng thực tế trên GitHub.",
     stats: [
       { label: "Pull Requests Chuẩn hóa", val: "28+ PRs", desc: "Đính kèm ảnh/video minh chứng thực tế trên GitHub" },
-      { label: "Gia tốc Bàn giao Mã", val: "3x - 5x", desc: "Nhờ Multi-Agent Tooling & Self-Healing Loop" },
-      { label: "Độ tin cậy Type Safety", val: "100%", desc: "Tự động chạy Static Typecheck (tsc -b) trước PR" },
-      { label: "Minh chứng Kiểm thử", val: "Zero-Blind", desc: "Không merge mã nguồn khi thiếu Proof of Work" }
+      { label: "Độ tin cậy Type Safety", val: "100%", desc: "Bắt buộc pass Static Typecheck (tsc -b) trước PR" },
+      { label: "Chạy Thử Nghiệm Runtime", val: "Local & Cloud", desc: "Kiểm thử server thật trước khi tạo PR" },
+      { label: "Minh chứng Kiểm thử", val: "100% PRs", desc: "Đính kèm Screenshot UI & Video Demo nghiệp vụ" }
     ],
     comparisons: [
       {
-        criterion: "1. Ngữ cảnh & Phạm vi Dự án (Context Grounding)",
-        traditionalWay: {
-          title: "Prompt Rời rạc & Copy-Paste Web UI",
-          desc: "Kỹ sư copy từng đoạn code nhỏ vào ChatGPT/Claude web chat; AI hoàn toàn mù về cấu trúc cây thư mục, type definitions toàn cục và quan hệ giữa các module.",
-          drawback: "Dễ sinh mã nguồn xung đột version thư viện, sai lệch API contracts và gãy cấu trúc tổng thể."
-        },
-        agenticWay: {
-          title: "Agentic Tooling & Deep Context Grounding",
-          desc: "Sử dụng các Agentic IDE/CLI (Antigravity, Cursor, Terminal CLI) có quyền đọc trực tiếp codebase, phân tích cây file, AST, Prisma schema và các interface dùng chung.",
-          advantage: "Code sinh ra khớp hoàn toàn với kiến trúc hiện có, tôn trọng quy chuẩn Clean Architecture và Modular Pattern."
-        }
-      },
-      {
-        criterion: "2. Chu trình Xử lý Lỗi & Debug (Self-Healing Loop)",
-        traditionalWay: {
-          title: "Thao tác Thủ công & Thử sai Mù quáng",
-          desc: "Khi code sinh ra bị lỗi biên dịch hoặc runtime crash, kỹ sư phải copy lỗi quay lại chat dán tới dán lui; AI sửa được chỗ này lại phá hỏng chỗ khác.",
-          drawback: "Tạo vòng luẩn quẩn 'sửa một lỗi sinh ba lỗi mới', tiêu tốn thời gian debug gấp 3 lần bình thường."
-        },
-        agenticWay: {
-          title: "Vòng lặp Tự sửa lỗi (Self-Healing Feedback Loop)",
-          desc: "Agent tự động chạy lệnh compiler (`tsc -b`), phân tích compiler diagnostics, tự định vị file phát sinh lỗi và điều chỉnh mã nguồn cho đến khi đạt zero-error.",
-          advantage: "Toàn bộ chu trình bóc tách lỗi và sửa chữa diễn ra tự trị trong terminal dưới sự giám sát logic của kỹ sư."
-        }
-      },
-      {
-        criterion: "3. Kiến trúc, Ràng buộc & An toàn Mã nguồn",
-        traditionalWay: {
-          title: "'Vibe Coding' Mất kiểm soát",
-          desc: "Phó mặc hoàn toàn cho AI quyết định logic; bỏ qua các tầng kiểm tra bảo mật, không có validation biên (Edge Cases), dễ bị prompt injection hoặc rò rỉ dữ liệu.",
-          drawback: "Tích tụ nợ kỹ thuật (Technical Debt) khổng lồ, code lỏng lẻo không đủ tiêu chuẩn chạy Production."
-        },
-        agenticWay: {
-          title: "Kỹ sư Làm Chủ Kiến trúc (Architect-in-the-Loop)",
-          desc: "Kỹ sư định hình ranh giới trách nhiệm (Separation of Concerns), đóng khung RBAC, schema validation và circuit breakers; AI chỉ đóng vai trò cánh tay thực thi thần tốc.",
-          advantage: "Bảo đảm tiêu chuẩn cấp doanh nghiệp (Enterprise-grade): Zero-Trust, phân tầng chặt chẽ, tối ưu hiệu năng."
-        }
-      },
-      {
-        criterion: "4. Quy trình Git Flow & Pull Request (Proof of Work)",
+        criterion: "Quy chuẩn Thực thi Pull Request & Minh chứng Kiểm thử (PR Proof of Work)",
         traditionalWay: {
           title: "Commit Thiếu Trách nhiệm & Zero Verification",
-          desc: "Commit trực tiếp vào nhánh chính (main) hoặc tạo Pull Request sơ sài; không kiểm thử môi trường thực tế, không có bằng chứng chứng minh tính năng hoạt động.",
-          drawback: "Dễ gây lỗi dây chuyền cho đồng đội (break build) và làm sập môi trường staging/production."
+          desc: "Kỹ sư copy-paste code từ AI rồi commit thẳng vào nhánh main hoặc tạo Pull Request sơ sài. Không khởi chạy server thực tế, không kiểm thử luồng người dùng (User Journey), hoàn toàn không có ảnh chụp hay video chứng minh tính năng hoạt động.",
+          drawback: "Đồng đội review mù quáng (blind review), tiềm ẩn rủi ro gãy build dây chuyền, xung đột mã nguồn và làm sập môi trường Staging/Production.",
+          bullets: [
+            "Commit trực tiếp vào nhánh chính (main/master) hoặc PR rỗng",
+            "Không khởi chạy local server để phát hiện lỗi runtime",
+            "Hoàn toàn thiếu Screenshot UI và Video ghi hình tính năng",
+            "Đẩy toàn bộ rủi ro crash runtime sang cho đồng đội hoặc tester"
+          ]
         },
         agenticWay: {
           title: "Quy chuẩn PR Minh chứng (Pull Request Proof of Work)",
           desc: "Luôn phân nhánh Feature branch; bắt buộc khởi chạy server thực tế, ghi lại ảnh chụp màn hình UI và video demo luồng nghiệp vụ đính kèm trực tiếp vào mô tả PR trên GitHub.",
-          advantage: "Minh bạch 100% bằng chứng kiểm thử trước khi review và merge; đồng đội và Tech Lead nghiệm thu tức thì."
-        }
-      },
-      {
-        criterion: "5. Năng suất Thực tế & Giá trị Bàn giao",
-        traditionalWay: {
-          title: "Cảm giác Nhanh Ảo (Illusion of Speed)",
-          desc: "Tạo cảm giác gõ code rất nhanh ở vài phút đầu nhưng mất hàng giờ hoặc hàng ngày để truy tìm các bug ngầm do AI hallucination sinh ra.",
-          drawback: "Năng suất bàn giao cuối cùng bị kéo tụt, sản phẩm thiếu tính ổn định lâu dài."
-        },
-        agenticWay: {
-          title: "Gia tốc Bàn giao Bền vững (Production-Ready Velocity)",
-          desc: "Kết hợp tư duy toán học/thuật toán vững chắc với năng lực mở rộng context của Agent giúp hoàn thiện cả tính năng, test cases và tài liệu chỉ trong 1 chu trình.",
-          advantage: "Bàn giao sản phẩm thật chạy ổn định (đã chứng minh qua 28 PRs ExamTrust & hệ thống NetViet HR Pro)."
+          advantage: "Minh bạch 100% bằng chứng kiểm thử trước khi review và merge; đồng đội và Tech Lead nghiệm thu tức thì.",
+          bullets: [
+            "Tách nhánh feature/* độc lập và tuân thủ chặt chẽ Git Flow",
+            "Bắt buộc pass 100% compiler check (tsc -b) & runtime tests",
+            "Bắt buộc đính kèm Screenshot UI & Video demo luồng nghiệp vụ",
+            "Mô tả chi tiết Scope of Changes & Edge Cases đã xử lý trước khi merge"
+          ]
         }
       }
     ],
     pipeline: [
       {
         step: "01",
-        title: "Architectural Blueprinting",
-        subtitle: "Định hình Kiến trúc & Ràng buộc",
-        desc: "Kỹ sư phân tích nghiệp vụ, thiết kế Data Model, API Specs, bảo mật RBAC và các ca kiểm thử biên (Edge Cases) trước khi yêu cầu Agent thực thi.",
+        title: "Feature Branching & Scope",
+        subtitle: "Phân nhánh Tính năng Độc lập",
+        desc: "Khởi tạo nhánh `feature/*` tách biệt từ `develop/main`. Xác định ranh giới tính năng rõ ràng, tuyệt đối không commit code rác hay file thừa.",
         actionItems: [
-          "Phân tích yêu cầu và bóc tách modulize",
-          "Thiết kế schema database & interface contracts",
-          "Xác định ranh giới bảo mật và error handling"
+          "Phân nhánh feature riêng biệt",
+          "Giữ commit atomic và có ý nghĩa",
+          "Không để lọt secret hay cache"
         ],
-        proofLabel: "Architectural Constraints"
+        proofLabel: "Git Flow Standard"
       },
       {
         step: "02",
-        title: "Autonomous Agentic Execution",
-        subtitle: "Thực thi Mã nguồn Đa tác vụ",
-        desc: "Khai thác Agentic Tools (Antigravity, Cursor, CLI) đọc trực tiếp toàn bộ codebase, điều hướng file và tái cấu trúc mã nguồn theo chuẩn Clean Code.",
+        title: "Runtime Verification & Typecheck",
+        subtitle: "Khởi chạy Server & Zero Error",
+        desc: "Bắt buộc khởi chạy server backend và frontend thực tế trên môi trường local. Chạy kiểm tra tĩnh `tsc -b` đạt 0 cảnh báo hay lỗi.",
         actionItems: [
-          "Duyệt cây file và inject context chính xác",
-          "Sinh mã nguồn tuân thủ Strict TypeScript & SOLID",
-          "Tách biệt rõ rệt Controller, Service, Worker"
+          "Static typecheck pass 100%",
+          "Khởi chạy runtime server thật",
+          "Kiểm tra phản hồi API & Database"
         ],
-        proofLabel: "Deep Codebase Grounding"
+        proofLabel: "Zero Compiler Error"
       },
       {
         step: "03",
-        title: "Self-Healing Verification Loop",
-        subtitle: "Vòng lặp Kiểm chứng Tự phục hồi",
-        desc: "Tự động kích hoạt compiler checks (`tsc -b`), build pipeline và test suite. Agent tự đọc stack trace, chẩn đoán nguyên nhân gốc rễ và tự vá lỗi ngay trong terminal.",
+        title: "Screenshot UI & Video Recording",
+        subtitle: "Ghi lại Minh chứng Thực tế",
+        desc: "Chụp ảnh màn hình giao diện ở các trạng thái (Success, Empty, Error) và quay video screen recording luồng thao tác của người dùng.",
         actionItems: [
-          "Static type checking & Lint verification tự động",
-          "Tự sửa lỗi biên dịch không cần can thiệp thủ công",
-          "Kiểm tra tính tương thích backwards-compatibility"
+          "Chụp screenshot UI thực tế",
+          "Quay video demo luồng nghiệp vụ",
+          "Kiểm chứng các kịch bản ngoại lệ"
         ],
-        proofLabel: "100% Build & Type Passing"
+        proofLabel: "Proof of Work Asset"
       },
       {
         step: "04",
-        title: "PR Delivery with Proof of Work",
-        subtitle: "Nghiệm thu Minh chứng trên GitHub",
-        desc: "Khởi chạy ứng dụng thực tế, ghi lại ảnh chụp màn hình UI và video demo tính năng trực tiếp. Soạn thảo Pull Request (PR) chuẩn chỉnh kèm bằng chứng kiểm thử trước khi merge.",
+        title: "GitHub PR & Peer Review",
+        subtitle: "Đính kèm vào PR trên GitHub",
+        desc: "Nhúng trực tiếp ảnh/video vào phần mô tả Markdown của Pull Request trên GitHub. Đồng đội và Tech Lead nghiệm thu trực quan trước khi merge.",
         actionItems: [
-          "Kiểm thử runtime luồng người dùng (User journey)",
-          "Chụp screenshot UI & quay video record màn hình",
-          "Đính kèm Proof of Work vào mô tả PR trên GitHub"
+          "Nhúng media vào mô tả PR GitHub",
+          "Liệt kê Checklist kiểm thử",
+          "Merge an toàn không sợ gãy build"
         ],
-        proofLabel: "Verified PR Proof of Work"
+        proofLabel: "Safe Merge Verified"
       }
     ],
     realWorldProof: [
@@ -409,9 +369,9 @@ export const initialPortfolioData: PortfolioData = {
         desc: "Hệ thống khảo thí trực tuyến phân tán với 28 Pull Requests chuẩn hóa trên GitHub. Mọi PR đều phân tách rõ Feature branch, kiểm tra build và đính kèm bằng chứng thực thi chức năng sinh đề, telemetry và proctoring.",
         prUrl: "https://github.com/trungducnguyen4/ExamTrust/pulls?q=is%3Apr+is%3Aclosed",
         highlights: [
-          "28 PRs tuân thủ nghiêm ngặt Git Workflow",
-          "Tách biệt API Server và AI Bull Worker",
-          "Minh chứng màn hình cho 10 Browser Telemetry Events"
+          "28 PRs chuẩn hóa tuân thủ nghiêm ngặt Git Workflow",
+          "Mỗi PR đính kèm minh chứng màn hình và log kiểm thử",
+          "Zero merge conflict và 100% type safety trước khi merge"
         ]
       },
       {
@@ -420,10 +380,10 @@ export const initialPortfolioData: PortfolioData = {
         repo: "trungducnguyen4/nexrall-hr-manager---marketing",
         prCount: "Feature PR Verified",
         badge: "Triển khai Thực tế",
-        desc: "Hệ sinh thái số hóa vận hành 12 phân hệ nhân sự với chi phí $0 hạ tầng cho dưới 100 nhân viên. Toàn bộ logic chức năng Circuit Breaker, Serverless D1 và GPS Radar đều được kiểm thử và tạo PR nghiệm thu.",
+        desc: "Hệ sinh thái số hóa vận hành 12 phân hệ nhân sự với chi phí $0 hạ tầng cho dưới 100 nhân viên. Toàn bộ logic chức năng Circuit Breaker, Serverless D1 và GPS Radar đều được kiểm thử và tạo PR nghiệm thu kèm minh chứng.",
         prUrl: "https://github.com/trungducnguyen4/nexrall-hr-manager---marketing/pulls?q=is%3Apr",
         highlights: [
-          "Khảo sát toàn bộ nhân sự và phòng HR",
+          "Khảo sát toàn bộ nhân sự và phòng HR thực tế",
           "Tiết kiệm 25 - 30 triệu VNĐ/năm chi phí hạ tầng",
           "Proof of Work cho 24 Tools AI Copilot & Radar GPS"
         ]

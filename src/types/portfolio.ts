@@ -236,25 +236,27 @@ export interface AcademicAchievementItem {
 }
 
 export interface AgenticComparisonItem {
-  criterion: string;
+  criterion?: string;
   traditionalWay: {
     title: string;
     desc: string;
     drawback: string;
+    bullets?: string[];
   };
   agenticWay: {
     title: string;
     desc: string;
     advantage: string;
+    bullets?: string[];
   };
 }
 
 export interface AgenticPipelineStage {
   step: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   desc: string;
-  actionItems: string[];
+  actionItems?: string[];
   proofLabel?: string;
 }
 
@@ -273,10 +275,10 @@ export interface AgenticWorkflowData {
   badge?: string;
   title: string;
   subtitle: string;
-  manifesto: string;
-  stats: { label: string; val: string; desc: string }[];
-  comparisons: AgenticComparisonItem[];
-  pipeline: AgenticPipelineStage[];
+  manifesto?: string;
+  stats?: { label: string; val: string; desc: string }[];
+  comparisons?: AgenticComparisonItem[];
+  pipeline?: AgenticPipelineStage[];
   realWorldProof: AgenticProofItem[];
 }
 
