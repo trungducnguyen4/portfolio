@@ -109,6 +109,12 @@ export const initialPortfolioData: PortfolioData = {
             desc: "Triển khai Frontend trên **Cloudflare Workers (OpenNext)**, lưu trữ chứng cứ webcam trên **Cloudflare R2**, webhook **AWS Lambda** và container hóa môi trường với **Docker Compose**.",
             badge: "Cloudflare Serverless",
             metrics: "Zero-Cost Infra"
+          },
+          {
+            title: "Quy trình Git Flow & Pull Request Minh chứng (28 PRs)",
+            desc: "Tuân thủ nghiêm ngặt **Git Workflow** với **28 Pull Requests (PR)** trên GitHub; chuẩn hóa việc đính kèm **screenshot / video demo kiểm thử thực tế (Proof of Work)** trong mô tả PR giúp rà soát logic chặt chẽ và nghiệm thu trước khi merge vào nhánh chính.",
+            badge: "28 GitHub PRs",
+            metrics: "PR Proof of Work"
           }
         ],
         tech: [
@@ -121,7 +127,8 @@ export const initialPortfolioData: PortfolioData = {
           "Docker Compose",
           "Cloudflare Workers & R2",
           "RESTful API & Swagger",
-          "RBAC Auth (JWT)"
+          "RBAC Auth (JWT)",
+          "Git Flow (28 PRs & Proof of Work)"
         ]
       },
       aiCore: {
@@ -223,6 +230,7 @@ export const initialPortfolioData: PortfolioData = {
       ],
       media: {
         imageUrl: "/images/examtrust-dashboard.png",
+        repoUrl: "https://github.com/trungducnguyen4/ExamTrust",
         images: [
           {
             url: "/images/examtrust-dashboard.png",
@@ -279,9 +287,10 @@ export const initialPortfolioData: PortfolioData = {
         "**Kiến trúc Serverless Zero-Cost ($0/tháng cho quy mô dưới 100 nhân sự)**: Thiết kế toàn bộ hạ tầng trên **Cloudflare Workers**, **Cloudflare D1 (SQLite)**, **R2 Bucket** và **Durable Objects**, vận hành ổn định cho **quy mô dưới 100 nhân viên** với **chi phí 0 đồng**. So với chi phí thị trường khi thuê **cụm Web & Database Server (~1.5 - 2 triệu/tháng)** kết hợp đường truyền **IP tĩnh (Static IP ~600k/tháng)**, giải pháp giúp doanh nghiệp **tiết kiệm trực tiếp ~25 - 30 triệu VNĐ/năm** chi phí hạ tầng cố định.",
         "**Phát triển Enterprise AI Copilot & Multi-Provider Gateway**: Xây dựng AI Copilot với **24 Native Function Calling Tools**, **Stateful Circuit Breaker (cooldown 30s)** chống cascading outages, **rate limiting đa tầng** và tự động **fallback giữa Gemini, OpenAI và Edge Heuristics**, bảo vệ **100% ngân sách token**.",
         "**Bảo mật Tool-Layer RBAC & Chống Hallucination**: Triển khai kiểm soát quyền **độc lập khỏi prompt ở tầng mã nguồn**, loại bỏ nguy cơ **Prompt Injection / Jailbreak** đối với dữ liệu lương nhạy cảm; tích hợp **Citation Grounding** lọc trích dẫn giả mạo và **Human-in-the-Loop Action Cards**.",
-        "**Streaming SSE & Chấm công Radar GPS**: Xây dựng cơ chế truyền phát **Server-Sent Events (SSE)** kèm đo lường **True TTFT**, kết hợp tính năng **chấm công GPS đa địa điểm** (văn phòng HCM, Hà Nội) với **radar bán kính thông minh** thay thế mạng Wifi IP tĩnh."
+        "**Streaming SSE & Chấm công Radar GPS**: Xây dựng cơ chế truyền phát **Server-Sent Events (SSE)** kèm đo lường **True TTFT**, kết hợp tính năng **chấm công GPS đa địa điểm** (văn phòng HCM, Hà Nội) với **radar bán kính thông minh** thay thế mạng Wifi IP tĩnh.",
+        "**Quy trình Git Flow & Pull Request Minh chứng (Proof of Work)**: Tuân thủ quy trình phát triển chuyên nghiệp với **Pull Request (PR) trên GitHub**; luôn đính kèm **screenshot / video demo kết quả chạy thực tế** trong phần mô tả PR làm bằng chứng kiểm thử (**Proof of Work / Verification**) trước khi review & merge mã nguồn."
       ],
-      tags: ["NetViet HR Pro", "Enterprise AI Copilot", "Multi-Provider AI Gateway", "Function Calling (24 Tools)", "Server-Sent Events (SSE)", "Serverless Zero Cost", "Cloudflare Workers & D1", "GPS Radar Geofence", "Tool-Layer RBAC"],
+      tags: ["NetViet HR Pro", "Enterprise AI Copilot", "Multi-Provider AI Gateway", "Function Calling (24 Tools)", "Server-Sent Events (SSE)", "Serverless Zero Cost", "Cloudflare Workers & D1", "GPS Radar Geofence", "Tool-Layer RBAC", "Git Flow & PR Proof of Work"],
       media: {
         imageUrl: "/images/netviet-ai-copilot-desktop.png",
         images: [
@@ -340,9 +349,9 @@ export const initialPortfolioData: PortfolioData = {
         "Làm việc theo nhóm qua **5 sprint** (mỗi sprint 2 tuần), chủ động đóng góp vào việc khởi tạo và làm mịn **Product Backlog**.",
         "Tham gia đầy đủ các buổi **Sprint Planning**, **Daily Scrum** và ước lượng công việc (**Task Estimation**).",
         "Phát triển toàn diện các tính năng xác thực và phân quyền cốt lõi: **Đăng ký**, **Đăng nhập**, **Đăng xuất**, **Phân quyền người dùng (Authorization & RBAC)** và **Quản lý tài khoản**.",
-        "Thực hành chuẩn hóa **Git workflow** (**Feature branch**, **Pull Request review**, **Merge conflict resolution**)."
+        "Thực hành chuẩn hóa **Git workflow**: Tuân thủ quy trình đính kèm **screenshot / video demo kết quả thực thi** trực tiếp vào mô tả từng **Pull Request (PR) trên GitHub** làm minh chứng kiểm thử (**Proof of Work**) cho đồng đội review trước khi merge code (**Feature branch**, **Pull Request review**, **Merge conflict resolution**)."
       ],
-      tags: ["Java", "Spring Framework", "Scrum / Agile", "Git Flow", "Authentication / Authorization", "Sprint Planning"],
+      tags: ["Java", "Spring Framework", "Scrum / Agile", "Git Flow", "Authentication / Authorization", "Sprint Planning", "PR Proof of Work"],
       media: {
         imageUrl: "/images/rikkei-issues-list.png",
         images: [
@@ -398,7 +407,8 @@ export const initialPortfolioData: PortfolioData = {
         "**Multi-Provider AI Gateway**: Circuit Breaker ngắt 30s chống sập, Rate Limiting & Fast-fail 429",
         "**24 Native Function Calling Tools**: Phê duyệt đơn, kiểm toán bảng lương, chấm công GPS & Action Cards",
         "**Bảo mật Zero-Trust Tool-Layer RBAC**: Chặn đứng Prompt Injection, kiểm soát quyền truy cập cấp DB",
-        "**Server-Sent Events (SSE) & True TTFT Telemetry**: Trực quan hóa tốc độ sinh token và Citation Grounding"
+        "**Server-Sent Events (SSE) & True TTFT Telemetry**: Trực quan hóa tốc độ sinh token và Citation Grounding",
+        "**Quy trình Git Flow & PR Verification**: Chuẩn hóa việc đính kèm screenshot và video demo tính năng thực tế trực tiếp trong mô tả từng Pull Request trên GitHub làm minh chứng kiểm thử (Proof of Work) trước khi merge"
       ],
       techStack: ["Cloudflare Workers", "D1 Database", "Gemini & OpenAI API", "SSE Streaming", "Vector Search", "TypeScript/ESM"],
       imageUrl: "/images/netviet-ai-copilot-desktop.png",

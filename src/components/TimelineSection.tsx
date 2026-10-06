@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { TimelineItem } from '../types/portfolio';
 import { Briefcase, Calendar, MapPin, Play, Image as ImageIcon, ExternalLink, Plus, Tag, X, ZoomIn } from 'lucide-react';
+import { GithubIcon } from './Icons';
 import { SectionMascot } from './SectionMascot';
 
 interface TimelineSectionProps {
@@ -183,6 +184,19 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                         Website
+                      </a>
+                    )}
+
+                    {item.media?.repoUrl && (
+                      <a
+                        href={item.media.repoUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-red-600 transition-colors"
+                        title="Xem kho lưu trữ & Pull Requests trên GitHub"
+                      >
+                        <GithubIcon className="w-3.5 h-3.5" />
+                        GitHub PRs
                       </a>
                     )}
                   </div>
