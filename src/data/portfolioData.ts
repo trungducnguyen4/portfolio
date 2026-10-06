@@ -273,13 +273,13 @@ export const initialPortfolioData: PortfolioData = {
       location: "TP. Hồ Chí Minh · On-site",
       workType: "Internship",
       logo: "/logos/netviet-logo.svg",
-      description: "Chủ động khảo sát và bám sát quy trình làm việc thực tế tại doanh nghiệp để phát triển hệ thống NetViet HR Pro kết hợp Enterprise AI Copilot (phiên bản demo độc lập trên Cloudflare: nexrall-hr-demo.netviettv-hr-manager.workers.dev). Tối ưu hóa triệt để chi phí hạ tầng với kiến trúc Serverless Zero Cost ($0/tháng), chuyển dịch từ CRUD thông thường sang hệ thống phân tích dữ liệu chuyên sâu và tích hợp AI Agent thông minh hỗ trợ Ban Giám đốc và bộ phận Nhân sự.",
+      description: "Chủ động khảo sát và bám sát quy trình làm việc thực tế tại doanh nghiệp để phát triển hệ thống **NetViet HR Pro** kết hợp **Enterprise AI Copilot** (phiên bản demo độc lập trên Cloudflare: `nexrall-hr-demo.netviettv-hr-manager.workers.dev`). Tối ưu hóa triệt để chi phí hạ tầng với kiến trúc **Serverless Zero Cost ($0/tháng)**, chuyển dịch từ CRUD thông thường sang **hệ thống phân tích dữ liệu chuyên sâu** và tích hợp **AI Agent thông minh** hỗ trợ Ban Giám đốc và bộ phận Nhân sự.",
       responsibilities: [
-        "Khảo sát & số hóa vận hành SME: Đi sâu vào từng phòng ban để xây dựng quy trình số hóa chuẩn xác cho 12 phân hệ nhân sự (chấm công, nghỉ phép, công việc Kanban, tính lương, bàn giao dự án), thay vì áp dụng máy móc lý thuyết.",
-        "Kiến trúc Serverless Zero-Cost ($0/tháng): Thiết kế toàn bộ hạ tầng trên Cloudflare Workers, Cloudflare D1 (SQLite), R2 Bucket và Durable Objects, xử lý lưu lượng request cao với chi phí 0 đồng, tiết kiệm ngân sách tối đa cho doanh nghiệp.",
-        "Phát triển Enterprise AI Copilot & Multi-Provider Gateway: Xây dựng AI Copilot với 24 Native Function Calling Tools, Stateful Circuit Breaker (cooldown 30s) chống cascading outages, rate limiting đa tầng và tự động fallback giữa Gemini, OpenAI và Edge Heuristics, bảo vệ 100% ngân sách token.",
-        "Bảo mật Tool-Layer RBAC & Chống Hallucination: Triển khai kiểm soát quyền độc lập khỏi prompt ở tầng mã nguồn, loại bỏ nguy cơ Prompt Injection / Jailbreak đối với dữ liệu lương nhạy cảm; tích hợp Citation Grounding lọc trích dẫn giả mạo và Human-in-the-Loop Action Cards.",
-        "Streaming SSE & Chấm công Radar GPS: Xây dựng cơ chế truyền phát Server-Sent Events (SSE) kèm đo lường True TTFT, kết hợp tính năng chấm công GPS đa địa điểm (văn phòng HCM, Hà Nội) với radar bán kính thông minh thay thế mạng Wifi IP tĩnh."
+        "**Khảo sát & số hóa vận hành SME**: Đi sâu vào từng phòng ban để xây dựng quy trình số hóa chuẩn xác cho **12 phân hệ nhân sự** (**chấm công**, **nghỉ phép**, **công việc Kanban**, **tính lương**, **bàn giao dự án**), thay vì áp dụng máy móc lý thuyết.",
+        "**Kiến trúc Serverless Zero-Cost ($0/tháng)**: Thiết kế toàn bộ hạ tầng trên **Cloudflare Workers**, **Cloudflare D1 (SQLite)**, **R2 Bucket** và **Durable Objects**, xử lý lưu lượng request cao với **chi phí 0 đồng**, **tiết kiệm ngân sách tối đa** cho doanh nghiệp.",
+        "**Phát triển Enterprise AI Copilot & Multi-Provider Gateway**: Xây dựng AI Copilot với **24 Native Function Calling Tools**, **Stateful Circuit Breaker (cooldown 30s)** chống cascading outages, **rate limiting đa tầng** và tự động **fallback giữa Gemini, OpenAI và Edge Heuristics**, bảo vệ **100% ngân sách token**.",
+        "**Bảo mật Tool-Layer RBAC & Chống Hallucination**: Triển khai kiểm soát quyền **độc lập khỏi prompt ở tầng mã nguồn**, loại bỏ nguy cơ **Prompt Injection / Jailbreak** đối với dữ liệu lương nhạy cảm; tích hợp **Citation Grounding** lọc trích dẫn giả mạo và **Human-in-the-Loop Action Cards**.",
+        "**Streaming SSE & Chấm công Radar GPS**: Xây dựng cơ chế truyền phát **Server-Sent Events (SSE)** kèm đo lường **True TTFT**, kết hợp tính năng **chấm công GPS đa địa điểm** (văn phòng HCM, Hà Nội) với **radar bán kính thông minh** thay thế mạng Wifi IP tĩnh."
       ],
       tags: ["NetViet HR Pro", "Enterprise AI Copilot", "Multi-Provider AI Gateway", "Function Calling (24 Tools)", "Server-Sent Events (SSE)", "Serverless Zero Cost", "Cloudflare Workers & D1", "GPS Radar Geofence", "Tool-Layer RBAC"],
       media: {
@@ -335,12 +335,12 @@ export const initialPortfolioData: PortfolioData = {
       location: "TP. Hồ Chí Minh · Hybrid",
       workType: "Internship",
       logo: "/logos/rikkei-logo.png",
-      description: "Tham gia dự án mô phỏng (Mock project) chuẩn doanh nghiệp trên nền tảng Java để rèn luyện quy trình Git và tích lũy kinh nghiệm thực tế sâu sắc với Scrum / Agile.",
+      description: "Tham gia dự án mô phỏng (**Mock project**) chuẩn doanh nghiệp trên nền tảng **Java** để rèn luyện quy trình Git và tích lũy kinh nghiệm thực tế sâu sắc với **Scrum / Agile**.",
       responsibilities: [
-        "Làm việc theo nhóm qua 5 sprint (mỗi sprint 2 tuần), chủ động đóng góp vào việc khởi tạo và làm mịn Product Backlog.",
-        "Tham gia đầy đủ các buổi Sprint Planning, Daily Scrum và ước lượng công việc (Task Estimation).",
-        "Phát triển toàn diện các tính năng xác thực và phân quyền cốt lõi: Đăng ký, Đăng nhập, Đăng xuất, Phân quyền người dùng (Authorization & RBAC) và Quản lý tài khoản.",
-        "Thực hành chuẩn hóa Git workflow (Feature branch, Pull Request review, Merge conflict resolution)."
+        "Làm việc theo nhóm qua **5 sprint** (mỗi sprint 2 tuần), chủ động đóng góp vào việc khởi tạo và làm mịn **Product Backlog**.",
+        "Tham gia đầy đủ các buổi **Sprint Planning**, **Daily Scrum** và ước lượng công việc (**Task Estimation**).",
+        "Phát triển toàn diện các tính năng xác thực và phân quyền cốt lõi: **Đăng ký**, **Đăng nhập**, **Đăng xuất**, **Phân quyền người dùng (Authorization & RBAC)** và **Quản lý tài khoản**.",
+        "Thực hành chuẩn hóa **Git workflow** (**Feature branch**, **Pull Request review**, **Merge conflict resolution**)."
       ],
       tags: ["Java", "Spring Framework", "Scrum / Agile", "Git Flow", "Authentication / Authorization", "Sprint Planning"],
       media: {
@@ -393,12 +393,12 @@ export const initialPortfolioData: PortfolioData = {
       tagline: "Production AI Copilot: 24 Native Tools & Multi-Provider AI Gateway",
       category: "AI Workflow",
       featured: true,
-      description: "Hệ thống AI Agent nhân sự cấp doanh nghiệp tích hợp vào nền tảng NetViet HR Pro. Trang bị Multi-Provider AI Gateway (Gemini, OpenAI, Workers AI) có Circuit Breaker tự phục hồi, 24 Native Function Calling Tools, bảo mật Tool-Layer RBAC chống Jailbreak và streaming SSE thời gian thực.",
+      description: "Hệ thống **AI Agent nhân sự cấp doanh nghiệp** tích hợp vào nền tảng **NetViet HR Pro**. Trang bị **Multi-Provider AI Gateway (Gemini, OpenAI, Workers AI)** có **Circuit Breaker tự phục hồi**, **24 Native Function Calling Tools**, bảo mật **Tool-Layer RBAC chống Jailbreak** và **streaming SSE** thời gian thực.",
       features: [
-        "Multi-Provider AI Gateway: Circuit Breaker ngắt 30s chống sập, Rate Limiting & Fast-fail 429",
-        "24 Native Function Calling Tools: Phê duyệt đơn, kiểm toán bảng lương, chấm công GPS & Action Cards",
-        "Bảo mật Zero-Trust Tool-Layer RBAC: Chặn đứng Prompt Injection, kiểm soát quyền truy cập cấp DB",
-        "Server-Sent Events (SSE) & True TTFT Telemetry: Trực quan hóa tốc độ sinh token và Citation Grounding"
+        "**Multi-Provider AI Gateway**: Circuit Breaker ngắt 30s chống sập, Rate Limiting & Fast-fail 429",
+        "**24 Native Function Calling Tools**: Phê duyệt đơn, kiểm toán bảng lương, chấm công GPS & Action Cards",
+        "**Bảo mật Zero-Trust Tool-Layer RBAC**: Chặn đứng Prompt Injection, kiểm soát quyền truy cập cấp DB",
+        "**Server-Sent Events (SSE) & True TTFT Telemetry**: Trực quan hóa tốc độ sinh token và Citation Grounding"
       ],
       techStack: ["Cloudflare Workers", "D1 Database", "Gemini & OpenAI API", "SSE Streaming", "Vector Search", "TypeScript/ESM"],
       imageUrl: "/images/netviet-ai-copilot-desktop.png",

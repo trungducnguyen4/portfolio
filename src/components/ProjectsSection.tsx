@@ -10,6 +10,28 @@ interface ProjectsSectionProps {
   onOpenCustomizer: () => void;
 }
 
+const renderFormattedText = (text: string) => {
+  if (!text) return null;
+  const parts = text.split(/(\*\*.*?\*\*|`.*?`)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={i} className="font-bold text-slate-950">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return (
+        <code key={i} className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 font-mono text-[12px] font-semibold border border-slate-200">
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    return part;
+  });
+};
+
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   projects,
   onOpenMediaModal,
@@ -95,7 +117,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     {project.tagline}
                   </div>
                   <p className="text-xs sm:text-sm text-slate-600 mt-3 leading-relaxed line-clamp-3">
-                    {project.description}
+                    {renderFormattedText(project.description)}
                   </p>
 
                   {/* Key Highlights */}
@@ -103,7 +125,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     {project.features.map((feat, idx) => (
                       <div key={idx} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
                         <CheckCircle2 className="w-3.5 h-3.5 text-red-600 flex-shrink-0 mt-0.5" />
-                        <span className="leading-snug">{feat}</span>
+                        <span className="leading-snug">{renderFormattedText(feat)}</span>
                       </div>
                     ))}
                   </div>

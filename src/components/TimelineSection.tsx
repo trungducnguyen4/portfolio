@@ -9,6 +9,28 @@ interface TimelineSectionProps {
   onOpenCustomizer: () => void;
 }
 
+const renderFormattedText = (text: string) => {
+  if (!text) return null;
+  const parts = text.split(/(\*\*.*?\*\*|`.*?`)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={i} className="font-bold text-slate-950">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return (
+        <code key={i} className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 font-mono text-[12px] font-semibold border border-slate-200">
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    return part;
+  });
+};
+
 export const TimelineSection: React.FC<TimelineSectionProps> = ({
   experiences,
   onOpenMediaModal,
@@ -169,14 +191,14 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({
                 {/* Description & Responsibilities */}
                 <div className="mt-5 space-y-4">
                   <p className="text-sm text-slate-700 leading-relaxed font-normal">
-                    {item.description}
+                    {renderFormattedText(item.description)}
                   </p>
 
                   <ul className="space-y-2">
                     {item.responsibilities.map((resp, rIdx) => (
                       <li key={rIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
                         <span className="w-2 h-2 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
-                        <span className="leading-relaxed">{resp}</span>
+                        <span className="leading-relaxed">{renderFormattedText(resp)}</span>
                       </li>
                     ))}
                   </ul>
