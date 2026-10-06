@@ -235,9 +235,55 @@ export interface AcademicAchievementItem {
   note: string;
 }
 
+export interface AgenticComparisonItem {
+  criterion: string;
+  traditionalWay: {
+    title: string;
+    desc: string;
+    drawback: string;
+  };
+  agenticWay: {
+    title: string;
+    desc: string;
+    advantage: string;
+  };
+}
+
+export interface AgenticPipelineStage {
+  step: string;
+  title: string;
+  subtitle: string;
+  desc: string;
+  actionItems: string[];
+  proofLabel?: string;
+}
+
+export interface AgenticProofItem {
+  id: string;
+  title: string;
+  repo: string;
+  prCount: string;
+  badge: string;
+  desc: string;
+  prUrl: string;
+  highlights: string[];
+}
+
+export interface AgenticWorkflowData {
+  badge?: string;
+  title: string;
+  subtitle: string;
+  manifesto: string;
+  stats: { label: string; val: string; desc: string }[];
+  comparisons: AgenticComparisonItem[];
+  pipeline: AgenticPipelineStage[];
+  realWorldProof: AgenticProofItem[];
+}
+
 export interface PortfolioData {
   profile: ProfileInfo;
   education: EducationItem;
+  agenticWorkflow?: AgenticWorkflowData;
   experiences: TimelineItem[];
   projects: ProjectItem[];
   skills: {

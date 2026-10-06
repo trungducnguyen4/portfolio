@@ -28,9 +28,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCustomizer }) => {
           </a>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center space-x-1 lg:space-x-7 text-sm font-semibold text-slate-700">
+          <div className="hidden md:flex items-center space-x-1 lg:space-x-6 text-sm font-semibold text-slate-700">
             <a href="#about" className="hover:text-red-600 transition-colors px-2 py-1">Giới thiệu</a>
             <a href="#education" className="hover:text-red-600 transition-colors px-2 py-1">Học vấn</a>
+            <a href="#agentic-workflow" className="hover:text-red-600 transition-colors px-2 py-1 flex items-center gap-1.5">
+              <span>Agentic Workflow</span>
+              <span className="text-[10px] font-black bg-red-50 text-red-700 px-1.5 py-0.5 rounded-full border border-red-200">PRs</span>
+            </a>
             <a href="#experience" className="hover:text-red-600 transition-colors px-2 py-1">Kinh nghiệm</a>
             {/* <a href="#projects" className="hover:text-red-600 transition-colors px-2 py-1">Dự án AI</a> */}
             <a href="#achievements" className="hover:text-red-600 transition-colors px-2 py-1">Hoạt động & Chứng chỉ</a>

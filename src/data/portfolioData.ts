@@ -271,6 +271,179 @@ export const initialPortfolioData: PortfolioData = {
       note: "Học sinh lớp chọn khối A01 với thành tích xuất sắc: Toán 8.4, Lí 8.5, Tiếng Anh 9.4 — Tổng điểm Khối A01 đạt 26.3 điểm (Kỳ thi Tốt nghiệp THPT Quốc gia 2022). Được Hệ thống Luyện thi NQH Cấp 3 vinh danh trong danh sách học sinh đạt thành tích xuất sắc môn Tiếng Anh khóa 2K4."
     }
   },
+  agenticWorkflow: {
+    badge: "AI-Augmented Software Engineering & PR Verification",
+    title: "Agentic Workflow trong Kỹ thuật Phần mềm & Quy trình Pull Request (PR)",
+    subtitle: "Đối chiếu sự khác biệt cốt lõi giữa việc sử dụng AI thông thường (thụ động, copy-paste) và Quy trình Kỹ thuật Agentic tự động hóa gắn liền với Minh chứng Kiểm thử (Proof of Work) trong từng Pull Request trên GitHub",
+    manifesto: "AI không thể thay thế tư duy kỹ sư. Khi đặt vào tay một Software Engineer có nền tảng học thuật bài bản (Tốt nghiệp loại Giỏi TDTU, GPA 8.34), công nghệ Agentic trở thành đòn bẩy gia tăng năng suất gấp 3 - 5 lần mà vẫn kiểm soát 100% tính toàn vẹn kiến trúc, type safety và không bao giờ merge mã nguồn thiếu minh chứng kiểm thử.",
+    stats: [
+      { label: "Pull Requests Chuẩn hóa", val: "28+ PRs", desc: "Đính kèm ảnh/video minh chứng thực tế trên GitHub" },
+      { label: "Gia tốc Bàn giao Mã", val: "3x - 5x", desc: "Nhờ Multi-Agent Tooling & Self-Healing Loop" },
+      { label: "Độ tin cậy Type Safety", val: "100%", desc: "Tự động chạy Static Typecheck (tsc -b) trước PR" },
+      { label: "Minh chứng Kiểm thử", val: "Zero-Blind", desc: "Không merge mã nguồn khi thiếu Proof of Work" }
+    ],
+    comparisons: [
+      {
+        criterion: "1. Ngữ cảnh & Phạm vi Dự án (Context Grounding)",
+        traditionalWay: {
+          title: "Prompt Rời rạc & Copy-Paste Web UI",
+          desc: "Kỹ sư copy từng đoạn code nhỏ vào ChatGPT/Claude web chat; AI hoàn toàn mù về cấu trúc cây thư mục, type definitions toàn cục và quan hệ giữa các module.",
+          drawback: "Dễ sinh mã nguồn xung đột version thư viện, sai lệch API contracts và gãy cấu trúc tổng thể."
+        },
+        agenticWay: {
+          title: "Agentic Tooling & Deep Context Grounding",
+          desc: "Sử dụng các Agentic IDE/CLI (Antigravity, Cursor, Terminal CLI) có quyền đọc trực tiếp codebase, phân tích cây file, AST, Prisma schema và các interface dùng chung.",
+          advantage: "Code sinh ra khớp hoàn toàn với kiến trúc hiện có, tôn trọng quy chuẩn Clean Architecture và Modular Pattern."
+        }
+      },
+      {
+        criterion: "2. Chu trình Xử lý Lỗi & Debug (Self-Healing Loop)",
+        traditionalWay: {
+          title: "Thao tác Thủ công & Thử sai Mù quáng",
+          desc: "Khi code sinh ra bị lỗi biên dịch hoặc runtime crash, kỹ sư phải copy lỗi quay lại chat dán tới dán lui; AI sửa được chỗ này lại phá hỏng chỗ khác.",
+          drawback: "Tạo vòng luẩn quẩn 'sửa một lỗi sinh ba lỗi mới', tiêu tốn thời gian debug gấp 3 lần bình thường."
+        },
+        agenticWay: {
+          title: "Vòng lặp Tự sửa lỗi (Self-Healing Feedback Loop)",
+          desc: "Agent tự động chạy lệnh compiler (`tsc -b`), phân tích compiler diagnostics, tự định vị file phát sinh lỗi và điều chỉnh mã nguồn cho đến khi đạt zero-error.",
+          advantage: "Toàn bộ chu trình bóc tách lỗi và sửa chữa diễn ra tự trị trong terminal dưới sự giám sát logic của kỹ sư."
+        }
+      },
+      {
+        criterion: "3. Kiến trúc, Ràng buộc & An toàn Mã nguồn",
+        traditionalWay: {
+          title: "'Vibe Coding' Mất kiểm soát",
+          desc: "Phó mặc hoàn toàn cho AI quyết định logic; bỏ qua các tầng kiểm tra bảo mật, không có validation biên (Edge Cases), dễ bị prompt injection hoặc rò rỉ dữ liệu.",
+          drawback: "Tích tụ nợ kỹ thuật (Technical Debt) khổng lồ, code lỏng lẻo không đủ tiêu chuẩn chạy Production."
+        },
+        agenticWay: {
+          title: "Kỹ sư Làm Chủ Kiến trúc (Architect-in-the-Loop)",
+          desc: "Kỹ sư định hình ranh giới trách nhiệm (Separation of Concerns), đóng khung RBAC, schema validation và circuit breakers; AI chỉ đóng vai trò cánh tay thực thi thần tốc.",
+          advantage: "Bảo đảm tiêu chuẩn cấp doanh nghiệp (Enterprise-grade): Zero-Trust, phân tầng chặt chẽ, tối ưu hiệu năng."
+        }
+      },
+      {
+        criterion: "4. Quy trình Git Flow & Pull Request (Proof of Work)",
+        traditionalWay: {
+          title: "Commit Thiếu Trách nhiệm & Zero Verification",
+          desc: "Commit trực tiếp vào nhánh chính (main) hoặc tạo Pull Request sơ sài; không kiểm thử môi trường thực tế, không có bằng chứng chứng minh tính năng hoạt động.",
+          drawback: "Dễ gây lỗi dây chuyền cho đồng đội (break build) và làm sập môi trường staging/production."
+        },
+        agenticWay: {
+          title: "Quy chuẩn PR Minh chứng (Pull Request Proof of Work)",
+          desc: "Luôn phân nhánh Feature branch; bắt buộc khởi chạy server thực tế, ghi lại ảnh chụp màn hình UI và video demo luồng nghiệp vụ đính kèm trực tiếp vào mô tả PR trên GitHub.",
+          advantage: "Minh bạch 100% bằng chứng kiểm thử trước khi review và merge; đồng đội và Tech Lead nghiệm thu tức thì."
+        }
+      },
+      {
+        criterion: "5. Năng suất Thực tế & Giá trị Bàn giao",
+        traditionalWay: {
+          title: "Cảm giác Nhanh Ảo (Illusion of Speed)",
+          desc: "Tạo cảm giác gõ code rất nhanh ở vài phút đầu nhưng mất hàng giờ hoặc hàng ngày để truy tìm các bug ngầm do AI hallucination sinh ra.",
+          drawback: "Năng suất bàn giao cuối cùng bị kéo tụt, sản phẩm thiếu tính ổn định lâu dài."
+        },
+        agenticWay: {
+          title: "Gia tốc Bàn giao Bền vững (Production-Ready Velocity)",
+          desc: "Kết hợp tư duy toán học/thuật toán vững chắc với năng lực mở rộng context của Agent giúp hoàn thiện cả tính năng, test cases và tài liệu chỉ trong 1 chu trình.",
+          advantage: "Bàn giao sản phẩm thật chạy ổn định (đã chứng minh qua 28 PRs ExamTrust & hệ thống NetViet HR Pro)."
+        }
+      }
+    ],
+    pipeline: [
+      {
+        step: "01",
+        title: "Architectural Blueprinting",
+        subtitle: "Định hình Kiến trúc & Ràng buộc",
+        desc: "Kỹ sư phân tích nghiệp vụ, thiết kế Data Model, API Specs, bảo mật RBAC và các ca kiểm thử biên (Edge Cases) trước khi yêu cầu Agent thực thi.",
+        actionItems: [
+          "Phân tích yêu cầu và bóc tách modulize",
+          "Thiết kế schema database & interface contracts",
+          "Xác định ranh giới bảo mật và error handling"
+        ],
+        proofLabel: "Architectural Constraints"
+      },
+      {
+        step: "02",
+        title: "Autonomous Agentic Execution",
+        subtitle: "Thực thi Mã nguồn Đa tác vụ",
+        desc: "Khai thác Agentic Tools (Antigravity, Cursor, CLI) đọc trực tiếp toàn bộ codebase, điều hướng file và tái cấu trúc mã nguồn theo chuẩn Clean Code.",
+        actionItems: [
+          "Duyệt cây file và inject context chính xác",
+          "Sinh mã nguồn tuân thủ Strict TypeScript & SOLID",
+          "Tách biệt rõ rệt Controller, Service, Worker"
+        ],
+        proofLabel: "Deep Codebase Grounding"
+      },
+      {
+        step: "03",
+        title: "Self-Healing Verification Loop",
+        subtitle: "Vòng lặp Kiểm chứng Tự phục hồi",
+        desc: "Tự động kích hoạt compiler checks (`tsc -b`), build pipeline và test suite. Agent tự đọc stack trace, chẩn đoán nguyên nhân gốc rễ và tự vá lỗi ngay trong terminal.",
+        actionItems: [
+          "Static type checking & Lint verification tự động",
+          "Tự sửa lỗi biên dịch không cần can thiệp thủ công",
+          "Kiểm tra tính tương thích backwards-compatibility"
+        ],
+        proofLabel: "100% Build & Type Passing"
+      },
+      {
+        step: "04",
+        title: "PR Delivery with Proof of Work",
+        subtitle: "Nghiệm thu Minh chứng trên GitHub",
+        desc: "Khởi chạy ứng dụng thực tế, ghi lại ảnh chụp màn hình UI và video demo tính năng trực tiếp. Soạn thảo Pull Request (PR) chuẩn chỉnh kèm bằng chứng kiểm thử trước khi merge.",
+        actionItems: [
+          "Kiểm thử runtime luồng người dùng (User journey)",
+          "Chụp screenshot UI & quay video record màn hình",
+          "Đính kèm Proof of Work vào mô tả PR trên GitHub"
+        ],
+        proofLabel: "Verified PR Proof of Work"
+      }
+    ],
+    realWorldProof: [
+      {
+        id: "examtrust",
+        title: "Khóa luận Tốt nghiệp ExamTrust (TDTU)",
+        repo: "trungducnguyen4/ExamTrust",
+        prCount: "28 Pull Requests",
+        badge: "Khóa luận Loại Giỏi",
+        desc: "Hệ thống khảo thí trực tuyến phân tán với 28 Pull Requests chuẩn hóa trên GitHub. Mọi PR đều phân tách rõ Feature branch, kiểm tra build và đính kèm bằng chứng thực thi chức năng sinh đề, telemetry và proctoring.",
+        prUrl: "https://github.com/trungducnguyen4/ExamTrust/pulls?q=is%3Apr+is%3Aclosed",
+        highlights: [
+          "28 PRs tuân thủ nghiêm ngặt Git Workflow",
+          "Tách biệt API Server và AI Bull Worker",
+          "Minh chứng màn hình cho 10 Browser Telemetry Events"
+        ]
+      },
+      {
+        id: "netviet",
+        title: "NetViet HR Pro & Enterprise AI Copilot",
+        repo: "trungducnguyen4/nexrall-hr-manager---marketing",
+        prCount: "Feature PR Verified",
+        badge: "Triển khai Thực tế",
+        desc: "Hệ sinh thái số hóa vận hành 12 phân hệ nhân sự với chi phí $0 hạ tầng cho dưới 100 nhân viên. Toàn bộ logic chức năng Circuit Breaker, Serverless D1 và GPS Radar đều được kiểm thử và tạo PR nghiệm thu.",
+        prUrl: "https://github.com/trungducnguyen4/nexrall-hr-manager---marketing/pulls?q=is%3Apr",
+        highlights: [
+          "Khảo sát toàn bộ nhân sự và phòng HR",
+          "Tiết kiệm 25 - 30 triệu VNĐ/năm chi phí hạ tầng",
+          "Proof of Work cho 24 Tools AI Copilot & Radar GPS"
+        ]
+      },
+      {
+        id: "rikkei",
+        title: "Dự án Mock Project OneConnect (Rikkeisoft)",
+        repo: "Rikkeisoft Hybrid Internship",
+        prCount: "5 Sprints Scrum",
+        badge: "Agile / Scrum Doanh nghiệp",
+        desc: "Tham gia phát triển dự án chuẩn doanh nghiệp qua 5 Sprint liên tục, chuẩn hóa quy trình phân nhánh Feature branch, review Pull Request và xử lý merge conflict thực tế.",
+        prUrl: "https://rikkeisoft.com",
+        highlights: [
+          "5 Sprint Scrum chuẩn chỉ (Planning, Daily, Retro)",
+          "Thực hành Feature branch & PR Code Review",
+          "Đính kèm kết quả test module phân quyền RBAC"
+        ]
+      }
+    ]
+  },
   experiences: [
     {
       id: "netviet",

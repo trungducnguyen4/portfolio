@@ -4,6 +4,7 @@ import type { PortfolioData } from './types/portfolio';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Education } from './components/Education';
+import { AgenticWorkflowSection } from './components/AgenticWorkflowSection';
 import { TimelineSection } from './components/TimelineSection';
 // import { ProjectsSection } from './components/ProjectsSection';
 import { AchievementsSection } from './components/AchievementsSection';
@@ -82,6 +83,7 @@ export const App: React.FC = () => {
             graduationThesis: initialPortfolioData.education.graduationThesis,
             highSchool: initialPortfolioData.education.highSchool,
           },
+          agenticWorkflow: initialPortfolioData.agenticWorkflow,
           certifications: initialPortfolioData.certifications,
           activities: initialPortfolioData.activities,
           highSchoolAchievement: initialPortfolioData.highSchoolAchievement,
@@ -152,6 +154,11 @@ export const App: React.FC = () => {
 
         <Education
           education={data.education}
+          onOpenMediaModal={handleOpenMedia}
+        />
+
+        <AgenticWorkflowSection
+          data={data.agenticWorkflow || initialPortfolioData.agenticWorkflow}
           onOpenMediaModal={handleOpenMedia}
         />
 
