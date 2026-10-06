@@ -273,7 +273,7 @@ export const initialPortfolioData: PortfolioData = {
       location: "TP. Hồ Chí Minh · On-site",
       workType: "Internship",
       logo: "/logos/netviet-logo.svg",
-      description: "Chủ động khảo sát và bám sát quy trình làm việc thực tế tại doanh nghiệp để phát triển hệ thống NetViet HR Pro (hr.netviet.live) kết hợp Enterprise AI Copilot. Tối ưu hóa triệt để chi phí hạ tầng với kiến trúc Serverless Zero Cost ($0/tháng), chuyển dịch từ CRUD thông thường sang hệ thống phân tích dữ liệu chuyên sâu và tích hợp AI Agent thông minh hỗ trợ Ban Giám đốc và bộ phận Nhân sự.",
+      description: "Chủ động khảo sát và bám sát quy trình làm việc thực tế tại doanh nghiệp để phát triển hệ thống NetViet HR Pro kết hợp Enterprise AI Copilot (phiên bản demo độc lập trên Cloudflare: nexrall-hr-demo.netviettv-hr-manager.workers.dev). Tối ưu hóa triệt để chi phí hạ tầng với kiến trúc Serverless Zero Cost ($0/tháng), chuyển dịch từ CRUD thông thường sang hệ thống phân tích dữ liệu chuyên sâu và tích hợp AI Agent thông minh hỗ trợ Ban Giám đốc và bộ phận Nhân sự.",
       responsibilities: [
         "Khảo sát & số hóa vận hành SME: Đi sâu vào từng phòng ban để xây dựng quy trình số hóa chuẩn xác cho 12 phân hệ nhân sự (chấm công, nghỉ phép, công việc Kanban, tính lương, bàn giao dự án), thay vì áp dụng máy móc lý thuyết.",
         "Kiến trúc Serverless Zero-Cost ($0/tháng): Thiết kế toàn bộ hạ tầng trên Cloudflare Workers, Cloudflare D1 (SQLite), R2 Bucket và Durable Objects, xử lý lưu lượng request cao với chi phí 0 đồng, tiết kiệm ngân sách tối đa cho doanh nghiệp.",
@@ -322,7 +322,7 @@ export const initialPortfolioData: PortfolioData = {
             caption: "Phân hệ Bảng lương & Tự động hóa Tính toán Chi phí Nhân sự"
           }
         ],
-        projectUrl: "https://hr.netviet.live",
+        projectUrl: "https://nexrall-hr-demo.netviettv-hr-manager.workers.dev",
         repoUrl: "https://github.com/trungducnguyen4/nexrall-hr-manager---marketing"
       }
     },
@@ -402,7 +402,7 @@ export const initialPortfolioData: PortfolioData = {
       ],
       techStack: ["Cloudflare Workers", "D1 Database", "Gemini & OpenAI API", "SSE Streaming", "Vector Search", "TypeScript/ESM"],
       imageUrl: "/images/netviet-ai-copilot-desktop.png",
-      liveUrl: "https://hrnetviet.live",
+      liveUrl: "https://nexrall-hr-demo.netviettv-hr-manager.workers.dev",
       githubUrl: "https://github.com/trungducnguyen4/nexrall-hr-manager---marketing"
     },
     {

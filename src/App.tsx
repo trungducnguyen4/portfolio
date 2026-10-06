@@ -27,7 +27,7 @@ export const App: React.FC = () => {
           delete parsed.skills;
           changed = true;
         }
-        if (parsed.projects && !parsed.projects.some((p: any) => p.id === 'nexrall-hr-copilot')) {
+        if (parsed.projects && (!parsed.projects.some((p: any) => p.id === 'nexrall-hr-copilot') || parsed.projects.some((p: any) => p.id === 'nexrall-hr-copilot' && p.liveUrl?.includes('hrnetviet')))) {
           delete parsed.projects;
           changed = true;
         }
