@@ -70,18 +70,18 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
             {/* Action Buttons */}
             <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
               <a
-                href="#projects"
+                href="#experience"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-600/25 transition-all hover:scale-105"
               >
-                Khám phá Dự án AI
+                Kinh nghiệm Thực chiến
                 <ArrowRight className="w-4 h-4" />
               </a>
 
               <a
-                href="#experience"
+                href="#education"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm text-slate-900 bg-white border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition-all shadow-xs"
               >
-                Lộ trình Sự nghiệp
+                Khóa luận & Học vấn
               </a>
 
               <button

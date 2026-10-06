@@ -5,7 +5,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Education } from './components/Education';
 import { TimelineSection } from './components/TimelineSection';
-import { ProjectsSection } from './components/ProjectsSection';
+// import { ProjectsSection } from './components/ProjectsSection';
 import { AchievementsSection } from './components/AchievementsSection';
 import { SkillsSection } from './components/SkillsSection';
 import { Footer } from './components/Footer';
@@ -161,11 +161,13 @@ export const App: React.FC = () => {
           onOpenCustomizer={() => setIsCustomizerOpen(true)}
         />
 
+        {/* Tạm thời ẩn phần dự án tiêu biểu theo yêu cầu
         <ProjectsSection
           projects={data.projects}
           onOpenMediaModal={handleOpenMedia}
           onOpenCustomizer={() => setIsCustomizerOpen(true)}
         />
+        */}
 
         <AchievementsSection
           certifications={data.certifications || initialPortfolioData.certifications}

@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCustomizer }) => {
             <a href="#about" className="hover:text-red-600 transition-colors px-2 py-1">Giới thiệu</a>
             <a href="#education" className="hover:text-red-600 transition-colors px-2 py-1">Học vấn</a>
             <a href="#experience" className="hover:text-red-600 transition-colors px-2 py-1">Kinh nghiệm</a>
-            <a href="#projects" className="hover:text-red-600 transition-colors px-2 py-1">Dự án AI</a>
+            {/* <a href="#projects" className="hover:text-red-600 transition-colors px-2 py-1">Dự án AI</a> */}
             <a href="#achievements" className="hover:text-red-600 transition-colors px-2 py-1">Hoạt động & Chứng chỉ</a>
             <a href="#skills" className="hover:text-red-600 transition-colors px-2 py-1">Công nghệ</a>
           </div>
