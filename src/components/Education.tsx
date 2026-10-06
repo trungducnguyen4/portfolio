@@ -192,8 +192,6 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
               <SectionMascot
                 image="/avatar3d/avatar_education.png?v=4"
                 alt="3D Mascot Tốt Nghiệp Loại Giỏi TDTU"
-                speechTitle="Tốt nghiệp Loại Giỏi"
-                speechText="TDTU GPA 8.34 & Khối A01 26.3! Nền tảng tư duy toán học và kỹ thuật phần mềm bài bản."
                 size="xl"
               />
             </div>
