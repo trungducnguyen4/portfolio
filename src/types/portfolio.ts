@@ -280,6 +280,15 @@ export interface AgenticProofItem {
   highlights: string[];
 }
 
+export interface MarkdownGuideTemplate {
+  id: string;
+  fileName: string;
+  title: string;
+  badge: string;
+  description: string;
+  content: string;
+}
+
 export interface AgenticWorkflowData {
   badge?: string;
   title: string;
@@ -289,6 +298,7 @@ export interface AgenticWorkflowData {
   comparisons?: AgenticComparisonItem[];
   pipeline?: AgenticPipelineStage[];
   realWorldProof: AgenticProofItem[];
+  markdownGuides?: MarkdownGuideTemplate[];
 }
 
 export interface PortfolioData {

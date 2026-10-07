@@ -312,131 +312,181 @@ export const initialPortfolioData: PortfolioData = {
     pipeline: [
       {
         step: "01",
-        title: "Feature Branching & Architecture Scope",
-        subtitle: "Khởi tạo Nhánh & Đóng gói Module",
-        desc: "Khởi tạo nhánh `feature/*` tách biệt từ `develop/main`. Xác định ranh giới module theo Clean Architecture, thiết lập DTO validation và cấu hình PR template.",
+        title: "Feature Branching & PR Template Spec",
+        subtitle: "Khởi tạo Nhánh & Áp dụng Mẫu PR Chuẩn",
+        desc: "Phân nhánh `feature/*` độc lập từ `develop/main`. Thiết lập quy chuẩn commit và nạp sẵn khung mẫu Pull Request chuẩn chỉ trước khi bắt tay viết code.",
         actionItems: [
-          "Phân nhánh feature/[ticket] độc lập, tuân thủ Git Flow",
-          "Tách biệt Controller, Service, DTO & Interface hợp đồng",
-          "Tuyệt đối không commit file .env, credentials hay cache thừa"
+          "Phân nhánh feature/[ticket] độc lập, tuân thủ nghiêm ngặt Git Flow",
+          "Thiết lập Conventional Commits (feat:, fix:, refactor:)",
+          "Bắt buộc định hình phạm vi Scope of Changes theo mẫu .md"
         ],
-        proofLabel: "Git Flow Standard",
+        proofLabel: "Git Flow & PR Template",
         createdFiles: [
           {
-            name: "src/modules/*/[feature].module.ts",
-            path: "NestJS / Next.js",
-            type: "code",
-            desc: "Đóng gói Dependency Injection, providers và export service dùng chung"
+            name: ".github/PULL_REQUEST_TEMPLATE.md",
+            path: "GitHub Repository Root",
+            type: "doc",
+            desc: "Khung mẫu PR chuẩn hóa trên GitHub: Bắt buộc điền Overview, Proof of Change (4 Trụ cột) và Deployment Checklist"
           },
           {
-            name: "src/modules/*/[feature].controller.ts",
-            path: "REST API Layer",
-            type: "code",
-            desc: "Định tuyến API endpoints, gán RBAC Guard, Swagger docs & DTO validation"
-          },
-          {
-            name: ".github/pull_request_template.md",
-            path: "CI/CD & Git Template",
-            type: "config",
-            desc: "Template PR chuẩn hóa bắt buộc mục checklist kiểm thử và Proof of Work"
+            name: "docs/guidelines/GIT_WORKFLOW.md",
+            path: "Engineering Standard Spec",
+            type: "doc",
+            desc: "Sổ tay quy chuẩn phân nhánh, bảo vệ nhánh main, cấm commit file rác / credentials và cấm gộp PR quá 500 lines"
           }
         ]
       },
       {
         step: "02",
-        title: "Runtime Verification & Data Integrity",
-        subtitle: "Khởi chạy Server & Zero Error",
-        desc: "Khởi chạy đồng thời API Server & AI Worker thật trên môi trường local. Chạy compiler `tsc -b` pass 100%, thực thi migration database và test suite.",
+        title: "Verification Protocol & 4 Pillars Testing",
+        subtitle: "Giao thức 4 Trụ Cột: 'Prove the Change'",
+        desc: "Thực thi quy tắc Verification Protocol: Mọi thay đổi đều phải được chứng minh bằng kết quả kiểm thử thực tế, tuyệt đối không suy đoán chủ quan.",
         actionItems: [
-          "Static typecheck tsc -b đạt 0 error, 0 warning",
-          "Thực thi Prisma / D1 SQL migrations & seed dữ liệu mẫu",
-          "Khởi chạy Redis Bull Queue kiểm tra worker bất đồng bộ"
+          "Trụ cột 1 (Tests): Syntax check node --check / tsc -b, automated tests npm test",
+          "Trụ cột 2 (Runtime): Thực thi API endpoint thật, status HTTP 200/201, audit DB",
+          "Trụ cột 4 (Confidence): Tuyên bố rõ ràng những gì ĐÃ kiểm chứng vs CHƯA kiểm thử"
         ],
-        proofLabel: "Zero Compiler Error",
+        proofLabel: "Verification Protocol",
         createdFiles: [
           {
-            name: "prisma/schema.prisma | migrations/*.sql",
-            path: "Database Architecture",
-            type: "code",
-            desc: "Schema cơ sở dữ liệu quan hệ, bảng QuestionVersion (Git-like VCS) và D1 migrations"
+            name: ".agents/rules/verification-protocol.md",
+            path: "Engineering Protocol Rule",
+            type: "doc",
+            desc: "Quy chuẩn Kỹ thuật: 'Prove the Change and Report Confidence' — Định nghĩa chi tiết 4 Trụ Cột kiểm định bắt buộc"
           },
           {
-            name: "src/workers/ai-worker.ts",
-            path: "Redis Bull Queue Worker",
-            type: "code",
-            desc: "Tiến trình worker độc lập xử lý tác vụ AI nặng (sinh đề, LLM judge) không block HTTP"
-          },
-          {
-            name: "src/testing/golden-dataset.ts & *.spec.ts",
-            path: "Automated Evaluation",
-            type: "test",
-            desc: "Bộ dữ liệu chuẩn (Golden Dataset) đo lường độ tuân thủ JSON Schema 100% và unit tests"
+            name: "docs/testing/TESTING_CHECKLIST.md",
+            path: "Quality Assurance Standard",
+            type: "doc",
+            desc: "Danh mục nghiệm thu kỹ thuật: Syntax check, regression tests, database migration và API contracts validation"
           }
         ]
       },
       {
         step: "03",
-        title: "Screenshot UI & Video Recording",
-        subtitle: "Ghi lại Minh chứng Thực tế (Proof Assets)",
-        desc: "Khởi chạy giao diện người dùng, tự tay test end-to-end hành trình nghiệp vụ. Chụp ảnh màn hình các trạng thái UI và quay video ghi hình làm bằng chứng.",
+        title: "Visual Proof Protocol (Screenshots & Video)",
+        subtitle: "Minh chứng Thị giác Bắt buộc cho Mọi Thay đổi",
+        desc: "Thực thi Trụ cột 3 (Visual): Bắt buộc chụp ảnh màn hình hoặc quay video screen recording luồng thao tác người dùng trước khi tạo Pull Request.",
         actionItems: [
-          "Kiểm thử đầy đủ các trạng thái giao diện: Success, Empty, Error",
-          "Chụp screenshot độ nét cao cho từng phân hệ & pop-up modal",
-          "Quay video screen recording luồng thao tác người dùng thật"
+          "Chỉnh sửa UI/Component: BẮT BUỘC chụp Screenshot (Normal, Empty, Error, Responsive)",
+          "Chỉnh sửa Luồng người dùng: BẮT BUỘC quay Video screen recording / GIF (.mp4)",
+          "Chỉnh sửa Backend thuần: Bắt buộc minh họa Toast thông báo, Modal popup hoặc dữ liệu bảng"
         ],
-        proofLabel: "Proof of Work Asset",
+        proofLabel: "Visual Proof Protocol",
         createdFiles: [
           {
-            name: "docs/screenshots/ui-[feature]-desktop.png",
-            path: "Visual Proof Asset",
-            type: "media",
-            desc: "Ảnh chụp màn hình phân hệ chức năng trên giao diện desktop thực tế"
-          },
-          {
-            name: "docs/videos/demo-[feature]-walkthrough.mp4",
-            path: "Video Proof Asset",
-            type: "media",
-            desc: "Video quay màn hình thao tác luồng nghiệp vụ từ nhập liệu đến khi hoàn tất"
-          },
-          {
-            name: "logs/telemetry-events-audit.json",
-            path: "Runtime Verification Log",
+            name: "docs/rules/VISUAL_PROOF_GUIDELINES.md",
+            path: "Media Proof Standard",
             type: "doc",
-            desc: "Nhật ký ghi nhận 10 sự kiện browser telemetry chứng minh logic chạy chuẩn xác"
+            desc: "Quy định tiêu chuẩn chụp screenshot đa trạng thái và quay video thao tác hành trình người dùng thật"
+          },
+          {
+            name: "docs/proofs/PROOF_ASSET_STORAGE.md",
+            path: "Evidence Repository Spec",
+            type: "doc",
+            desc: "Tiêu chuẩn lưu trữ, nén ảnh/video và cú pháp Markdown để nhúng trực tiếp media vào mô tả PR trên GitHub"
           }
         ]
       },
       {
         step: "04",
-        title: "GitHub PR Documentation & Safe Merge",
-        subtitle: "Đính kèm vào PR trên GitHub",
-        desc: "Soạn thảo PR Markdown hoàn chỉnh trên GitHub, nhúng trực tiếp ảnh/video demo. Đồng đội và Tech Lead nghiệm thu trực quan trước khi merge vào main.",
+        title: "Fresh-Context AI Review & Safe Merge Gate",
+        subtitle: "Phản biện Độc lập trên Git Diff & Merge An toàn",
+        desc: "Áp dụng cơ chế Fresh-Context Review: Reviewer độc lập chỉ nhận User Request và git diff để phản biện logic, bảo mật và clean code trước khi được phép merge.",
         actionItems: [
-          "Nhúng ảnh UI & video demo trực tiếp vào Markdown của PR GitHub",
-          "Hoàn thành 100% tiêu chí trong PR Acceptance Checklist",
-          "Đồng đội review tự tin, merge vào nhánh chính không lo gãy build"
+          "Khởi tạo reviewer độc lập chỉ duyệt trên bản git diff sạch",
+          "Rà soát 3 tiêu chí: Regressions logic, Security/Secrets leaks, Code cleanliness",
+          "Chỉ khi Reviewer xác nhận APPROVED và pass 100% checklist thì mới cho phép merge"
         ],
-        proofLabel: "Safe Merge Verified",
+        proofLabel: "Fresh-Context Review",
         createdFiles: [
           {
-            name: "Pull Request #28 (GitHub PR Description)",
-            path: "github.com/trungducnguyen4/...",
+            name: "docs/rules/FRESH_CONTEXT_CODE_REVIEW.md",
+            path: "Anti-Confirmation Bias Rule",
             type: "doc",
-            desc: "PR description chuẩn chỉnh kèm bảng tóm tắt thay đổi, checklist và embedded media"
+            desc: "Quy chuẩn review mã nguồn độc lập trên git diff, loại bỏ hoàn toàn thiên kiến xác nhận (Confirmation Bias)"
           },
           {
-            name: "CHANGELOG.md & api-spec.yaml",
-            path: "Release & API Documentation",
+            name: "docs/release/PR_ACCEPTANCE_SIGNOFF.md",
+            path: "Merge Gate Checklist",
             type: "doc",
-            desc: "Tài liệu kỹ thuật cập nhật các API contracts mới phục vụ bàn giao và tích hợp"
-          },
-          {
-            name: "PR Acceptance Sign-off",
-            path: "Review & Merge Gate",
-            type: "config",
-            desc: "Trạng thái nghiệm thu đạt chuẩn: 0 compiler error, verified runtime proof"
+            desc: "Checklist nghiệm thu đóng PR: CI GitHub Actions passed, 0 security/bug issue, 100% visual proof đính kèm"
           }
         ]
+      }
+    ],
+    markdownGuides: [
+      {
+        id: "pr-template",
+        fileName: ".github/PULL_REQUEST_TEMPLATE.md",
+        title: "Mẫu Pull Request Chuẩn mực trên GitHub (PR Template)",
+        badge: "GitHub PR Standard",
+        description: "Template tự động nạp vào mọi PR trên GitHub, chuẩn hóa cấu trúc bắt buộc: Overview, 4 Trụ Cột Minh Chứng (Tests, Runtime, Visual, Confidence) và Deployment Checklist.",
+        content: `## 📌 Overview
+<!-- Tóm tắt ngắn gọn mục tiêu của Pull Request và các thay đổi chính -->
+
+---
+
+## 🔍 Proof of Change & Confidence Report
+
+### 1. 🧪 Tests (Focused logic and integration checks)
+- [ ] Syntax check: \`node --check server.js local/entry.js src/app.js src/ui.js\`
+- [ ] Automated tests: \`npm test\` passed
+- [ ] Pre-launch attack squad: \`npm run attack\` passed
+
+### 2. ⚡ Runtime (Use the actual feature end to end)
+- **Endpoint / Action**: <!-- ví dụ: POST /api/campaigns/create -->
+- **Status code / Response**: <!-- ví dụ: HTTP 200 OK -->
+- **Database verification**: <!-- ví dụ: D1 record inserted/updated -->
+
+### 3. 👁️ Visual (Inspect what the user will see)
+<!-- 
+BẮT BUỘC:
+- Nếu chỉnh UI / Component: ĐÍNH KÈM SCREENSHOT (Kéo thả ảnh vào đây)
+- Nếu chỉnh Luồng người dùng (User Flow): ĐÍNH KÈM VIDEO QUAY MÀN HÌNH / GIF (Kéo thả file video mp4/mov hoặc gif vào đây)
+- Nếu chỉnh Backend/API: Minh họa Toast thông báo hoặc bảng dữ liệu hiển thị
+-->
+
+### 4. 🎯 Confidence (State what was verified — and what was not)
+- **Mức độ tự tin (Confidence level)**: High / Medium / Low
+- **Những gì ĐÃ được chứng minh (Verified)**:
+  - 
+  - 
+- **Những gì CHƯA kiểm thử / Ranh giới phụ thuộc (NOT verified)**:
+  - 
+  - 
+
+---
+
+## 🚀 Deployment Checklist
+- [ ] Code passes CI pipeline on GitHub Actions
+- [ ] Attack Squad passes with 0 critical security/bug issues
+- [ ] Screenshots / Videos attached for visual proof`
+      },
+      {
+        id: "verification-protocol",
+        fileName: ".agents/rules/verification-protocol.md",
+        title: "Giao thức Kỹ thuật Xác minh (Verification Protocol Rule)",
+        badge: "Core Engineering Rule",
+        description: "Bộ quy tắc cốt lõi 'Prove the Change and Report Confidence' ràng buộc kỹ sư và AI: Tuyệt đối không phán đoán chủ quan, bắt buộc thực thi 4 Trụ Cột và Fresh-Context Review.",
+        content: `# Rule: Verification Protocol — "Prove the Change and Report Confidence"
+
+## Core Philosophy
+Mọi thay đổi mã nguồn, tính năng mới hoặc sửa lỗi (bugfix) đều phải được chứng minh bằng bằng chứng thực tế trước khi coi là hoàn thành.
+Tuyệt đối không phán đoán "chắc là chạy được rồi" mà không có kết quả xác minh cụ thể.
+
+## 4 Trụ Cột Xác Minh (The 4 Pillars)
+1. 🧪 Tests: Syntax check, Unit & Integration Tests, zero regression.
+2. ⚡ Runtime: Chạy thực tế End-to-End, HTTP Status 200/201, kiểm tra DB records.
+3. 👁️ Visual: Chỉnh UI bắt buộc có Screenshot; Chỉnh luồng người dùng bắt buộc có Video screen recording.
+4. 🎯 Confidence: Tuyên bố mức độ tự tin (High/Med/Low), liệt kê rõ ĐÃ kiểm vs CHƯA kiểm.
+
+## 🧐 Fresh-Context AI Code Review
+Trước khi commit & push, bắt buộc spawn Reviewer độc lập chỉ nhận User Request và git diff:
+1. Logic & Regressions: Không làm vỡ module lân cận.
+2. Security & Secrets: Không lộ biến môi trường, API tokens, SQLi/XSS.
+3. Code Cleanliness: Không console.log rác, không mock data thừa.
+Chỉ khi reviewer xác nhận APPROVED mới đủ điều kiện Commit & Push lên GitHub.`
       }
     ],
     realWorldProof: [
