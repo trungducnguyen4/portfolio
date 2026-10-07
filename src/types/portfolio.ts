@@ -251,6 +251,13 @@ export interface AgenticComparisonItem {
   };
 }
 
+export interface AgenticPipelineFile {
+  name: string;
+  path?: string;
+  type?: 'code' | 'config' | 'test' | 'media' | 'doc';
+  desc: string;
+}
+
 export interface AgenticPipelineStage {
   step: string;
   title: string;
@@ -258,6 +265,8 @@ export interface AgenticPipelineStage {
   desc: string;
   actionItems?: string[];
   proofLabel?: string;
+  createdFiles?: AgenticPipelineFile[];
+  deliverables?: string[];
 }
 
 export interface AgenticProofItem {

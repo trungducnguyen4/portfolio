@@ -312,51 +312,131 @@ export const initialPortfolioData: PortfolioData = {
     pipeline: [
       {
         step: "01",
-        title: "Feature Branching & Scope",
-        subtitle: "Phân nhánh Tính năng Độc lập",
-        desc: "Khởi tạo nhánh `feature/*` tách biệt từ `develop/main`. Xác định ranh giới tính năng rõ ràng, tuyệt đối không commit code rác hay file thừa.",
+        title: "Feature Branching & Architecture Scope",
+        subtitle: "Khởi tạo Nhánh & Đóng gói Module",
+        desc: "Khởi tạo nhánh `feature/*` tách biệt từ `develop/main`. Xác định ranh giới module theo Clean Architecture, thiết lập DTO validation và cấu hình PR template.",
         actionItems: [
-          "Phân nhánh feature riêng biệt",
-          "Giữ commit atomic và có ý nghĩa",
-          "Không để lọt secret hay cache"
+          "Phân nhánh feature/[ticket] độc lập, tuân thủ Git Flow",
+          "Tách biệt Controller, Service, DTO & Interface hợp đồng",
+          "Tuyệt đối không commit file .env, credentials hay cache thừa"
         ],
-        proofLabel: "Git Flow Standard"
+        proofLabel: "Git Flow Standard",
+        createdFiles: [
+          {
+            name: "src/modules/*/[feature].module.ts",
+            path: "NestJS / Next.js",
+            type: "code",
+            desc: "Đóng gói Dependency Injection, providers và export service dùng chung"
+          },
+          {
+            name: "src/modules/*/[feature].controller.ts",
+            path: "REST API Layer",
+            type: "code",
+            desc: "Định tuyến API endpoints, gán RBAC Guard, Swagger docs & DTO validation"
+          },
+          {
+            name: ".github/pull_request_template.md",
+            path: "CI/CD & Git Template",
+            type: "config",
+            desc: "Template PR chuẩn hóa bắt buộc mục checklist kiểm thử và Proof of Work"
+          }
+        ]
       },
       {
         step: "02",
-        title: "Runtime Verification & Typecheck",
+        title: "Runtime Verification & Data Integrity",
         subtitle: "Khởi chạy Server & Zero Error",
-        desc: "Bắt buộc khởi chạy server backend và frontend thực tế trên môi trường local. Chạy kiểm tra tĩnh `tsc -b` đạt 0 cảnh báo hay lỗi.",
+        desc: "Khởi chạy đồng thời API Server & AI Worker thật trên môi trường local. Chạy compiler `tsc -b` pass 100%, thực thi migration database và test suite.",
         actionItems: [
-          "Static typecheck pass 100%",
-          "Khởi chạy runtime server thật",
-          "Kiểm tra phản hồi API & Database"
+          "Static typecheck tsc -b đạt 0 error, 0 warning",
+          "Thực thi Prisma / D1 SQL migrations & seed dữ liệu mẫu",
+          "Khởi chạy Redis Bull Queue kiểm tra worker bất đồng bộ"
         ],
-        proofLabel: "Zero Compiler Error"
+        proofLabel: "Zero Compiler Error",
+        createdFiles: [
+          {
+            name: "prisma/schema.prisma | migrations/*.sql",
+            path: "Database Architecture",
+            type: "code",
+            desc: "Schema cơ sở dữ liệu quan hệ, bảng QuestionVersion (Git-like VCS) và D1 migrations"
+          },
+          {
+            name: "src/workers/ai-worker.ts",
+            path: "Redis Bull Queue Worker",
+            type: "code",
+            desc: "Tiến trình worker độc lập xử lý tác vụ AI nặng (sinh đề, LLM judge) không block HTTP"
+          },
+          {
+            name: "src/testing/golden-dataset.ts & *.spec.ts",
+            path: "Automated Evaluation",
+            type: "test",
+            desc: "Bộ dữ liệu chuẩn (Golden Dataset) đo lường độ tuân thủ JSON Schema 100% và unit tests"
+          }
+        ]
       },
       {
         step: "03",
         title: "Screenshot UI & Video Recording",
-        subtitle: "Ghi lại Minh chứng Thực tế",
-        desc: "Chụp ảnh màn hình giao diện ở các trạng thái (Success, Empty, Error) và quay video screen recording luồng thao tác của người dùng.",
+        subtitle: "Ghi lại Minh chứng Thực tế (Proof Assets)",
+        desc: "Khởi chạy giao diện người dùng, tự tay test end-to-end hành trình nghiệp vụ. Chụp ảnh màn hình các trạng thái UI và quay video ghi hình làm bằng chứng.",
         actionItems: [
-          "Chụp screenshot UI thực tế",
-          "Quay video demo luồng nghiệp vụ",
-          "Kiểm chứng các kịch bản ngoại lệ"
+          "Kiểm thử đầy đủ các trạng thái giao diện: Success, Empty, Error",
+          "Chụp screenshot độ nét cao cho từng phân hệ & pop-up modal",
+          "Quay video screen recording luồng thao tác người dùng thật"
         ],
-        proofLabel: "Proof of Work Asset"
+        proofLabel: "Proof of Work Asset",
+        createdFiles: [
+          {
+            name: "docs/screenshots/ui-[feature]-desktop.png",
+            path: "Visual Proof Asset",
+            type: "media",
+            desc: "Ảnh chụp màn hình phân hệ chức năng trên giao diện desktop thực tế"
+          },
+          {
+            name: "docs/videos/demo-[feature]-walkthrough.mp4",
+            path: "Video Proof Asset",
+            type: "media",
+            desc: "Video quay màn hình thao tác luồng nghiệp vụ từ nhập liệu đến khi hoàn tất"
+          },
+          {
+            name: "logs/telemetry-events-audit.json",
+            path: "Runtime Verification Log",
+            type: "doc",
+            desc: "Nhật ký ghi nhận 10 sự kiện browser telemetry chứng minh logic chạy chuẩn xác"
+          }
+        ]
       },
       {
         step: "04",
-        title: "GitHub PR & Peer Review",
+        title: "GitHub PR Documentation & Safe Merge",
         subtitle: "Đính kèm vào PR trên GitHub",
-        desc: "Nhúng trực tiếp ảnh/video vào phần mô tả Markdown của Pull Request trên GitHub. Đồng đội và Tech Lead nghiệm thu trực quan trước khi merge.",
+        desc: "Soạn thảo PR Markdown hoàn chỉnh trên GitHub, nhúng trực tiếp ảnh/video demo. Đồng đội và Tech Lead nghiệm thu trực quan trước khi merge vào main.",
         actionItems: [
-          "Nhúng media vào mô tả PR GitHub",
-          "Liệt kê Checklist kiểm thử",
-          "Merge an toàn không sợ gãy build"
+          "Nhúng ảnh UI & video demo trực tiếp vào Markdown của PR GitHub",
+          "Hoàn thành 100% tiêu chí trong PR Acceptance Checklist",
+          "Đồng đội review tự tin, merge vào nhánh chính không lo gãy build"
         ],
-        proofLabel: "Safe Merge Verified"
+        proofLabel: "Safe Merge Verified",
+        createdFiles: [
+          {
+            name: "Pull Request #28 (GitHub PR Description)",
+            path: "github.com/trungducnguyen4/...",
+            type: "doc",
+            desc: "PR description chuẩn chỉnh kèm bảng tóm tắt thay đổi, checklist và embedded media"
+          },
+          {
+            name: "CHANGELOG.md & api-spec.yaml",
+            path: "Release & API Documentation",
+            type: "doc",
+            desc: "Tài liệu kỹ thuật cập nhật các API contracts mới phục vụ bàn giao và tích hợp"
+          },
+          {
+            name: "PR Acceptance Sign-off",
+            path: "Review & Merge Gate",
+            type: "config",
+            desc: "Trạng thái nghiệm thu đạt chuẩn: 0 compiler error, verified runtime proof"
+          }
+        ]
       }
     ],
     realWorldProof: [
