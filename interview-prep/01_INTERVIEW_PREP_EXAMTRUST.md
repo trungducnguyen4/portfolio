@@ -50,7 +50,7 @@
       ├── [ MySQL Database via Prisma ORM ] (QuestionVersion, ExamSnapshot)
       │
       └── [ Redis Message Broker (Bull Queue) ]
-            │ (Job: generate-exam, vision-audit, vector-index)
+            │ (Queue 'ai-generation': single-question, exam-questions, proctoring-evidence, duplicate-analysis)
             ▼
 [ Independent AI Background Worker (ai-worker.ts) ]
    ├── Multi-Provider LLM Gateway (Gemini, DeepSeek, OpenRouter, Ollama)
@@ -65,20 +65,22 @@
 ## 3. 6 ĐIỂM SÁNG KỸ THUẬT CẦN THUỘC LÒNG
 
 ### 1. Phân tách API Web Server & AI Worker (Distributed Bull Queue)
-* **Vấn đề**: Gọi LLM sinh đề hoặc xử lý ảnh tốn từ **3 đến 15 giây**. Nếu chạy trực tiếp trong HTTP Request của NestJS, Event Loop của Node.js sẽ bị giữ kết nối (holding connection), gây cạn kiệt connection pool và nghẽn HTTP khi có hàng trăm thí sinh nộp bài cùng lúc.
+* **Vấn đề**: Các tác vụ AI như **Giảng viên yêu cầu AI sinh câu hỏi nháp / trích xuất câu hỏi từ tài liệu** hoặc **mô hình thị giác máy tính phân tích ảnh chụp webcam phòng thi** tốn từ **3 đến 15 giây**. Nếu xử lý đồng bộ trực tiếp trong HTTP Request của NestJS, Event Loop của Node.js sẽ bị giữ kết nối (holding connection), gây cạn kiệt connection pool và nghẽn toàn bộ HTTP API khi có hàng trăm thí sinh đang thi cử và nộp bài.  
+  *(Lưu ý mấu chốt: Nghiệp vụ tạo đề thi trong hệ thống hoàn toàn chạy bằng thuật toán bốc câu hỏi từ ngân hàng câu hỏi chỉ mất vài chục mili-giây, không hề đợi AI).*
 * **Giải pháp**:
-  * Client gửi request tạo đề -> API Server đẩy payload vào **Redis Bull Queue** và trả ngay HTTP 202 Accepted kèm `jobId`.
-  * Tiến trình `ai-worker.ts` chạy độc lập, lắng nghe job, gọi AI Gateway.
-  * Client polling hoặc nhận thông báo trạng thái qua WebSocket/SSE khi job hoàn tất.
-* **Kết quả**: HTTP API phản hồi tức thì (< 50ms), zero downtime khi AI bị chậm.
+  * Khi Giảng viên yêu cầu AI sinh câu hỏi hoặc client gửi ảnh webcam kiểm tra, API Server đẩy payload vào **Redis Bull Queue (queue `'ai-generation'`)** và trả ngay HTTP 202 Accepted kèm `jobId`.
+  * Tiến trình `ai-worker.ts` chạy độc lập, lắng nghe job (`task: 'single-question'`, `task: 'exam-questions'`, `task: 'proctoring-evidence'`), gọi AI Gateway, chạy JSON Repair Loop và ghi kết quả vào database.
+  * Phía client polling hoặc nhận thông báo trạng thái qua WebSocket/SSE khi job hoàn tất.
+* **Kết quả**: HTTP API của Web Server luôn phản hồi tức thì (< 50ms), luồng làm bài và nộp bài của thí sinh hoàn toàn không bị ảnh hưởng bởi tải xử lý AI.
 
-### 2. Thuật toán Snapshot Đề thi Bất biến (Immutable Exam State)
-* **Vấn đề**: Giảng viên có thể vô tình sửa hoặc xóa câu hỏi trong ngân hàng câu hỏi trong lúc thí sinh đang làm bài thi; hoặc nếu thí sinh reload lại trang thì đề có thể bị đổi thứ tự câu hỏi và đáp án.
-* **Giải pháp**:
-  * Khi thí sinh bấm "Bắt đầu làm bài", hệ thống chạy thuật toán bốc câu hỏi ngẫu nhiên theo ma trận độ khó (Dễ/Trung bình/Khó).
-  * Ngay lập tức serialize toàn bộ nội dung câu hỏi, thứ tự đáp án (shuffled) thành một bản ghi **Snapshot đóng băng** trong bảng `ExamSessionSnapshot`.
-  * Trong suốt thời gian làm bài, thí sinh chỉ đọc và tương tác với bản Snapshot này.
-* **Kết quả**: Đảm bảo 100% tính bất biến học thuật, sinh viên reload trang vẫn giữ nguyên vẹn đề gốc.
+### 2. Nguyên tắc Human-in-the-Loop & Snapshot Đề thi Bất biến (Immutable Exam State)
+* **Triết lý Thiết kế — Tuyệt đối không để AI tự ý sinh cả đề thi lung tung**:
+  * Trong khảo thí học thuật, việc cho LLM tự động sinh hoàn chỉnh cả một đề thi rồi phát trực tiếp cho thí sinh là điều cấm kỵ vì rủi ro ảo giác (hallucination) và sai lệch chuẩn đào tạo.
+  * Do đó, trong ExamTrust: AI **CHỈ đóng vai trò hỗ trợ sinh câu hỏi gợi ý / bản thảo câu hỏi (Question Drafts)**. Giảng viên bắt buộc phải kiểm duyệt (review), biên tập lại nội dung, đáp án, độ khó trước khi lưu thành câu hỏi chính thức trong Ngân hàng câu hỏi.
+* **Cơ chế Sinh đề & Snapshot Đề thi Bất biến**:
+  * Đề thi chỉ được cấu thành từ Ngân hàng câu hỏi đã qua kiểm duyệt (theo danh sách câu hỏi Giảng viên chọn hoặc bốc ngẫu nhiên theo ma trận độ khó Dễ/Trung bình/Khó bằng SQL query).
+  * Khi thí sinh bấm "Bắt đầu làm bài", hệ thống ngay lập tức serialize toàn bộ nội dung câu hỏi và thứ tự đáp án (shuffled) thành một bản ghi **Snapshot đóng băng** trong database (`ExamSessionSnapshot`).
+  * Trong suốt thời gian làm bài, thí sinh chỉ đọc và tương tác với bản Snapshot này. Dù giảng viên có chỉnh sửa ngân hàng câu hỏi hay thí sinh reload lại trang thì đề thi vẫn giữ nguyên vẹn 100%.
 
 ### 3. Ngân hàng Câu hỏi Git-Like Versioning (`QuestionVersion`)
 * **Vấn đề**: Đề thi cần kiểm toán (Audit Trail) phục vụ thanh tra đào tạo. Nếu chỉ cập nhật trực tiếp dòng dữ liệu trong DB, ta sẽ mất dấu ai đã sửa nội dung gì và không thể khôi phục phiên bản trước.
@@ -107,7 +109,7 @@
 * **Kết quả**: Đạt tỷ lệ phân tích cú pháp JSON thành công **100%**, không bị crash tiến trình.
 
 ### 6. Khung Benchmark Tự động LLM-as-a-Judge (`golden-dataset.ts`)
-* **Vấn đề**: Làm sao biết prompt mới tốt hơn prompt cũ? Làm sao kiểm soát ảo giác (hallucination) và đảm bảo LLM sinh đề đúng ma trận độ khó?
+* **Vấn đề**: Làm sao biết prompt mới tốt hơn prompt cũ? Làm sao kiểm soát ảo giác (hallucination) và đảm bảo LLM sinh câu hỏi gợi ý đúng chủ đề và độ khó yêu cầu?
 * **Giải pháp**:
   * Xây dựng bộ `golden-dataset.ts` chứa 50+ ca kiểm thử mẫu có đáp án đối chuẩn.
   * Module `AiEvaluationJudge` cho một mô hình lớn (Gemini 1.5 Pro) chấm điểm chất lượng câu hỏi sinh ra bởi mô hình worker (Ollama/DeepSeek) theo thang Rubric: Độ chính xác học thuật, độ phân hóa câu hỏi, tính rõ ràng và tuân thủ schema.
@@ -118,11 +120,12 @@
 
 ### ❓ Câu 1: Em hãy giải thích lý do tại sao em chọn tách biệt API Web Server và Worker Process qua Redis Bull Queue mà không dùng trực tiếp Promise/Async trong NestJS?
 * **Gợi ý trả lời**:
-  > *"Node.js hoạt động dựa trên cơ chế Single-Threaded Event Loop. Khi một async operation như gọi API bên ngoài diễn ra, dù không block main thread về mặt CPU, nhưng nó vẫn giữ kết nối HTTP TCP kết nối tới server trong hàng chục giây.*  
+  > *"Node.js hoạt động dựa trên cơ chế Single-Threaded Event Loop. Khi một async operation như gọi API LLM sinh câu hỏi từ tài liệu hoặc phân tích ảnh webcam diễn ra, nó giữ kết nối HTTP TCP kết nối tới server trong hàng chục giây.*  
   > *Nếu em chỉ dùng `async/await` nội bộ trong Controller:*  
-  > *1. Nếu server bị restart hoặc crash giữa chừng, toàn bộ các tác vụ đang sinh câu hỏi dở dang sẽ bị mất vĩnh viễn (in-memory loss).*  
-  > *2. Khi chịu tải cao (nhiều giảng viên bấm sinh đề cùng lúc), số lượng concurrent request vượt quá ngưỡng connection pool của Node.js/OS sẽ làm nghẽn luôn các request làm bài thi của thí sinh.*  
-  > *Vì vậy, em dùng **Redis Bull Queue** để tách thành Background Job: API Server chỉ nhận yêu cầu và đẩy vào Redis (mất < 10ms), trả về `jobId` cho client. Tiến trình `ai-worker.ts` xử lý hàng đợi theo cơ chế concurrency kiểm soát được (ví dụ chỉ chạy 3 jobs song song để tránh vượt rate-limit LLM), có cơ chế tự retry với exponential backoff khi mạng chập chờn và lưu trạng thái bền vững vào Redis."*
+  > *1. Nếu server bị restart hoặc crash giữa chừng, toàn bộ các tác vụ đang sinh câu hỏi hoặc phân tích ảnh dở dang sẽ bị mất vĩnh viễn (in-memory loss).*  
+  > *2. Khi chịu tải cao (nhiều giảng viên đồng thời yêu cầu AI sinh bộ câu hỏi hoặc nhiều ảnh webcam cùng đẩy lên), số lượng concurrent request giữ kết nối quá lâu sẽ làm cạn kiệt connection pool của Node.js/OS, gây nghẽn luôn các request làm bài thi và nộp bài của hàng trăm thí sinh.*  
+  > *(Lưu ý: Nghiệp vụ tạo đề thi trong hệ thống hoàn toàn chạy bằng thuật toán bốc câu hỏi từ ngân hàng câu hỏi chỉ mất vài chục mili-giây, không hề đợi AI).*  
+  > *Vì vậy, em dùng **Redis Bull Queue** để tách thành Background Job: API Server chỉ nhận yêu cầu và đẩy vào Redis (mất < 10ms), trả về `jobId` cho client. Tiến trình `ai-worker.ts` xử lý hàng đợi theo cơ chế concurrency kiểm soát được (ví dụ chỉ chạy 3-5 jobs song song để tránh vượt rate-limit LLM), có cơ chế tự retry với exponential backoff khi mạng chập chờn và lưu trạng thái bền vững vào Redis."*
 
 ---
 

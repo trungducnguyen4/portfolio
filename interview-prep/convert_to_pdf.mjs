@@ -206,18 +206,30 @@ for (const f of files) {
 
   fs.writeFileSync(htmlPath, fullHtml, 'utf-8');
 
+  const tempPdfPath = path.join(dir, `_temp_${f.pdf}`);
   try {
     execFileSync(chromePath, [
       '--headless=new',
       '--disable-gpu',
       '--no-pdf-header-footer',
-      `--print-to-pdf=${pdfPath}`,
+      `--print-to-pdf=${tempPdfPath}`,
       htmlPath,
     ]);
 
-    if (fs.existsSync(pdfPath)) {
-      const stats = fs.statSync(pdfPath);
-      console.log(`✅ Thành công: ${f.pdf} (${Math.round(stats.size / 1024)} KB)`);
+    if (fs.existsSync(tempPdfPath)) {
+      try {
+        fs.copyFileSync(tempPdfPath, pdfPath);
+        fs.unlinkSync(tempPdfPath);
+        const stats = fs.statSync(pdfPath);
+        console.log(`✅ Thành công: ${f.pdf} (${Math.round(stats.size / 1024)} KB)`);
+      } catch (copyErr) {
+        // File đích đang bị mở bởi Foxit / PDF reader
+        const fallbackPdf = path.join(dir, f.pdf.replace('.pdf', '_updated.pdf'));
+        fs.copyFileSync(tempPdfPath, fallbackPdf);
+        fs.unlinkSync(tempPdfPath);
+        const stats = fs.statSync(fallbackPdf);
+        console.log(`⚠️ File ${f.pdf} đang mở trong ứng dụng khác. Đã lưu bản mới nhất tại: ${path.basename(fallbackPdf)} (${Math.round(stats.size / 1024)} KB)`);
+      }
     } else {
       console.error(`❌ Không tìm thấy file PDF đầu ra: ${pdfPath}`);
     }
@@ -226,6 +238,9 @@ for (const f of files) {
   } finally {
     if (fs.existsSync(htmlPath)) {
       fs.unlinkSync(htmlPath);
+    }
+    if (fs.existsSync(tempPdfPath)) {
+      fs.unlinkSync(tempPdfPath);
     }
   }
 }

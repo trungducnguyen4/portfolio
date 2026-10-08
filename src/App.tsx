@@ -6,9 +6,8 @@ import { Hero } from './components/Hero';
 import { Education } from './components/Education';
 import { AgenticWorkflowSection } from './components/AgenticWorkflowSection';
 import { TimelineSection } from './components/TimelineSection';
-// import { ProjectsSection } from './components/ProjectsSection';
 import { AchievementsSection } from './components/AchievementsSection';
-import { SkillsSection } from './components/SkillsSection';
+// import { SkillsSection } from './components/SkillsSection';
 import { Footer } from './components/Footer';
 import { MediaModal } from './components/MediaModal';
 import { CustomizerModal } from './components/CustomizerModal';
@@ -183,9 +182,11 @@ export const App: React.FC = () => {
           onOpenMediaModal={handleOpenMedia}
         />
 
+        {/* Ẩn phần Công nghệ sử dụng theo yêu cầu
         <SkillsSection
           skills={data.skills}
         />
+        */}
       </main>
 
       {/* Footer */}

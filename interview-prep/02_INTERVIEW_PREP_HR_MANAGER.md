@@ -25,7 +25,7 @@
 > *Dự án xuất phát từ bài toán thực tế của doanh nghiệp: quy trình vận hành quản lý nhân sự bị phân mảnh trên Excel, giấy tờ và nhóm chat, trong khi các phần mềm ERP ngoài thị trường có chi phí đắt đỏ và yêu cầu thuê server tốn kém. Em đã trực tiếp **khảo sát toàn bộ nhân viên và phòng Hành chính - Nhân sự (HR)** để bóc tách luồng công việc, từ đó số hóa chính xác **12 phân hệ nhân sự** (chấm công, nghỉ phép, Kanban công việc, tính lương, phê duyệt).*  
 >  
 > *Về mặt kỹ thuật, em tự hào với 3 điểm nhấn lớn:*  
-> *1. **Kiến trúc Serverless Zero-Cost trên Cloudflare (Workers, D1, R2)**: Vận hành trơn tru cho quy mô dưới 100 nhân sự với **chi phí hạ tầng $0/tháng**, giúp doanh nghiệp **tiết kiệm trực tiếp 25 - 30 triệu VNĐ mỗi năm** so với phương án thuê VPS ảo và IP tĩnh.*  
+> *1. **Kiến trúc Serverless Zero-Cost trên Cloudflare (Workers, D1, R2)**: Vận hành trơn tru cho quy mô dưới 100 nhân sự với **chi phí hạ tầng $0/tháng**, giúp doanh nghiệp **tiết kiệm trực tiếp 8.4 triệu VNĐ mỗi năm** (~700.000 đ/tháng) so với phương án thuê VPS ảo và mạng chấm công.*  
 > *2. **Enterprise AI Copilot với 24 Native Function Tools**: Tích hợp **Stateful Circuit Breaker** (cooldown 30s) chống sập chuỗi, và **Bảo mật Tool-Layer RBAC** ở tầng mã nguồn — ngăn chặn triệt để nguy cơ Prompt Injection xâm phạm dữ liệu lương.*  
 > *3. **Chấm công Radar GPS Geofencing**: Hỗ trợ đa văn phòng (HCM, Hà Nội) với thuật toán tính khoảng cách Haversine chính xác thay thế hoàn toàn mạng Wifi IP tĩnh truyền thống.*  
 >  
@@ -40,10 +40,10 @@ Khi phỏng vấn, nhà tuyển dụng đánh giá rất cao kỹ sư hiểu v�
 
 | Phương án truyền thống (Truyền thống) | Phương án Cloudflare Serverless (Của ứng viên) | Mức tiết kiệm hàng năm |
 |---|---|---|
-| **Thuê VPS Cloud (Web + DB)**: ~1.500.000 - 2.000.000 đ/tháng | **Cloudflare Workers + D1 DB Free Tier**: **0 đ/tháng** (100.000 req/ngày miễn phí, doanh nghiệp < 100 người chỉ dùng ~3.000 - 5.000 req/ngày) | Tiết kiệm: **18 - 24 triệu VNĐ/năm** |
-| **Đường truyền mạng IP Tĩnh riêng** (phục vụ chấm công qua Wifi công ty): ~600.000 đ/tháng | **Chấm công Radar GPS Geofencing** trên di động/trình duyệt: **0 đ/tháng** | Tiết kiệm: **7.2 triệu VNĐ/năm** |
+| **Thuê VPS Cloud cơ bản**: ~450.000 đ/tháng | **Cloudflare Workers + D1 DB Free Tier**: **0 đ/tháng** (100.000 req/ngày miễn phí, doanh nghiệp < 100 người chỉ dùng ~3.000 - 5.000 req/ngày) | Tiết kiệm: **5.4 triệu VNĐ/năm** |
+| **Đường truyền mạng IP Tĩnh / VPN chấm công**: ~250.000 đ/tháng | **Chấm công Radar GPS Geofencing** trên di động/trình duyệt: **0 đ/tháng** | Tiết kiệm: **3.0 triệu VNĐ/năm** |
 | **Bảo trì, vá lỗi hệ điều hành OS, backup database**: Tốn công DevOps | **Serverless tự động managed, zero-maintenance**, backup tự động | Tiết kiệm chi phí vận hành nhân sự |
-| **TỔNG CHI PHÍ HÀNG NĂM**: ~25.000.000 - 30.000.000 VNĐ/năm | **TỔNG CHI PHÍ HÀNG NĂM**: **0 VNĐ / năm** | **TIẾT KIỆM RÒNG: ~25 - 30 TRIỆU ĐỒNG/NĂM** |
+| **TỔNG CHI PHÍ HÀNG NĂM**: ~8.400.000 VNĐ/năm | **TỔNG CHI PHÍ HÀNG NĂM**: **0 VNĐ / năm** | **TIẾT KIỆM RÒNG: 8.4 TRIỆU ĐỒNG/NĂM (KHỚP 100% VỚI CV)** |
 
 ---
 
@@ -187,7 +187,7 @@ Khi phỏng vấn, nhà tuyển dụng đánh giá rất cao kỹ sư hiểu v�
 | Hạng mục | Thông số thực tế NetViet HR Pro | Ý nghĩa phỏng vấn |
 |---|---|---|
 | **Chi phí Hạ tầng** | **$0 / tháng** (Cloudflare Serverless) | Tối ưu hóa ngân sách xuất sắc cho SME |
-| **Tiết kiệm Doanh nghiệp** | **~25 - 30 triệu VNĐ / năm** | Hiểu giá trị kinh tế mang lại cho công ty |
+| **Tiết kiệm Doanh nghiệp** | **8.4 triệu VNĐ / năm** | Hiểu giá trị kinh tế mang lại cho công ty (khớp 100% với CV) |
 | **Quy mô Hệ thống** | **12 phân hệ nhân sự**, thiết kế < 100 users | Khảo sát thực tế toàn diện, không làm CRUD rác |
 | **AI Function Tools** | **24 Tools Native Calling** | Tích hợp AI sâu vào quy trình nghiệp vụ |
 | **Bảo mật AI** | **Tool-Layer RBAC ở tầng Backend** | Chống 100% Prompt Injection vào bảng lương |

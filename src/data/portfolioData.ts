@@ -62,7 +62,7 @@ export const initialPortfolioData: PortfolioData = {
       role: "Lead Full-stack Architecture & AI Integration",
       period: "2026",
       badge: "Đề tài Khóa luận Tốt nghiệp",
-      description: "Hệ sinh thái khảo thí và đánh giá học thuật khép kín All-in-One: từ **ngân hàng câu hỏi có versioning**, **sinh đề gợi ý bằng AI đa nhà cung cấp**, cơ chế **sinh đề ngẫu nhiên hóa snapshot bất biến** cho từng sinh viên, đến hệ thống **giám sát liêm chính 3 tầng** (**browser telemetry + AI risk scoring + human audit**) và phân tích học thuật chuyên sâu.",
+      description: "Hệ sinh thái khảo thí và đánh giá học thuật khép kín All-in-One: từ **ngân hàng câu hỏi có versioning**, **hỗ trợ sinh câu hỏi gợi ý bằng AI đa nhà cung cấp (Human-in-the-Loop có giảng viên kiểm duyệt)**, cơ chế **sinh đề ngẫu nhiên hóa snapshot bất biến** cho từng sinh viên, đến hệ thống **giám sát liêm chính 3 tầng** (**browser telemetry + AI risk scoring + human audit**) và phân tích học thuật chuyên sâu.",
       softwareCore: {
         title: "Lõi Kỹ thuật Phần mềm (Software Engineering Core)",
         tagline: "Kiến trúc Phân tán, Hàng đợi Bất đồng bộ & Tính toàn vẹn Dữ liệu Cấp Doanh nghiệp",
@@ -168,7 +168,7 @@ export const initialPortfolioData: PortfolioData = {
           },
           {
             title: "Đánh giá & Benchmark Tự động (LLM-as-a-Judge)",
-            desc: "Xây dựng **AiEvaluationJudge** kết hợp **Golden Dataset (golden-dataset.ts)** để benchmark tự động chất lượng sinh đề, đo lường **độ tuân thủ JSON Schema 100%** và **kiểm soát ảo giác (hallucination)**.",
+            desc: "Xây dựng **AiEvaluationJudge** kết hợp **Golden Dataset (golden-dataset.ts)** để benchmark tự động chất lượng sinh câu hỏi AI, đo lường **độ tuân thủ JSON Schema 100%** và **kiểm soát ảo giác (hallucination)**.",
             badge: "LLM-as-a-Judge Eval",
             metrics: "Golden Dataset Suite"
           },
@@ -496,7 +496,7 @@ Chỉ khi reviewer xác nhận APPROVED mới đủ điều kiện Commit & Push
         repo: "trungducnguyen4/ExamTrust",
         prCount: "28 Pull Requests",
         badge: "Khóa luận Loại Giỏi",
-        desc: "Hệ thống khảo thí trực tuyến phân tán với 28 Pull Requests chuẩn hóa trên GitHub. Mọi PR đều phân tách rõ Feature branch, kiểm tra build và đính kèm bằng chứng thực thi chức năng sinh đề, telemetry và proctoring.",
+        desc: "Hệ thống khảo thí trực tuyến phân tán với 28 Pull Requests chuẩn hóa trên GitHub. Mọi PR đều phân tách rõ Feature branch, kiểm tra build và đính kèm bằng chứng thực thi chức năng quản lý bài thi, telemetry và proctoring.",
         prUrl: "https://github.com/trungducnguyen4/ExamTrust/pulls?q=is%3Apr+is%3Aclosed",
         highlights: [
           "28 PRs chuẩn hóa tuân thủ nghiêm ngặt Git Workflow",
@@ -514,7 +514,7 @@ Chỉ khi reviewer xác nhận APPROVED mới đủ điều kiện Commit & Push
         prUrl: "https://github.com/trungducnguyen4/nexrall-hr-manager---marketing/pulls?q=is%3Apr",
         highlights: [
           "Khảo sát toàn bộ nhân sự và phòng HR thực tế",
-          "Tiết kiệm 25 - 30 triệu VNĐ/năm chi phí hạ tầng",
+          "Tiết kiệm 8.4 triệu VNĐ/năm chi phí hạ tầng",
           "Proof of Work cho 24 Tools AI Copilot & Radar GPS"
         ]
       },
@@ -547,7 +547,7 @@ Chỉ khi reviewer xác nhận APPROVED mới đủ điều kiện Commit & Push
       description: "Chủ động khảo sát toàn diện quy trình làm việc thực tế cùng Ban Giám đốc và phòng Hành chính - Nhân sự để phát triển hệ thống **NetViet HR Pro** kết hợp **Enterprise AI Copilot** (phiên bản demo độc lập trên Cloudflare: `nexrall-hr-demo.netviettv-hr-manager.workers.dev`). Tối ưu hóa triệt để chi phí hạ tầng với kiến trúc **Serverless Zero Cost ($0/tháng cho quy mô dưới 100 nhân sự)**, chuyển dịch từ CRUD thông thường sang **hệ thống phân tích dữ liệu chuyên sâu** và tích hợp **AI Agent thông minh** hỗ trợ ra quyết định thời gian thực.",
       responsibilities: [
         "**Khảo sát & số hóa vận hành SME**: Trực tiếp phỏng vấn và khảo sát thực tế **toàn bộ nhân viên** (quy mô dưới 100 người) cùng **phòng Hành chính - Nhân sự (HR)** để bóc tách triệt để các pain point vận hành; từ đó chuẩn hóa và số hóa chính xác **12 phân hệ nhân sự** (**chấm công**, **nghỉ phép**, **công việc Kanban**, **tính lương**, **bàn giao dự án**), thay vì áp dụng máy móc lý thuyết.",
-        "**Kiến trúc Serverless Zero-Cost ($0/tháng cho quy mô dưới 100 nhân sự)**: Thiết kế toàn bộ hạ tầng trên **Cloudflare Workers**, **Cloudflare D1 (SQLite)**, **R2 Bucket** và **Durable Objects**, vận hành ổn định cho **quy mô dưới 100 nhân viên** với **chi phí 0 đồng**. So với chi phí thị trường khi thuê **cụm Web & Database Server (~1.5 - 2 triệu/tháng)** kết hợp đường truyền **IP tĩnh (Static IP ~600k/tháng)**, giải pháp giúp doanh nghiệp **tiết kiệm trực tiếp ~25 - 30 triệu VNĐ/năm** chi phí hạ tầng cố định.",
+        "**Kiến trúc Serverless Zero-Cost ($0/tháng cho quy mô dưới 100 nhân sự)**: Thiết kế toàn bộ hạ tầng trên **Cloudflare Workers**, **Cloudflare D1 (SQLite)**, **R2 Bucket** và **Durable Objects**, vận hành ổn định cho **quy mô dưới 100 nhân viên** với **chi phí 0 đồng**. So với giải pháp thuê máy chủ và duy trì đường truyền mạng chuyên dụng (~700.000 đ/tháng), giải pháp giúp doanh nghiệp **tiết kiệm trực tiếp 8.4 triệu VNĐ/năm** chi phí hạ tầng cố định.",
         "**Phát triển Enterprise AI Copilot & Multi-Provider Gateway**: Xây dựng AI Copilot với **24 Native Function Calling Tools**, **Stateful Circuit Breaker (cooldown 30s)** chống cascading outages, **rate limiting đa tầng** và tự động **fallback giữa Gemini, OpenAI và Edge Heuristics**, bảo vệ **100% ngân sách token**.",
         "**Bảo mật Tool-Layer RBAC & Chống Hallucination**: Triển khai kiểm soát quyền **độc lập khỏi prompt ở tầng mã nguồn**, loại bỏ nguy cơ **Prompt Injection / Jailbreak** đối với dữ liệu lương nhạy cảm; tích hợp **Citation Grounding** lọc trích dẫn giả mạo và **Human-in-the-Loop Action Cards**.",
         "**Streaming SSE & Chấm công Radar GPS**: Xây dựng cơ chế truyền phát **Server-Sent Events (SSE)** kèm đo lường **True TTFT**, kết hợp tính năng **chấm công GPS đa địa điểm** (văn phòng HCM, Hà Nội) với **radar bán kính thông minh** thay thế mạng Wifi IP tĩnh.",
