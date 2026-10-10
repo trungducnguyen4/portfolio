@@ -1,12 +1,12 @@
 import React from 'react';
-import { Sparkles, Edit3, Mail } from 'lucide-react';
+import { Sparkles, Mail } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface NavbarProps {
-  onOpenCustomizer: () => void;
+  onOpenCustomizer?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenCustomizer }) => {
+export const Navbar: React.FC<NavbarProps> = () => {
   const { language, setLanguage, t } = useLanguage();
 
   return (
@@ -75,16 +75,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCustomizer }) => {
                 <span className="text-[11px]">EN</span>
               </button>
             </div>
-
-            {/* Customizer Button */}
-            <button
-              onClick={onOpenCustomizer}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-800 hover:bg-slate-200 border border-slate-300/80 transition-all hover:scale-105 shadow-xs"
-              title={t('navCustomize')}
-            >
-              <Edit3 className="w-3.5 h-3.5 text-red-600" />
-              <span className="hidden sm:inline">{t('navCustomize')}</span>
-            </button>
 
             {/* Contact CTA */}
             <a

@@ -1,16 +1,16 @@
 import React from 'react';
 import type { ProfileInfo } from '../types/portfolio';
-import { Sparkles, ArrowRight, Mail, MapPin, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Mail, MapPin } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { SectionMascot } from './SectionMascot';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface HeroProps {
   profile: ProfileInfo;
-  onOpenCustomizer: () => void;
+  onOpenCustomizer?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
+export const Hero: React.FC<HeroProps> = ({ profile }) => {
   const { t } = useLanguage();
 
   return (
@@ -86,14 +86,6 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
               >
                 {t('heroBtnEducation')}
               </a>
-
-              <button
-                onClick={onOpenCustomizer}
-                className="inline-flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-xs text-slate-700 bg-slate-100 border border-slate-300 hover:bg-slate-200 transition-all"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-red-600" />
-                {t('heroBtnCustomize')}
-              </button>
             </div>
 
             {/* Social and Location meta */}
@@ -142,8 +134,8 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
             </div>
           </div>
 
-          {/* Right Column: 3D Mascot & Visual Matte Black Terminal */}
-          <div className="w-full max-w-md lg:w-[480px] flex flex-col items-center gap-6">
+          {/* Right Column: 3D Mascot (Mục Giới thiệu) */}
+          <div className="w-full max-w-md lg:w-[480px] flex flex-col items-center justify-center">
             {/* Large 3D Mascot (Mục Giới thiệu) - Frameless Transparent */}
             <SectionMascot
               image="/avatar3d/avatar_welcome.png"
@@ -152,72 +144,6 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
               speechText={t('heroMascotSpeech')}
               size="xl"
             />
-
-            <div className="w-full relative bg-slate-950 text-slate-100 rounded-2xl p-6 border-2 border-slate-900 shadow-2xl overflow-hidden group">
-              {/* Window Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
-                  <span className="ml-2 text-xs font-mono text-slate-400">trungduc@ai-terminal ~</span>
-                </div>
-                <div className="text-[10px] font-mono font-bold text-red-400 bg-red-500/15 px-2 py-0.5 rounded border border-red-500/30">
-                  AI-Powered
-                </div>
-              </div>
-
-              {/* Terminal / Code Body */}
-              <div className="mt-4 font-mono text-xs space-y-3">
-                <div className="text-slate-400">
-                  <span className="text-red-400 font-bold">const</span>{' '}
-                  <span className="text-white font-bold">engineer</span> = &#123;
-                </div>
-                <div className="pl-4 space-y-1 text-slate-300">
-                  <div>
-                    <span className="text-red-300">name</span>: <span className="text-white font-semibold">'{profile.name}'</span>,
-                  </div>
-                  <div>
-                    <span className="text-red-300">graduated</span>: <span className="text-amber-300 font-semibold">'Tôn Đức Thắng Univ (TDTU)'</span>,
-                  </div>
-                  <div>
-                    <span className="text-red-300">degree</span>: <span className="text-emerald-300 font-semibold">'Loại Giỏi (GPA 8.34)'</span>,
-                  </div>
-                  <div>
-                    <span className="text-red-300">philosophy</span>: <span className="text-slate-200">'AI-first Workflow + Clean Code'</span>,
-                  </div>
-                  <div>
-                    <span className="text-red-300">superpowers</span>: [
-                  </div>
-                  <div className="pl-4 text-emerald-400 text-[11px] leading-relaxed">
-                    'Cursor IDE Mastery', 'Prompt Engineering',<br/>
-                    'ERP Business Flow', 'Fast Feature Delivery'
-                  </div>
-                  <div>],</div>
-                </div>
-                <div className="text-slate-400">&#125;;</div>
-
-                <div className="pt-2 border-t border-slate-800/80">
-                  <div className="text-slate-400 text-[11px]">
-                    <span className="text-red-400 font-bold">➜</span> <span className="text-emerald-400">engineer.deliverProductWithAI()</span>
-                  </div>
-                  <div className="mt-1.5 p-2 rounded bg-slate-900 border border-slate-800 text-[11px] text-white flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-red-500 flex-shrink-0" />
-                    <span className="font-semibold">Quality Software Shipped 3x Faster</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Verified Affiliations Strip */}
-              <div className="mt-5 pt-4 border-t border-slate-800 flex items-center justify-between">
-                <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Verified Affiliations</span>
-                <div className="flex items-center gap-3">
-                  <img src="/logos/tdtu-logo.png" alt="TDTU" className="h-6 object-contain bg-white p-0.5 rounded shadow-xs" />
-                  <img src="/logos/rikkei-logo.png" alt="Rikkeisoft" className="h-6 object-contain bg-white p-0.5 rounded shadow-xs" />
-                  <img src="/logos/vco-logo.png" alt="VCO" className="h-6 object-contain bg-white p-0.5 rounded shadow-xs" />
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>
