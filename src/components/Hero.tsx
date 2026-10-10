@@ -3,6 +3,7 @@ import type { ProfileInfo } from '../types/portfolio';
 import { Sparkles, ArrowRight, Mail, MapPin, CheckCircle2 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { SectionMascot } from './SectionMascot';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface HeroProps {
   profile: ProfileInfo;
@@ -10,6 +11,8 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
+  const { t } = useLanguage();
+
   return (
     <section id="about" className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-b from-red-50/50 via-white to-white">
       {/* Background Decorative Accents */}
@@ -30,7 +33,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 leading-tight">
-              Xin chào, tôi là{' '}
+              {t('heroGreeting')}{' '}
               <span className="text-gradient-red block mt-1">{profile.name}</span>
             </h1>
 
@@ -73,7 +76,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
                 href="#experience"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-600/25 transition-all hover:scale-105"
               >
-                Kinh nghiệm Thực chiến
+                {t('heroBtnExperience')}
                 <ArrowRight className="w-4 h-4" />
               </a>
 
@@ -81,7 +84,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
                 href="#education"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm text-slate-900 bg-white border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition-all shadow-xs"
               >
-                Khóa luận & Học vấn
+                {t('heroBtnEducation')}
               </a>
 
               <button
@@ -89,7 +92,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
                 className="inline-flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-xs text-slate-700 bg-slate-100 border border-slate-300 hover:bg-slate-200 transition-all"
               >
                 <Sparkles className="w-3.5 h-3.5 text-red-600" />
-                Tùy chỉnh Dữ liệu
+                {t('heroBtnCustomize')}
               </button>
             </div>
 
@@ -107,7 +110,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
                 target="_blank"
                 rel="noreferrer"
                 className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 hover:text-red-600 border border-slate-200 hover:border-red-300 shadow-xs transition-all text-sm sm:text-base font-bold"
-                title="Truy cập GitHub trungducnguyen4"
+                title="GitHub: trungducnguyen4"
               >
                 <GithubIcon className="w-5 h-5 text-slate-900 group-hover:text-red-600 flex-shrink-0 transition-colors" />
                 <span>GitHub</span>
@@ -120,7 +123,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
                 target="_blank"
                 rel="noreferrer"
                 className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 hover:text-red-600 border border-slate-200 hover:border-red-300 shadow-xs transition-all text-sm sm:text-base font-bold"
-                title="Truy cập LinkedIn trungducnguyen1407"
+                title="LinkedIn: trungducnguyen1407"
               >
                 <LinkedinIcon className="w-5 h-5 text-[#0A66C2] group-hover:text-red-600 flex-shrink-0 transition-colors" />
                 <span>LinkedIn</span>
@@ -131,7 +134,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
               <a
                 href={`mailto:${profile.email}`}
                 className="group inline-flex items-center gap-2 text-slate-800 hover:text-red-600 transition-colors"
-                title="Gửi email cho Nguyễn Trung Đức"
+                title={profile.email}
               >
                 <Mail className="w-5 h-5 text-red-600 flex-shrink-0" />
                 <span className="font-bold text-slate-900 group-hover:text-red-600">{profile.email}</span>
@@ -144,9 +147,9 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
             {/* Large 3D Mascot (Mục Giới thiệu) - Frameless Transparent */}
             <SectionMascot
               image="/avatar3d/avatar_welcome.png"
-              alt="3D Mascot Nguyễn Trung Đức Chào Mừng"
-              speechTitle="Xin chào bạn!"
-              speechText="Mình là Trung Đức. Chào mừng bạn ghé thăm không gian Portfolio của mình!"
+              alt="3D Mascot Trung Duc"
+              speechTitle={t('heroMascotTitle')}
+              speechText={t('heroMascotSpeech')}
               size="xl"
             />
 

@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { initialPortfolioData } from './data/portfolioData';
+import { initialPortfolioDataEn } from './data/portfolioDataEn';
 import type { PortfolioData } from './types/portfolio';
+import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Education } from './components/Education';
 import { AgenticWorkflowSection } from './components/AgenticWorkflowSection';
 import { TimelineSection } from './components/TimelineSection';
 import { AchievementsSection } from './components/AchievementsSection';
-// import { SkillsSection } from './components/SkillsSection';
 import { Footer } from './components/Footer';
 import { MediaModal } from './components/MediaModal';
 import { CustomizerModal } from './components/CustomizerModal';
 
-export const App: React.FC = () => {
+const AppContent: React.FC = () => {
+  const { language } = useLanguage();
+  const defaultData = language === 'en' ? initialPortfolioDataEn : initialPortfolioData;
+
   // Always enforce Light Mode & clear stale skills cache
   useEffect(() => {
     document.documentElement.classList.add('light');
@@ -53,51 +57,27 @@ export const App: React.FC = () => {
     }
   }, []);
 
-  // Portfolio data state with LocalStorage persistence
-  const [data, setData] = useState<PortfolioData>(() => {
+  // Portfolio data state with LocalStorage persistence per language
+  const [data, setData] = useState<PortfolioData>(defaultData);
+
+  // Sync data when language toggles if no custom overrides or update base
+  useEffect(() => {
     try {
-      const saved = localStorage.getItem('trungduc_portfolio_data');
+      const storageKey = `trungduc_portfolio_data_${language}`;
+      const saved = localStorage.getItem(storageKey);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return {
-          ...initialPortfolioData,
+        setData({
+          ...defaultData,
           ...parsed,
-          profile: {
-            ...initialPortfolioData.profile,
-            ...(parsed.profile || {}),
-            title: initialPortfolioData.profile.title,
-            tagline: initialPortfolioData.profile.tagline,
-            bio: initialPortfolioData.profile.bio,
-            github: initialPortfolioData.profile.github,
-            linkedin: initialPortfolioData.profile.linkedin,
-            stats: initialPortfolioData.profile.stats,
-          },
-          education: {
-            ...initialPortfolioData.education,
-            ...(parsed.education || {}),
-            diplomaCover: initialPortfolioData.education.diplomaCover,
-            honors: initialPortfolioData.education.honors,
-            activity: initialPortfolioData.education.activity,
-            aiThesis: initialPortfolioData.education.aiThesis,
-            graduationThesis: initialPortfolioData.education.graduationThesis,
-            highSchool: initialPortfolioData.education.highSchool,
-          },
-          agenticWorkflow: initialPortfolioData.agenticWorkflow,
-          certifications: initialPortfolioData.certifications,
-          activities: initialPortfolioData.activities,
-          highSchoolAchievement: initialPortfolioData.highSchoolAchievement,
-          skills: initialPortfolioData.skills,
-          experiences: initialPortfolioData.experiences,
-          projects: (parsed.projects && parsed.projects.some((p: any) => p.id === 'nexrall-hr-copilot'))
-            ? parsed.projects
-            : initialPortfolioData.projects,
-        };
+        });
+        return;
       }
     } catch (e) {
       console.error('Error loading saved portfolio data:', e);
     }
-    return initialPortfolioData;
-  });
+    setData(defaultData);
+  }, [language]);
 
   // Media Modal state
   const [mediaModal, setMediaModal] = useState<{
@@ -114,13 +94,22 @@ export const App: React.FC = () => {
   // Save handler from customizer
   const handleSaveData = (newData: PortfolioData) => {
     setData(newData);
-    localStorage.setItem('trungduc_portfolio_data', JSON.stringify(newData));
+    try {
+      localStorage.setItem(`trungduc_portfolio_data_${language}`, JSON.stringify(newData));
+    } catch {
+      // ignore
+    }
   };
 
   // Reset to default handler
   const handleResetData = () => {
-    setData(initialPortfolioData);
-    localStorage.removeItem('trungduc_portfolio_data');
+    setData(defaultData);
+    try {
+      localStorage.removeItem(`trungduc_portfolio_data_${language}`);
+      localStorage.removeItem('trungduc_portfolio_data');
+    } catch {
+      // ignore
+    }
   };
 
   const handleOpenMedia = (media: { type: 'video' | 'image'; url: string; title: string }) => {
@@ -157,7 +146,7 @@ export const App: React.FC = () => {
         />
 
         <AgenticWorkflowSection
-          data={data.agenticWorkflow || initialPortfolioData.agenticWorkflow}
+          data={data.agenticWorkflow || defaultData.agenticWorkflow}
           onOpenMediaModal={handleOpenMedia}
         />
 
@@ -167,26 +156,12 @@ export const App: React.FC = () => {
           onOpenCustomizer={() => setIsCustomizerOpen(true)}
         />
 
-        {/* Tạm thời ẩn phần dự án tiêu biểu theo yêu cầu
-        <ProjectsSection
-          projects={data.projects}
-          onOpenMediaModal={handleOpenMedia}
-          onOpenCustomizer={() => setIsCustomizerOpen(true)}
-        />
-        */}
-
         <AchievementsSection
-          certifications={data.certifications || initialPortfolioData.certifications}
-          activities={data.activities || initialPortfolioData.activities}
-          highSchoolAchievement={data.highSchoolAchievement || initialPortfolioData.highSchoolAchievement}
+          certifications={data.certifications || defaultData.certifications}
+          activities={data.activities || defaultData.activities}
+          highSchoolAchievement={data.highSchoolAchievement || defaultData.highSchoolAchievement}
           onOpenMediaModal={handleOpenMedia}
         />
-
-        {/* Ẩn phần Công nghệ sử dụng theo yêu cầu
-        <SkillsSection
-          skills={data.skills}
-        />
-        */}
       </main>
 
       {/* Footer */}
@@ -210,6 +185,14 @@ export const App: React.FC = () => {
         onReset={handleResetData}
       />
     </div>
+  );
+};
+
+export const App: React.FC = () => {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, ExternalLink, Play, Image as ImageIcon } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface MediaModalProps {
   isOpen: boolean;
@@ -12,6 +13,8 @@ interface MediaModalProps {
 }
 
 export const MediaModal: React.FC<MediaModalProps> = ({ isOpen, onClose, media }) => {
+  const { language } = useLanguage();
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -68,7 +71,9 @@ export const MediaModal: React.FC<MediaModalProps> = ({ isOpen, onClose, media }
             )}
             <div className="min-w-0">
               <h3 className="text-base font-bold text-slate-900 truncate">{media.title}</h3>
-              <p className="text-xs text-slate-500">Xem trực tiếp nội dung minh họa chi tiết</p>
+              <p className="text-xs text-slate-500">
+                {language === 'en' ? 'Direct high-resolution media preview' : 'Xem trực tiếp nội dung minh họa chi tiết'}
+              </p>
             </div>
           </div>
 
@@ -78,14 +83,14 @@ export const MediaModal: React.FC<MediaModalProps> = ({ isOpen, onClose, media }
               target="_blank"
               rel="noreferrer"
               className="p-2 text-slate-500 hover:text-red-600 rounded-lg hover:bg-slate-100 transition-colors"
-              title="Mở ảnh gốc trong tab mới"
+              title={language === 'en' ? 'Open original in new tab' : 'Mở ảnh gốc trong tab mới'}
             >
               <ExternalLink className="w-4 h-4" />
             </a>
             <button
               onClick={onClose}
               className="p-2 text-slate-500 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors"
-              title="Đóng (Esc)"
+              title={language === 'en' ? 'Close (Esc)' : 'Đóng (Esc)'}
             >
               <X className="w-5 h-5" />
             </button>
@@ -115,7 +120,7 @@ export const MediaModal: React.FC<MediaModalProps> = ({ isOpen, onClose, media }
                       className="px-4 py-2 rounded-xl bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold text-xs inline-flex items-center gap-2 shadow-md transition-colors"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
-                      Mở xem trực tiếp trên Facebook Reels
+                      {language === 'en' ? 'Watch on Facebook Reels' : 'Mở xem trực tiếp trên Facebook Reels'}
                     </a>
                   </div>
                 )}
@@ -123,7 +128,9 @@ export const MediaModal: React.FC<MediaModalProps> = ({ isOpen, onClose, media }
             ) : (
               <div className="w-full aspect-video rounded-xl overflow-hidden shadow-lg border border-slate-800 flex flex-col items-center justify-center bg-slate-900 p-8 text-center">
                 <Play className="w-12 h-12 text-red-500 mb-3" />
-                <p className="text-slate-300 font-medium mb-3">Đường dẫn video ngoài</p>
+                <p className="text-slate-300 font-medium mb-3">
+                  {language === 'en' ? 'External video link' : 'Đường dẫn video ngoài'}
+                </p>
                 <a
                   href={media.url}
                   target="_blank"
@@ -131,7 +138,7 @@ export const MediaModal: React.FC<MediaModalProps> = ({ isOpen, onClose, media }
                   className="px-4 py-2 rounded-lg bg-red-600 text-white font-semibold text-xs inline-flex items-center gap-2 hover:bg-red-700 transition-colors"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
-                  Mở xem video tại {new URL(media.url).hostname}
+                  {language === 'en' ? `Watch video on ${new URL(media.url).hostname}` : `Mở xem video tại ${new URL(media.url).hostname}`}
                 </a>
               </div>
             )
@@ -148,12 +155,16 @@ export const MediaModal: React.FC<MediaModalProps> = ({ isOpen, onClose, media }
 
         {/* Footer */}
         <div className="px-6 py-3 border-t border-slate-200 bg-slate-50 flex items-center justify-between text-xs text-slate-500">
-          <span>Gợi ý: Bạn có thể cập nhật link video YouTube hoặc ảnh bất cứ lúc nào qua nút "Tùy chỉnh Dữ liệu"</span>
+          <span>
+            {language === 'en'
+              ? 'Tip: You can customize media links anytime via the "Customize Data" button'
+              : 'Gợi ý: Bạn có thể cập nhật link video YouTube hoặc ảnh bất cứ lúc nào qua nút "Tùy chỉnh Dữ liệu"'}
+          </span>
           <button
             onClick={onClose}
             className="px-3.5 py-1.5 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold transition-colors"
           >
-            Đóng
+            {language === 'en' ? 'Close' : 'Đóng'}
           </button>
         </div>
       </div>

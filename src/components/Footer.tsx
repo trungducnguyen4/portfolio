@@ -3,12 +3,14 @@ import type { ProfileInfo } from '../types/portfolio';
 import { Mail, ArrowUp, Copy, Check, Sparkles } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { SectionMascot } from './SectionMascot';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface FooterProps {
   profile: ProfileInfo;
 }
 
 export const Footer: React.FC<FooterProps> = ({ profile }) => {
+  const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
@@ -30,13 +32,13 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
           <div className="max-w-2xl flex-1 text-left">
             <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold bg-red-600/20 text-red-400 border border-red-500/30 mb-4 shadow-xs">
               <Sparkles className="w-3.5 h-3.5 text-red-500" />
-              Sẵn sàng Hợp tác & Cơ hội Mới
+              {t('footerBannerTag')}
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
-              Bạn đang tìm kiếm một Software Engineer tạo ra sản phẩm đột phá với AI?
+              {t('footerBannerTitle')}
             </h2>
             <p className="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
-              Tôi luôn sẵn sàng kết nối với các doanh nghiệp, startup và đội ngũ kỹ thuật đang tìm kiếm nhân sự có nền tảng Kỹ thuật phần mềm vững chắc (Tốt nghiệp loại Giỏi ĐH Tôn Đức Thắng) và tinh thần tiên phong ứng dụng AI để tối ưu năng suất.
+              {t('footerBannerText')}
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -45,7 +47,7 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-600/30 transition-all hover:scale-105"
               >
                 <Mail className="w-4 h-4" />
-                Gửi Email Trực tiếp
+                {t('footerBtnEmail')}
               </a>
 
               <button
@@ -55,7 +57,7 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
                 {copied ? (
                   <>
                     <Check className="w-4 h-4 text-red-400" />
-                    <span className="text-red-400">Đã sao chép Email</span>
+                    <span className="text-red-400">{t('footerCopiedEmail')}</span>
                   </>
                 ) : (
                   <>
@@ -71,9 +73,9 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
           <div className="flex-shrink-0 flex items-center justify-center pt-4 lg:pt-0">
             <SectionMascot
               image="/avatar3d/avatar_contact.png"
-              alt="3D Mascot Liên Hệ Nguyễn Trung Đức"
-              speechTitle="Sẵn sàng Cống hiến"
-              speechText="Rất mong được trao đổi và cống hiến cùng quý công ty! ✉️"
+              alt="3D Mascot Nguyễn Trung Đức"
+              speechTitle={t('footerMascotTitle')}
+              speechText={t('footerMascotSpeech')}
               size="xl"
             />
           </div>
@@ -83,10 +85,10 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-slate-200 text-xs text-slate-600 font-medium">
           <div>
             <div className="font-bold text-slate-900">
-              © {new Date().getFullYear()} {profile.name} · TDTU Alumnus (GPA 8.34 - Giỏi)
+              © {new Date().getFullYear()} {profile.name} · {t('footerAlumnus')}
             </div>
             <div className="mt-1 text-slate-500">
-              Xây dựng với React, Vite, Tailwind CSS · Bộ màu Đỏ - Trắng - Đen.
+              {t('footerRights')}
             </div>
           </div>
 
@@ -112,7 +114,7 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
             <button
               onClick={scrollToTop}
               className="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-red-600 hover:border-red-300 shadow-xs transition-all ml-2"
-              title="Lên đầu trang"
+              title={t('footerScrollTop')}
             >
               <ArrowUp className="w-4 h-4" />
             </button>

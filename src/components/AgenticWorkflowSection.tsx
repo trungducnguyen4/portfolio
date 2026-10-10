@@ -16,6 +16,7 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { GithubIcon } from './Icons';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface AgenticWorkflowSectionProps {
   data?: AgenticWorkflowData;
@@ -25,6 +26,7 @@ interface AgenticWorkflowSectionProps {
 export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
   data,
 }) => {
+  const { language, t } = useLanguage();
   const [selectedGuideId, setSelectedGuideId] = useState<string>('pr-template');
   const [copied, setCopied] = useState<boolean>(false);
 
@@ -47,7 +49,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-black tracking-wide uppercase bg-red-50 text-red-700 border border-red-200 mb-3 shadow-2xs">
             <Workflow className="w-3.5 h-3.5 text-red-600" />
-            <span>{data.badge || 'Git Flow & Pull Request Verification Standard'}</span>
+            <span>{data.badge || t('workflowBadge')}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
             {data.title}
@@ -64,7 +66,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
               <div className="flex-1 space-y-2">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-red-50 text-red-700 border border-red-200">
                   <GitPullRequest className="w-3.5 h-3.5 text-red-600" />
-                  <span>Kỷ luật Kỹ sư trong Kỷ nguyên AI</span>
+                  <span>{t('workflowManifestoTag')}</span>
                 </div>
                 <p className="text-sm sm:text-base text-slate-800 leading-relaxed font-semibold">
                   &ldquo;{data.manifesto}&rdquo;
@@ -73,8 +75,8 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
               <div className="flex-shrink-0 flex items-center gap-2.5 bg-slate-50 px-4 py-2.5 rounded-2xl border border-slate-200 shadow-2xs">
                 <ShieldCheck className="w-5 h-5 text-red-600 flex-shrink-0" />
                 <div className="text-left">
-                  <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Cam kết Kỹ thuật</div>
-                  <div className="text-xs font-black text-slate-900">100% Verified PRs</div>
+                  <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{t('workflowCommitment')}</div>
+                  <div className="text-xs font-black text-slate-900">{t('workflowCommitmentVal')}</div>
                 </div>
               </div>
             </div>
@@ -99,7 +101,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
           <div className="mb-14">
             <div className="text-center mb-6">
               <span className="text-xs font-black uppercase text-slate-500 tracking-wider">
-                Trực diện Đối chiếu (Side-by-Side Comparison)
+                {t('workflowComparisonTitle')}
               </span>
             </div>
 
@@ -110,7 +112,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
                 <div className="space-y-4">
                   <div className="flex items-center justify-between gap-2">
                     <span className="px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-slate-200 text-slate-700">
-                      Cách dùng AI Thông thường
+                      {t('workflowTradTitle')}
                     </span>
                     <span className="text-xs font-semibold text-slate-500 flex items-center gap-1">
                       <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
@@ -131,7 +133,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
                   {comparison.traditionalWay.bullets && (
                     <div className="space-y-2 pt-2">
                       <div className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">
-                        Thực trạng &amp; Rủi ro tồn tại:
+                        {t('workflowTradRisks')}
                       </div>
                       <ul className="space-y-1.5 text-xs text-slate-600">
                         {comparison.traditionalWay.bullets.map((b, bIdx) => (
@@ -148,7 +150,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
                 <div className="mt-6 pt-4 border-t border-slate-200">
                   <div className="flex items-start gap-2 text-xs text-amber-800 font-semibold bg-amber-50/90 border border-amber-200/80 p-3.5 rounded-2xl">
                     <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-                    <span>Hệ quả: {comparison.traditionalWay.drawback}</span>
+                    <span>{t('workflowTradDrawback')} {comparison.traditionalWay.drawback}</span>
                   </div>
                 </div>
               </div>
@@ -160,7 +162,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
                 <div className="space-y-4">
                   <div className="flex items-center justify-between gap-2">
                     <span className="px-2.5 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-red-50 text-red-700 border border-red-200">
-                      Kỷ luật Kỹ sư &amp; Git Flow
+                      {t('workflowAgenticTitle')}
                     </span>
                     <span className="text-xs font-bold text-red-600 flex items-center gap-1">
                       <ShieldCheck className="w-4 h-4 text-red-600" />
@@ -181,7 +183,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
                   {comparison.agenticWay.bullets && (
                     <div className="space-y-2 pt-2">
                       <div className="text-[11px] font-bold text-slate-900 uppercase tracking-wider">
-                        Quy chuẩn Bắt buộc trong mỗi PR:
+                        {t('workflowAgenticStandards')}
                       </div>
                       <ul className="space-y-1.5 text-xs text-slate-700">
                         {comparison.agenticWay.bullets.map((b, bIdx) => (
@@ -214,7 +216,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
               <div className="flex items-center gap-2">
                 <Terminal className="w-4 h-4 text-red-600" />
                 <h4 className="text-sm sm:text-base font-black text-slate-900 uppercase tracking-wider">
-                  Quy trình 4 Bước Nghiệm thu PR (Pull Request Pipeline)
+                  {t('workflowPipelineTitle')}
                 </h4>
               </div>
               <span className="text-xs font-mono text-slate-500 hidden sm:inline">
@@ -260,7 +262,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
                     {stage.actionItems && (
                       <div className="space-y-1.5 pt-1">
                         <div className="text-[10px] font-black text-slate-500 uppercase tracking-wider">
-                          Nghiệp vụ thực thi:
+                          {t('workflowActionItems')}
                         </div>
                         <ul className="space-y-1 text-xs text-slate-600">
                           {stage.actionItems.map((act, aIdx) => (
@@ -278,7 +280,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
                       <div className="pt-3 border-t border-slate-200 space-y-2">
                         <div className="flex items-center gap-1.5 text-[11px] font-black text-slate-900 uppercase tracking-wider">
                           <FileText className="w-3.5 h-3.5 text-red-600" />
-                          <span>File .MD Quy Chuẩn PR:</span>
+                          <span>{t('workflowCreatedFiles')}</span>
                         </div>
                         <div className="space-y-1.5">
                           {stage.createdFiles.map((f, fIdx) => (
@@ -307,7 +309,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
                   </div>
 
                   <div className="mt-5 pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-semibold">
-                    <span>Giai đoạn {stage.step}/04</span>
+                    <span>{language === 'en' ? `Stage ${stage.step}/04` : `Giai đoạn ${stage.step}/04`}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-red-600 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
@@ -323,13 +325,13 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
               <div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-red-50 text-red-700 border border-red-200 mb-1.5">
                   <BookOpen className="w-3.5 h-3.5 text-red-600" />
-                  <span>Tài Liệu Kỹ Thuật &amp; Quy Chuẩn PR Thực Tế</span>
+                  <span>{t('workflowGuidesTag')}</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                  Hệ Thống File .MD Hướng Dẫn &amp; Kiểm Soát Quy Trình PR
+                  {t('workflowGuidesTitle')}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                  Khung tài liệu Markdown được áp dụng trực tiếp trong dự án để chuẩn hóa hành vi commit, kiểm định 4 Trụ Cột và review mã nguồn.
+                  {t('workflowGuidesSubtitle')}
                 </p>
               </div>
 
@@ -373,17 +375,17 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
                 type="button"
                 onClick={() => handleCopy(selectedGuide.content)}
                 className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300/80 transition-all cursor-pointer"
-                title="Sao chép nội dung file markdown"
+                title={language === 'en' ? 'Copy markdown file content' : 'Sao chép nội dung file markdown'}
               >
                 {copied ? (
                   <>
                     <Check className="w-3.5 h-3.5 text-emerald-600" />
-                    <span className="text-emerald-700 font-bold">Đã sao chép</span>
+                    <span className="text-emerald-700 font-bold">{t('workflowBtnCopied')}</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5 text-slate-600" />
-                    <span>Sao chép File .md</span>
+                    <span>{t('workflowBtnCopy')}</span>
                   </>
                 )}
               </button>
@@ -418,7 +420,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
               <div className="flex items-center gap-2">
                 <GithubIcon className="w-4 h-4 text-slate-900" />
                 <h4 className="text-sm sm:text-base font-black text-slate-900 uppercase tracking-wider">
-                  Minh chứng Thực tế trên GitHub (Real-World Pull Requests)
+                  {t('workflowProofTitle')}
                 </h4>
               </div>
               <span className="text-xs font-semibold text-red-600 bg-red-50 border border-red-200 px-2.5 py-0.5 rounded-full">
@@ -457,7 +459,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
 
                     <div className="space-y-1.5 pt-2">
                       <div className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">
-                        Minh chứng Đã Kiểm thử:
+                        {t('workflowProofSubtitle')}
                       </div>
                       <ul className="space-y-1 text-xs text-slate-600">
                         {proof.highlights.map((h, hIdx) => (
@@ -478,7 +480,7 @@ export const AgenticWorkflowSection: React.FC<AgenticWorkflowSectionProps> = ({
                       className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-red-600 transition-colors shadow-2xs"
                     >
                       <GithubIcon className="w-3.5 h-3.5" />
-                      <span>Xem Pull Requests trên GitHub</span>
+                      <span>{t('workflowBtnViewPrs')}</span>
                       <ExternalLink className="w-3 h-3 text-slate-400" />
                     </a>
                   </div>

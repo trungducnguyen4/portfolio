@@ -30,6 +30,7 @@ import {
 import { GithubIcon } from './Icons';
 import { SectionMascot } from './SectionMascot';
 import { initialPortfolioData } from '../data/portfolioData';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface EducationProps {
   education: EducationItem;
@@ -51,6 +52,7 @@ const renderBoldText = (text: string) => {
 };
 
 export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModal }) => {
+  const { language, t } = useLanguage();
   const [activeThesisImg, setActiveThesisImg] = useState(0);
   const [thesisPillarMode, setThesisPillarMode] = useState<'both' | 'ai' | 'swe'>('both');
   return (
@@ -61,13 +63,13 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold bg-red-50 text-red-700 border border-red-200 mb-4 shadow-xs">
             <GraduationCap className="w-3.5 h-3.5 text-red-600" />
-            Nền tảng Học vấn & Thành tích
+            {t('eduBadge')}
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            Quá trình Đào tạo & Nền tảng Học thuật
+            {t('eduTitle')}
           </h2>
           <p className="mt-3 text-slate-600 text-base sm:text-lg">
-            Được đào tạo chính quy, bài bản với nền tảng kỹ thuật phần mềm vững vàng và tư duy logic tự nhiên sắc bén.
+            {t('eduSubtitle')}
           </p>
         </div>
 
@@ -131,15 +133,17 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                     onOpenMediaModal?.({
                       type: 'image',
                       url: education.diplomaCover!,
-                      title: 'Bìa Bằng Tốt Nghiệp Loại Giỏi - Đại học Tôn Đức Thắng (TDTU)',
+                      title: language === 'en'
+                        ? 'Honors Degree Cover — Ton Duc Thang University (TDTU)'
+                        : 'Bìa Bằng Tốt Nghiệp Loại Giỏi - Đại học Tôn Đức Thắng (TDTU)',
                     })
                   }
                   className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md border-2 border-red-200 hover:border-red-400 transition-all cursor-pointer flex-shrink-0"
-                  title="Xem ảnh bìa bằng tốt nghiệp TDTU"
+                  title={language === 'en' ? 'View TDTU Degree Cover' : 'Xem ảnh bìa bằng tốt nghiệp TDTU'}
                 >
                   <img
                     src={education.diplomaCover}
-                    alt="Bìa Bằng Tốt Nghiệp TDTU"
+                    alt={language === 'en' ? 'TDTU Degree Cover' : 'Bìa Bằng Tốt Nghiệp TDTU'}
                     className="h-[72px] sm:h-[80px] w-auto aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -151,7 +155,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
               <div className="bg-red-50 px-5 sm:px-6 py-3.5 sm:py-4 rounded-2xl border-2 border-red-200 text-right shadow-xs">
                 <div className="text-xs uppercase font-bold text-red-700 flex items-center justify-end gap-1.5">
                   <Award className="w-3.5 h-3.5 text-red-600" />
-                  Xếp loại Tốt nghiệp
+                  {t('eduClassLabel')}
                 </div>
                 <div className="text-2xl sm:text-3xl font-black text-red-600 mt-0.5">
                   {education.classification}
@@ -160,7 +164,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
 
               <div className="bg-slate-950 px-5 sm:px-6 py-3.5 sm:py-4 rounded-2xl border-2 border-slate-900 text-right shadow-md">
                 <div className="text-xs uppercase font-bold text-slate-300">
-                  Điểm GPA Toàn khóa
+                  {t('eduGpaLabel')}
                 </div>
                 <div className="text-2xl sm:text-3xl font-black text-white font-mono mt-0.5">
                   {education.gpa}
@@ -175,7 +179,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
             <div className="lg:col-span-4">
               <h4 className="text-sm uppercase tracking-wider font-extrabold text-slate-900 flex items-center gap-2 mb-4">
                 <Sparkles className="w-4 h-4 text-red-600" />
-                Điểm nổi bật & Năng lực Đào tạo
+                {t('eduHonorsHighlights')}
               </h4>
               <ul className="space-y-3">
                 {education.honors.map((honor, idx) => (
@@ -191,7 +195,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
             <div className="lg:col-span-4 flex justify-center py-2 lg:py-0">
               <SectionMascot
                 image="/avatar3d/avatar_education.png?v=4"
-                alt="3D Mascot Tốt Nghiệp Loại Giỏi TDTU"
+                alt={t('eduMascotTitle')}
                 size="xl"
               />
             </div>
@@ -201,7 +205,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
               <div>
                 <h4 className="text-sm uppercase tracking-wider font-extrabold text-slate-900 flex items-center gap-2 mb-3">
                   <Trophy className="w-4 h-4 text-red-600" />
-                  Hoạt động & Giải thưởng Học thuật
+                  {t('eduAcademicAwards')}
                 </h4>
 
                 {(() => {
@@ -216,7 +220,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                           {act.award}
                         </span>
                         <span className="text-[11px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-md flex items-center gap-1">
-                          <Calendar className="w-3 h-3 text-slate-400" />
+                          <Calendar className="w-3.5 h-3.5 text-slate-400" />
                           {act.time}
                         </span>
                       </div>
@@ -225,7 +229,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                       <div className="flex items-start gap-3">
                         <div className="flex-1 min-w-0">
                           <h5 className="text-sm font-extrabold text-slate-900 leading-snug">
-                            Cuộc thi {act.contest}
+                            {language === 'en' ? `Contest: ${act.contest}` : `Cuộc thi ${act.contest}`}
                           </h5>
                           <p className="text-[11px] text-slate-500 font-medium leading-tight mt-0.5">
                             {act.contestFullName}
@@ -242,14 +246,16 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                             onClick={() => onOpenMediaModal?.({
                               type: 'image',
                               url: act.image!,
-                              title: `${act.award} — Cuộc thi Học thuật ${act.contest} (Khoa HTTT - UIT ĐHQG-HCM)`
+                              title: language === 'en'
+                                ? `${act.award} — ${act.contest} Academic Competition (UIT VNU-HCM)`
+                                : `${act.award} — Cuộc thi Học thuật ${act.contest} (Khoa HTTT - UIT ĐHQG-HCM)`
                             })}
                             className="group relative flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 border-slate-200 hover:border-red-500 transition-all shadow-xs cursor-pointer"
-                            title="Nhấn để phóng to ảnh chụp huy chương & lễ trao giải"
+                            title={language === 'en' ? 'Click to enlarge medal & awards photo' : 'Nhấn để phóng to ảnh chụp huy chương & lễ trao giải'}
                           >
                             <img
                               src={act.image}
-                              alt="Huy chương AISC 2024"
+                              alt={language === 'en' ? 'AISC 2024 Medal' : 'Huy chương AISC 2024'}
                               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                             />
                             <div className="absolute inset-0 bg-slate-950/25 group-hover:bg-slate-950/40 flex items-center justify-center transition-colors">
@@ -262,11 +268,11 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                       {/* Footer Info: Organizer & Role */}
                       <div className="mt-3 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
                         <div className="flex items-center gap-1.5 text-slate-600">
-                          <span className="text-slate-400 font-medium">Đơn vị:</span>
+                          <span className="text-slate-400 font-medium">{t('eduOrganizerLabel')}</span>
                           <span className="font-bold text-slate-800">Khoa HTTT · ĐH CNTT (UIT)</span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-slate-400 font-medium">Vai trò:</span>
+                          <span className="text-slate-400 font-medium">{t('eduRoleLabel')}</span>
                           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-extrabold text-slate-900 bg-slate-100 border border-slate-200 text-[11px]">
                             <Code2 className="w-3 h-3 text-red-600" />
                             {act.role}
@@ -287,10 +293,10 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                   <div className="text-[11px] font-bold text-red-700 uppercase tracking-wide flex items-center justify-between gap-1.5 mb-1.5">
                     <span className="flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5 text-red-600" />
-                      Khóa Luận Tốt Nghiệp
+                      {language === 'en' ? 'Graduation Thesis' : 'Khóa Luận Tốt Nghiệp'}
                     </span>
                     <span className="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-extrabold">
-                      Xem chi tiết ↓
+                      {language === 'en' ? 'View Details ↓' : 'Xem chi tiết ↓'}
                     </span>
                   </div>
                   <div className="text-sm font-bold text-slate-900 group-hover:text-red-600 transition-colors">
@@ -330,10 +336,10 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                     <div className="flex flex-wrap items-center gap-2 mb-2">
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-red-600 text-white shadow-xs">
                         <GraduationCap className="w-3.5 h-3.5" />
-                        KHÓA LUẬN TỐT NGHIỆP CỬ NHÂN KỸ THUẬT PHẦN MỀM
+                        {t('eduThesisHeaderBadge')}
                       </span>
                       <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-800 border border-slate-200">
-                        ĐH TÔN ĐỨC THẮNG · 2026
+                        {language === 'en' ? 'TON DUC THANG UNIV · 2026' : 'ĐH TÔN ĐỨC THẮNG · 2026'}
                       </span>
                       <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-red-50 text-red-700 border border-red-200">
                         ALL-IN-ONE &amp; AI PROCTORING
@@ -354,7 +360,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-slate-800 hover:text-red-600 border border-slate-200 bg-white hover:border-red-300 transition-all shadow-2xs"
-                        title="Xem mã nguồn ExamTrust và 28 Pull Requests trên GitHub"
+                        title={language === 'en' ? 'Inspect ExamTrust source code & 28 Pull Requests on GitHub' : 'Xem mã nguồn ExamTrust và 28 Pull Requests trên GitHub'}
                       >
                         <GithubIcon className="w-4 h-4" />
                         <span>GitHub (28 PRs)</span>
@@ -363,7 +369,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                     )}
                     <div className="bg-red-50 px-4 py-2.5 rounded-2xl border border-red-200">
                       <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                        Phụ trách chính
+                        {t('eduThesisRoleLabel')}
                       </div>
                       <div className="text-sm font-bold text-red-600 font-mono mt-0.5">
                         {education.graduationThesis.role}
@@ -393,11 +399,11 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                       }`}
                     >
                       <Layers className="w-4 h-4" />
-                      <span>Toàn cảnh Hai Lõi (SWE + AI)</span>
+                      <span>{t('eduThesisTabBoth')}</span>
                       <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
                         thesisPillarMode === 'both' ? 'bg-black/25 text-white' : 'bg-slate-100 text-slate-600'
                       }`}>
-                        {(education.graduationThesis.softwareCore?.highlights.length || 0) + (education.graduationThesis.aiCore?.highlights.length || 0)} Năng lực
+                        {(education.graduationThesis.softwareCore?.highlights.length || 0) + (education.graduationThesis.aiCore?.highlights.length || 0)} {language === 'en' ? 'Pillars' : 'Năng lực'}
                       </span>
                     </button>
 
@@ -412,7 +418,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                       }`}
                     >
                       <Bot className={`w-4 h-4 ${thesisPillarMode === 'ai' ? 'text-white' : 'text-red-600'}`} />
-                      <span>Lõi AI / LLM &amp; Agentic</span>
+                      <span>{t('eduThesisTabAiFocus')}</span>
                       <span className={`text-[10px] px-2 py-0.5 rounded-full font-extrabold border ${
                         thesisPillarMode === 'ai'
                           ? 'bg-white/20 text-white border-white/30'
@@ -433,7 +439,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                       }`}
                     >
                       <Code2 className={`w-4 h-4 ${thesisPillarMode === 'swe' ? 'text-white' : 'text-red-600'}`} />
-                      <span>Lõi Kỹ thuật Phần mềm (SWE)</span>
+                      <span>{t('eduThesisTabSweFocus')}</span>
                       <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${
                         thesisPillarMode === 'swe'
                           ? 'bg-white/20 text-white border-white/30'
@@ -446,7 +452,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
 
                   <div className="hidden md:flex items-center gap-2 text-xs text-slate-500 font-medium px-2">
                     <Sparkles className="w-3.5 h-3.5 text-red-600" />
-                    <span>Lựa chọn góc nhìn chuyên môn để đánh giá</span>
+                    <span>{t('eduThesisPerspective')}</span>
                   </div>
                 </div>
 
@@ -511,7 +517,9 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                                   <h4 className="text-base font-black text-slate-900 uppercase tracking-wide">
                                     {education.graduationThesis.softwareCore.title}
                                   </h4>
-                                  <div className="text-[11px] text-slate-500">Kiến trúc hạ tầng, xử lý chịu tải &amp; phân tán</div>
+                                  <div className="text-[11px] text-slate-500">
+                                    {language === 'en' ? 'Distributed infrastructure, high concurrency & queuing' : 'Kiến trúc hạ tầng, xử lý chịu tải & phân tán'}
+                                  </div>
                                 </div>
                               </div>
                               <span className="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-slate-100 text-slate-800 border border-slate-200">
@@ -558,7 +566,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                           {/* SWE Tech Chips - Pinned to bottom */}
                           <div className="pt-4 mt-5 border-t border-slate-200/80">
                             <div className="text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-2">
-                              Tech Stack Phần mềm &amp; Triển khai
+                              {t('eduThesisTechSwe')}
                             </div>
                             <div className="flex flex-wrap gap-1.5">
                               {education.graduationThesis.softwareCore.tech.map((t, idx) => (
@@ -587,7 +595,9 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                                   <h4 className="text-base font-black text-slate-900 uppercase tracking-wide">
                                     {education.graduationThesis.aiCore.title}
                                   </h4>
-                                  <div className="text-[11px] text-slate-500">RAG, Prompt Loops, Vision &amp; AI Evaluation</div>
+                                  <div className="text-[11px] text-slate-500">
+                                    {language === 'en' ? 'RAG, Prompt Loops, Multimodal Vision & Auto-Evaluation' : 'RAG, Prompt Loops, Vision & AI Evaluation'}
+                                  </div>
                                 </div>
                               </div>
                               <span className="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-red-100 text-red-700 border border-red-200">
@@ -634,7 +644,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                           {/* AI Tech Chips - Pinned to bottom */}
                           <div className="pt-4 mt-5 border-t border-slate-200/80">
                             <div className="text-[11px] uppercase font-bold tracking-wider text-slate-700 mb-2">
-                              Tech Stack AI &amp; Agentic Orchestration
+                              {t('eduThesisTechAi')}
                             </div>
                             <div className="flex flex-wrap gap-1.5">
                               {education.graduationThesis.aiCore.tech.map((t, idx) => (
@@ -657,11 +667,11 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                         <div className="flex items-center gap-2">
                           <FileText className="w-5 h-5 text-red-600" />
                           <h4 className="text-base font-bold text-slate-900">
-                            Minh chứng Giao diện &amp; Kiến trúc Thực tế (Live Screenshot Proofs)
+                            {t('eduThesisProofs')}
                           </h4>
                         </div>
                         <div className="text-xs text-slate-500 font-medium">
-                          Bấm vào ảnh chụp thực tế để mở phóng to Lightbox
+                          {t('eduThesisProofHint')}
                         </div>
                       </div>
 
@@ -675,11 +685,11 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                               onOpenMediaModal?.({
                                 type: 'image',
                                 url: cur.url,
-                                title: `${cur.title || cur.caption} — Khóa luận Tốt nghiệp ExamTrust (TDTU)`,
+                                title: `${cur.title || cur.caption} — ${education.graduationThesis!.title}`,
                               });
                             }}
                             className="w-full group relative rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-red-400 transition-all cursor-pointer flex flex-col text-left"
-                            title="Bấm để phóng to ảnh chụp hệ thống ExamTrust"
+                            title={language === 'en' ? 'Click to enlarge ExamTrust screenshot' : 'Bấm để phóng to ảnh chụp hệ thống ExamTrust'}
                           >
                             <div className="relative w-full h-64 sm:h-72 bg-slate-100 overflow-hidden flex items-center justify-center">
                               <img
@@ -690,7 +700,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                               <div className="absolute inset-0 bg-slate-900/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/95 backdrop-blur-md text-slate-900 text-xs font-bold shadow-lg border border-slate-200">
                                   <ZoomIn className="w-4 h-4 text-red-600" />
-                                  Phóng to giao diện
+                                  {t('eduThesisZoom')}
                                 </span>
                               </div>
                             </div>
@@ -698,11 +708,11 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                               <div className="flex items-center gap-2 text-xs font-bold text-slate-900 truncate">
                                 <CheckCircle2 className="w-4 h-4 text-red-600 flex-shrink-0" />
                                 <span className="truncate">
-                                  {(education.graduationThesis.media.images[activeThesisImg] || education.graduationThesis.media.images[0]).title || 'Giao diện Thực tế'}
+                                  {(education.graduationThesis.media.images[activeThesisImg] || education.graduationThesis.media.images[0]).title || (language === 'en' ? 'Live System UI' : 'Giao diện Thực tế')}
                                 </span>
                               </div>
                               <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider flex-shrink-0">
-                                Click phóng to
+                                {t('eduThesisClickZoom')}
                               </span>
                             </div>
                           </button>
@@ -743,7 +753,9 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
 
                           <div className="p-3.5 rounded-2xl bg-slate-100 border border-slate-200 text-xs text-slate-800 font-semibold flex items-center gap-2.5">
                             <div className="w-2.5 h-2.5 rounded-full bg-red-600 flex-shrink-0" />
-                            <span>Hệ thống phân tán Full-stack &amp; AI đã hoàn thiện và kiểm thử toàn diện</span>
+                            <span>
+                              {language === 'en' ? 'Enterprise Full-stack & AI architecture fully completed and tested' : 'Hệ thống phân tán Full-stack & AI đã hoàn thiện và kiểm thử toàn diện'}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -758,17 +770,19 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                     <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
                       <div className="flex items-center gap-2 mb-1.5">
                         <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-600 text-white shadow-xs">
-                          Góc nhìn Tuyển dụng AI Engineer
+                          {t('eduThesisAiBannerTag')}
                         </span>
                         <span className="text-xs font-bold text-slate-600">
                           Multi-LLM, RAG, Prompt Loops &amp; Auto-Eval
                         </span>
                       </div>
                       <h4 className="text-xl font-black text-slate-900">
-                        Khảo sát Chuyên sâu Lõi AI &amp; Agentic Engineering trong ExamTrust
+                        {t('eduThesisAiBannerTitle')}
                       </h4>
                       <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
-                        Được thiết kế đáp ứng chuẩn xác các yêu cầu kỹ năng AI hiện đại: RAG/Agent workflows, Vector Embeddings với Cosine search, Loop Engineering tự phục hồi JSON đứt gãy, Đánh giá LLM-as-a-Judge với Golden Dataset và AI Telemetry kiểm soát chi phí realtime.
+                        {language === 'en'
+                          ? 'Architected to precisely satisfy modern AI engineering standards: RAG/Agent workflows, 128-dim Vector Embeddings with Cosine search, self-healing JSON repair loops, LLM-as-a-Judge evaluations with Golden Datasets, and realtime AI token/cost telemetry.'
+                          : 'Được thiết kế đáp ứng chuẩn xác các yêu cầu kỹ năng AI hiện đại: RAG/Agent workflows, Vector Embeddings với Cosine search, Loop Engineering tự phục hồi JSON đứt gãy, Đánh giá LLM-as-a-Judge với Golden Dataset và AI Telemetry kiểm soát chi phí realtime.'}
                       </p>
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 pt-4 border-t border-slate-200">
@@ -821,7 +835,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                         <div className="pt-2">
                           <div className="text-xs uppercase font-extrabold tracking-wider text-slate-800 mb-2 flex items-center gap-1.5">
                             <Sparkles className="w-3.5 h-3.5 text-red-600" />
-                            Hệ sinh thái Công nghệ AI &amp; Orchestration
+                            {t('eduThesisTechAi')}
                           </div>
                           <div className="flex flex-wrap gap-2">
                             {education.graduationThesis.aiCore.tech.map((t, idx) => (
@@ -910,13 +924,24 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                         <div className="p-4 rounded-2xl bg-red-50/60 border border-red-200 space-y-2.5 text-xs text-slate-700">
                           <div className="text-xs font-bold text-red-700 uppercase flex items-center gap-1.5">
                             <Sparkles className="w-3.5 h-3.5 text-red-600" />
-                            Điểm cộng cho vị trí AI Engineer
+                            {t('eduThesisAiPlus')}
                           </div>
                           <ul className="space-y-1.5 list-disc pl-4 text-slate-600">
-                            <li><strong className="text-slate-900">Loop Engineering:</strong> Xử lý đứt gãy JSON bằng <code className="text-red-700 bg-white border border-red-200 px-1 py-0.5 rounded font-mono text-[11px]">jsonrepair</code> &amp; timeout <code className="text-red-700 bg-white border border-red-200 px-1 py-0.5 rounded font-mono text-[11px]">AbortSignal</code>, zero-crash trong queue.</li>
-                            <li><strong className="text-slate-900">Vector Search:</strong> Dịch vụ Embeddings 128 chiều lọc trùng câu hỏi &amp; gom cụm chủ đề qua Cosine Similarity.</li>
-                            <li><strong className="text-slate-900">LLM-as-a-Judge:</strong> Bộ dữ liệu vàng <code className="text-red-700 bg-white border border-red-200 px-1 py-0.5 rounded font-mono text-[11px]">golden-dataset.ts</code> đánh giá độ chính xác đề thi sinh ra tự động.</li>
-                            <li><strong className="text-slate-900">Token &amp; Cost Telemetry:</strong> Kiểm soát token, độ trễ và quy đổi USD realtime cho từng API provider.</li>
+                            {language === 'en' ? (
+                              <>
+                                <li><strong className="text-slate-900">Loop Engineering:</strong> Self-healing JSON repair via <code className="text-red-700 bg-white border border-red-200 px-1 py-0.5 rounded font-mono text-[11px]">jsonrepair</code> &amp; <code className="text-red-700 bg-white border border-red-200 px-1 py-0.5 rounded font-mono text-[11px]">AbortSignal</code> timeout, zero crashes in worker queue.</li>
+                                <li><strong className="text-slate-900">Vector Search:</strong> 128-dim normalized embedding service for question deduplication &amp; semantic clustering via Cosine Similarity.</li>
+                                <li><strong className="text-slate-900">LLM-as-a-Judge:</strong> Benchmark suite against <code className="text-red-700 bg-white border border-red-200 px-1 py-0.5 rounded font-mono text-[11px]">golden-dataset.ts</code> for automated question quality evaluation.</li>
+                                <li><strong className="text-slate-900">Token &amp; Cost Telemetry:</strong> Realtime tracking of token usage, latency, and USD cost conversion across providers.</li>
+                              </>
+                            ) : (
+                              <>
+                                <li><strong className="text-slate-900">Loop Engineering:</strong> Xử lý đứt gãy JSON bằng <code className="text-red-700 bg-white border border-red-200 px-1 py-0.5 rounded font-mono text-[11px]">jsonrepair</code> &amp; timeout <code className="text-red-700 bg-white border border-red-200 px-1 py-0.5 rounded font-mono text-[11px]">AbortSignal</code>, zero-crash trong queue.</li>
+                                <li><strong className="text-slate-900">Vector Search:</strong> Dịch vụ Embeddings 128 chiều lọc trùng câu hỏi &amp; gom cụm chủ đề qua Cosine Similarity.</li>
+                                <li><strong className="text-slate-900">LLM-as-a-Judge:</strong> Bộ dữ liệu vàng <code className="text-red-700 bg-white border border-red-200 px-1 py-0.5 rounded font-mono text-[11px]">golden-dataset.ts</code> đánh giá độ chính xác đề thi sinh ra tự động.</li>
+                                <li><strong className="text-slate-900">Token &amp; Cost Telemetry:</strong> Kiểm soát token, độ trễ và quy đổi USD realtime cho từng API provider.</li>
+                              </>
+                            )}
                           </ul>
                         </div>
                       </div>
@@ -931,17 +956,19 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                     <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
                       <div className="flex items-center gap-2 mb-1.5">
                         <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-slate-900 text-white shadow-xs">
-                          Góc nhìn Tech Lead / Senior SWE
+                          {t('eduThesisSweBannerTag')}
                         </span>
                         <span className="text-xs font-bold text-slate-600">
                           Multi-service, Bull Queue, Immutable Snapshot &amp; Serverless
                         </span>
                       </div>
                       <h4 className="text-xl font-black text-slate-900">
-                        Khảo sát Chuyên sâu Hạ tầng &amp; Kỹ thuật Phần mềm trong ExamTrust
+                        {t('eduThesisSweBannerTitle')}
                       </h4>
                       <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
-                        Hạ tầng hướng sản xuất (Production-grade) với kiến trúc phân tách rõ ràng giữa Web API và AI Background Worker, đảm bảo chịu tải cao, snapshot đề thi chống gian lận và tối ưu chi phí vận hành 0đ trên Cloudflare.
+                        {language === 'en'
+                          ? 'Production-grade architecture with clear separation between Web API and AI Background Workers, ensuring resilient throughput, tamper-proof exam snapshots, and $0/mo infrastructure cost on Cloudflare.'
+                          : 'Hạ tầng hướng sản xuất (Production-grade) với kiến trúc phân tách rõ ràng giữa Web API và AI Background Worker, đảm bảo chịu tải cao, snapshot đề thi chống gian lận và tối ưu chi phí vận hành 0đ trên Cloudflare.'}
                       </p>
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 pt-4 border-t border-slate-200">
@@ -994,7 +1021,7 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                         <div className="pt-2">
                           <div className="text-xs uppercase font-extrabold tracking-wider text-slate-800 mb-2 flex items-center gap-1.5">
                             <Sparkles className="w-3.5 h-3.5 text-red-600" />
-                            Hạ tầng &amp; Nền tảng Kỹ thuật Phần mềm
+                            {t('eduThesisTechSwe')}
                           </div>
                           <div className="flex flex-wrap gap-2">
                             {education.graduationThesis.softwareCore.tech.map((t, idx) => (
@@ -1083,14 +1110,26 @@ export const Education: React.FC<EducationProps> = ({ education, onOpenMediaModa
                         <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5 text-xs text-slate-700">
                           <div className="text-xs font-bold text-slate-900 uppercase flex items-center gap-1.5">
                             <Sparkles className="w-3.5 h-3.5 text-red-600" />
-                            Điểm cộng cho vị trí Software Engineer
+                            {t('eduThesisSwePlus')}
                           </div>
                           <ul className="space-y-1.5 list-disc pl-4 text-slate-600">
-                            <li><strong className="text-slate-900">Kiến trúc Hàng đợi:</strong> Tách riêng API và AI Worker qua Bull Queue + Redis, zero-block cho các request HTTP chính.</li>
-                            <li><strong className="text-slate-900">Snapshot Bất biến:</strong> Đóng băng trạng thái đề thi ngay khi sinh viên bắt đầu làm bài, chống lộ đề và race condition.</li>
-                            <li><strong className="text-slate-900">Git-like Versioning:</strong> Quản lý lịch sử chỉnh sửa ngân hàng câu hỏi, hỗ trợ rollback và audit trail toàn diện.</li>
-                            <li><strong className="text-slate-900">Git Workflow &amp; Proof of Work:</strong> Chuẩn hóa 28 Pull Requests trên GitHub, đính kèm screenshot / video demo kiểm thử thực tế trong mô tả PR làm minh chứng trước khi merge.</li>
-                            <li><strong className="text-slate-900">Zero-Cost Serverless:</strong> Tối ưu hóa triển khai trên Cloudflare Pages &amp; Workers, chi phí hạ tầng \$0/tháng.</li>
+                            {language === 'en' ? (
+                              <>
+                                <li><strong className="text-slate-900">Queue Architecture:</strong> Independent API and AI Worker via Bull Queue + Redis, zero-blocking on main HTTP requests.</li>
+                                <li><strong className="text-slate-900">Immutable Snapshot:</strong> Exam state frozen as candidate begins, preventing leakages and race conditions.</li>
+                                <li><strong className="text-slate-900">Git-like Versioning:</strong> Question bank revision history with full rollback and audit trails.</li>
+                                <li><strong className="text-slate-900">Git Workflow &amp; Proof of Work:</strong> 28 structured PRs on GitHub with screenshot/video verification proofs before merging.</li>
+                                <li><strong className="text-slate-900">Zero-Cost Serverless:</strong> Deployed on Cloudflare Pages &amp; Workers with $0/month infrastructure costs.</li>
+                              </>
+                            ) : (
+                              <>
+                                <li><strong className="text-slate-900">Kiến trúc Hàng đợi:</strong> Tách riêng API và AI Worker qua Bull Queue + Redis, zero-block cho các request HTTP chính.</li>
+                                <li><strong className="text-slate-900">Snapshot Bất biến:</strong> Đóng băng trạng thái đề thi ngay khi sinh viên bắt đầu làm bài, chống lộ đề và race condition.</li>
+                                <li><strong className="text-slate-900">Git-like Versioning:</strong> Quản lý lịch sử chỉnh sửa ngân hàng câu hỏi, hỗ trợ rollback và audit trail toàn diện.</li>
+                                <li><strong className="text-slate-900">Git Workflow &amp; Proof of Work:</strong> Chuẩn hóa 28 Pull Requests trên GitHub, đính kèm screenshot / video demo kiểm thử thực tế trong mô tả PR làm minh chứng trước khi merge.</li>
+                                <li><strong className="text-slate-900">Zero-Cost Serverless:</strong> Tối ưu hóa triển khai trên Cloudflare Pages &amp; Workers, chi phí hạ tầng \$0/tháng.</li>
+                              </>
+                            )}
                           </ul>
                         </div>
                       </div>

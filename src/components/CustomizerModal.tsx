@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { PortfolioData, TimelineItem } from '../types/portfolio';
 import { X, Save, RotateCcw, Download, Upload, Plus, Trash2, Edit3, Image, Video, Link, Briefcase, GraduationCap, Sparkles, User } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface CustomizerModalProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
   onSave,
   onReset,
 }) => {
+  const { language, t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'profile' | 'timeline' | 'projects' | 'rawJson'>('timeline');
   const [formData, setFormData] = useState<PortfolioData>(data);
   const [saveSuccess, setSaveSuccess] = useState(false);
@@ -123,15 +125,15 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
             </div>
             <div>
               <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                Trình Tùy chỉnh Portfolio Trực quan
+                {t('customizerVisualTitle')}
                 {saveSuccess && (
                   <span className="text-xs font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded border border-red-200">
-                    Đã lưu thành công!
+                    {t('customizerSavedSuccess')}
                   </span>
                 )}
               </h2>
               <p className="text-xs text-slate-500">
-                Thêm logo, video demo, ảnh minh họa hoặc cập nhật hồ sơ ngay tức thì
+                {t('customizerVisualSubtitle')}
               </p>
             </div>
           </div>
@@ -155,7 +157,7 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
             }`}
           >
             <Briefcase className="w-4 h-4" />
-            Kinh nghiệm (Timeline & Demo)
+            {language === 'en' ? 'Experience (Timeline & Demos)' : 'Kinh nghiệm (Timeline & Demo)'}
           </button>
 
           <button
@@ -167,7 +169,7 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
             }`}
           >
             <User className="w-4 h-4" />
-            Hồ sơ Cá nhân & Học vấn
+            {language === 'en' ? 'Profile & Education' : 'Hồ sơ Cá nhân & Học vấn'}
           </button>
 
           <button
@@ -179,7 +181,7 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
             }`}
           >
             <Sparkles className="w-4 h-4" />
-            Dự án AI & Video Demo
+            {language === 'en' ? 'AI Projects & Video Demos' : 'Dự án AI & Video Demo'}
           </button>
 
           <button
@@ -191,7 +193,7 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
             }`}
           >
             <Download className="w-4 h-4" />
-            Xuất / Nhập JSON
+            {language === 'en' ? 'Import / Export JSON' : 'Xuất / Nhập JSON'}
           </button>
         </div>
 
@@ -705,9 +707,13 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
         <div className="px-6 py-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
           <div className="text-xs text-slate-500">
             {saveSuccess ? (
-              <span className="text-red-600 font-bold">Đã lưu dữ liệu vào trình duyệt của bạn!</span>
+              <span className="text-red-600 font-bold">
+                {language === 'en' ? 'Data saved to browser storage!' : 'Đã lưu dữ liệu vào trình duyệt của bạn!'}
+              </span>
             ) : (
-              <span>Bấm "Lưu thay đổi" để áp dụng lên trang Portfolio</span>
+              <span>
+                {language === 'en' ? 'Click "Save Changes" to apply to portfolio' : 'Bấm "Lưu thay đổi" để áp dụng lên trang Portfolio'}
+              </span>
             )}
           </div>
 
@@ -716,14 +722,14 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
               onClick={onClose}
               className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors"
             >
-              Đóng
+              {t('customizerClose')}
             </button>
             <button
               onClick={handleSave}
               className="px-5 py-2 rounded-xl text-xs font-bold bg-red-600 text-white hover:bg-red-700 shadow-md shadow-red-600/20 flex items-center gap-1.5 transition-all hover:scale-105"
             >
               <Save className="w-4 h-4" />
-              Lưu thay đổi
+              {t('customizerBtnSave')}
             </button>
           </div>
         </div>

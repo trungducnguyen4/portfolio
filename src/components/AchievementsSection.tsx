@@ -15,6 +15,7 @@ import {
   Trophy,
   Globe2,
 } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface AchievementsSectionProps {
   certifications?: CertificationItem[];
@@ -29,6 +30,7 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
   highSchoolAchievement,
   onOpenMediaModal,
 }) => {
+  const { language, t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'all' | 'certifications' | 'achievements' | 'activities'>('all');
 
   return (
@@ -39,23 +41,23 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold bg-red-50 text-red-700 border border-red-200 mb-4 shadow-xs">
             <Trophy className="w-3.5 h-3.5 text-red-600" />
-            Hoạt động · Thành tựu · Chứng chỉ
+            {t('achieveBadge')}
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            Hoạt động, Thành tựu &amp; Chứng chỉ Quốc tế
+            {t('achieveTitle')}
           </h2>
           <p className="mt-3 text-slate-600 text-base sm:text-lg">
-            Năng lực phát triển toàn diện: Kỹ năng ngoại ngữ chuẩn quốc tế, tư duy học thuật tự nhiên sắc bén và trải nghiệm đối ngoại thực tế.
+            {t('achieveSubtitle')}
           </p>
         </div>
 
         {/* Tab Filters */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
           {[
-            { id: 'all', label: 'Tất cả Mục', count: certifications.length + (highSchoolAchievement ? 1 : 0) + activities.length },
-            { id: 'certifications', label: 'Chứng chỉ Quốc tế', count: certifications.length, icon: FileCheck2 },
-            { id: 'achievements', label: 'Thành tựu Học thuật', count: highSchoolAchievement ? 1 : 0, icon: Award },
-            { id: 'activities', label: 'Hoạt động Đối ngoại', count: activities.length, icon: Globe2 },
+            { id: 'all', label: t('achieveAllTab'), count: certifications.length + (highSchoolAchievement ? 1 : 0) + activities.length },
+            { id: 'certifications', label: t('achieveTabCerts'), count: certifications.length, icon: FileCheck2 },
+            { id: 'achievements', label: t('achieveTabAcademic'), count: highSchoolAchievement ? 1 : 0, icon: Award },
+            { id: 'activities', label: t('achieveTabActivities'), count: activities.length, icon: Globe2 },
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -114,14 +116,14 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                       {cert.name}
                     </h3>
                     <div className="text-sm font-semibold text-slate-600 mt-0.5">
-                      Đơn vị cấp: <span className="text-slate-900 font-bold">{cert.issuer}</span> · Quản lý bởi Ofqual Vương quốc Anh
+                      {t('achieveIssuerLabel')} <span className="text-slate-900 font-bold">{cert.issuer}</span> · {t('achieveOfqualLabel')}
                     </div>
                     <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-slate-500 font-medium">
-                      <span>Số hiệu: <strong className="font-mono text-slate-800">{cert.credentialId}</strong></span>
+                      <span>{t('achieveCredentialId')} <strong className="font-mono text-slate-800">{cert.credentialId}</strong></span>
                       <span>·</span>
-                      <span>Enrolment: <strong className="font-mono text-slate-800">{cert.enrolmentId}</strong></span>
+                      <span>{t('achieveEnrolment')} <strong className="font-mono text-slate-800">{cert.enrolmentId}</strong></span>
                       <span>·</span>
-                      <span>Ngày cấp: <strong className="text-slate-800">{cert.issuedDate}</strong></span>
+                      <span>{t('achieveIssuedDate')} <strong className="text-slate-800">{cert.issuedDate}</strong></span>
                     </div>
                   </div>
                 </div>
@@ -131,7 +133,7 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                   <div className="bg-red-50 px-5 py-3 rounded-2xl border-2 border-red-200 text-right shadow-xs">
                     <div className="text-xs uppercase font-bold text-red-700 flex items-center justify-end gap-1.5">
                       <Award className="w-3.5 h-3.5 text-red-600" />
-                      Điểm Tổng Thang Đo
+                      {t('achieveScoreLabel')}
                     </div>
                     <div className="text-2xl sm:text-3xl font-black text-red-600 mt-0.5 font-mono">
                       {cert.score}
@@ -144,10 +146,10 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-slate-900 hover:bg-red-600 text-white font-bold text-xs shadow-md transition-colors"
-                      title="Xác thực chứng chỉ trên hệ thống Blockchain của British Council"
+                      title={t('achieveBlockchainTitle')}
                     >
                       <ExternalLink className="w-4 h-4" />
-                      Xác thực Blockchain ↗
+                      {t('achieveVerifyBlockchain')}
                     </a>
                   )}
                 </div>
@@ -208,7 +210,7 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                         {cert.skills.grammarAndVocab}
                       </div>
                       <span className="inline-block mt-1 text-[10px] font-bold text-red-600">
-                        Thang 50
+                        {t('achieveAptisScoreScale50')}
                       </span>
                     </div>
                   </div>
@@ -221,11 +223,11 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                       onOpenMediaModal?.({
                         type: 'image',
                         url: cert.image,
-                        title: `${cert.name} — ${cert.issuer} (CEFR B2 · Điểm 161/200)`,
+                        title: `${cert.name} — ${cert.issuer} (CEFR B2 · ${cert.score})`,
                       })
                     }
                     className="relative group cursor-pointer overflow-hidden rounded-2xl border-2 border-slate-200 hover:border-red-500 transition-all duration-300 shadow-md hover:shadow-xl max-w-[240px] w-full"
-                    title="Nhấn để phóng to chứng chỉ bản gốc"
+                    title={t('achieveAptisZoomHint')}
                   >
                     <img
                       src={cert.image}
@@ -238,7 +240,7 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                       </div>
                     </div>
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-900/90 via-slate-900/60 to-transparent p-2 text-center text-white text-[11px] font-bold">
-                      Chứng chỉ Aptis ESOL · Nhấn để phóng to
+                      {t('achieveAptisZoomHint')}
                     </div>
                   </div>
                 </div>
@@ -261,18 +263,18 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                         {highSchoolAchievement.school}
                       </h3>
                       <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 text-red-700 border border-red-200">
-                        Lớp 12 Chọn Tự nhiên
+                        {t('achieveHighSchoolClass')}
                       </span>
                     </div>
                     <div className="text-sm font-semibold text-slate-600">
-                      {highSchoolAchievement.className} · Niên khóa {highSchoolAchievement.period}
+                      {highSchoolAchievement.className} · {t('achieveHighSchoolPeriodPrefix')} {highSchoolAchievement.period}
                     </div>
                     <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-slate-500 font-medium">
                       <span className="text-slate-700 font-semibold">
-                        Số báo danh: <span className="font-mono text-red-600 font-bold text-sm">{highSchoolAchievement.sbd}</span>
+                        {t('achieveHighSchoolCandidateId')} <span className="font-mono text-red-600 font-bold text-sm">{highSchoolAchievement.sbd}</span>
                       </span>
                       <span>·</span>
-                      <span className="text-slate-600">Sở GD&amp;ĐT Thành phố Hồ Chí Minh</span>
+                      <span className="text-slate-600">{t('achieveHighSchoolDept')}</span>
                     </div>
                   </div>
                 </div>
@@ -282,7 +284,7 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                   <div className="bg-red-50 px-5 py-3 rounded-2xl border-2 border-red-200 text-right shadow-xs">
                     <div className="text-xs uppercase font-bold text-red-700 flex items-center justify-end gap-1.5">
                       <Award className="w-3.5 h-3.5 text-red-600" />
-                      Tổng điểm Khối A01
+                      {t('achieveA01ScoreLabel')}
                     </div>
                     <div className="text-2xl sm:text-3xl font-black text-red-600 mt-0.5 font-mono">
                       {highSchoolAchievement.scores.totalA01} <span className="text-sm font-bold text-slate-500">/ 30</span>
@@ -294,10 +296,10 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-slate-900 hover:bg-red-600 text-white font-bold text-xs shadow-md transition-colors"
-                    title="Tra cứu điểm thi chính thức trên Báo VietNamNet"
+                    title={t('achieveLookupTitle')}
                   >
                     <ExternalLink className="w-4 h-4" />
-                    Tra cứu SBD {highSchoolAchievement.sbd}
+                    {t('achieveLookupBtn')} {highSchoolAchievement.sbd}
                   </a>
                 </div>
               </div>
@@ -318,14 +320,22 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                       <div className="flex-1">
                         <div className="flex flex-wrap items-center gap-2 mb-1">
                           <span className="text-xs font-black uppercase text-red-700 tracking-wide">
-                            {highSchoolAchievement.honorTitle || 'Vinh danh Học sinh Xuất sắc Môn Tiếng Anh 2K4'}
+                            {highSchoolAchievement.honorTitle || (language === 'en' ? 'Honored Outstanding Student in English 2K4' : 'Vinh danh Học sinh Xuất sắc Môn Tiếng Anh 2K4')}
                           </span>
                           <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-red-100 text-red-800 border border-red-200">
                             NQH CẤP 3
                           </span>
                         </div>
                         <p className="text-xs text-slate-700 font-medium leading-relaxed">
-                          Ghi nhận thành tích Ngoại ngữ <strong>9.4 / 10</strong> tại Kỳ thi Tốt nghiệp THPT 2022; được Hệ thống Luyện thi NQH Cấp 3 tuyên dương trên Bảng vàng (<strong>STT 121 · Nguyễn Trung Đức - THPT Võ Trường Toản</strong>).
+                          {language === 'en' ? (
+                            <>
+                              Recognized for achieving <strong>9.4 / 10</strong> in English in the 2022 National High School Exam; honored on the NQH High School Education System Roll of Honor (<strong>No. 121 · Nguyen Trung Duc - Vo Truong Toan High School</strong>).
+                            </>
+                          ) : (
+                            <>
+                              Ghi nhận thành tích Ngoại ngữ <strong>9.4 / 10</strong> tại Kỳ thi Tốt nghiệp THPT 2022; được Hệ thống Luyện thi NQH Cấp 3 tuyên dương trên Bảng vàng (<strong>STT 121 · Nguyễn Trung Đức - THPT Võ Trường Toản</strong>).
+                            </>
+                          )}
                         </p>
                       </div>
                     </div>
@@ -334,17 +344,17 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                   {/* 6 Subjects Grid */}
                   <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5 pt-2">
                     <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-center">
-                      <div className="text-[11px] font-bold text-slate-500 uppercase">Toán</div>
+                      <div className="text-[11px] font-bold text-slate-500 uppercase">{t('achieveSubjectMath')}</div>
                       <div className="text-lg font-black text-slate-900 font-mono mt-0.5">{highSchoolAchievement.scores.math}</div>
                     </div>
                     <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-center">
-                      <div className="text-[11px] font-bold text-slate-500 uppercase">Vật lí</div>
+                      <div className="text-[11px] font-bold text-slate-500 uppercase">{t('achieveSubjectPhysics')}</div>
                       <div className="text-lg font-black text-slate-900 font-mono mt-0.5">{highSchoolAchievement.scores.physics}</div>
                     </div>
                     <div className="bg-red-50 border-2 border-red-300 rounded-xl p-2.5 text-center relative shadow-xs">
                       <div className="text-[11px] font-black text-red-600 uppercase flex items-center justify-center gap-1">
                         <Award className="w-3 h-3 text-red-600" />
-                        Ngoại ngữ
+                        {t('achieveSubjectEnglish')}
                       </div>
                       <div className="text-lg font-black text-red-600 font-mono mt-0.5">{highSchoolAchievement.scores.english}</div>
                       <span className="absolute -top-2 left-1/2 -translate-x-1/2 px-1.5 py-0.2 bg-red-600 text-white rounded text-[8px] font-bold tracking-wider uppercase">
@@ -352,15 +362,15 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                       </span>
                     </div>
                     <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-center">
-                      <div className="text-[11px] font-bold text-slate-500 uppercase">Ngữ văn</div>
+                      <div className="text-[11px] font-bold text-slate-500 uppercase">{t('achieveSubjectLiterature')}</div>
                       <div className="text-lg font-black text-slate-900 font-mono mt-0.5">{highSchoolAchievement.scores.literature}</div>
                     </div>
                     <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-center">
-                      <div className="text-[11px] font-bold text-slate-500 uppercase">Hóa học</div>
+                      <div className="text-[11px] font-bold text-slate-500 uppercase">{t('achieveSubjectChemistry')}</div>
                       <div className="text-lg font-black text-slate-900 font-mono mt-0.5">{highSchoolAchievement.scores.chemistry}</div>
                     </div>
                     <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-center">
-                      <div className="text-[11px] font-bold text-slate-500 uppercase">Sinh học</div>
+                      <div className="text-[11px] font-bold text-slate-500 uppercase">{t('achieveSubjectBiology')}</div>
                       <div className="text-lg font-black text-slate-900 font-mono mt-0.5">{highSchoolAchievement.scores.biology}</div>
                     </div>
                   </div>
@@ -373,11 +383,13 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                       onOpenMediaModal?.({
                         type: 'image',
                         url: highSchoolAchievement.scoreImage,
-                        title: 'Bảng vàng vinh danh Học sinh xuất sắc Môn Tiếng Anh - Khóa 2K4 (Hệ thống NQH Cấp 3)',
+                        title: language === 'en'
+                          ? 'NQH High School Honor Roll: Outstanding English Student - Class of 2K4'
+                          : 'Bảng vàng vinh danh Học sinh xuất sắc Môn Tiếng Anh - Khóa 2K4 (Hệ thống NQH Cấp 3)',
                       })
                     }
                     className="relative group cursor-pointer overflow-hidden rounded-2xl border-2 border-slate-200 hover:border-red-500 transition-all duration-300 shadow-md hover:shadow-xl max-w-[240px] w-full"
-                    title="Nhấn để xem ảnh phóng to bảng vàng NQH"
+                    title={language === 'en' ? 'Click to view enlarged NQH honor roll' : 'Nhấn để xem ảnh phóng to bảng vàng NQH'}
                   >
                     <img
                       src={highSchoolAchievement.scoreImage}
@@ -390,7 +402,7 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                       </div>
                     </div>
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-900/90 via-slate-900/60 to-transparent p-2 text-center text-white text-[11px] font-bold">
-                      Bảng vàng NQH · STT 121: Nguyễn Trung Đức
+                      {language === 'en' ? 'NQH Honor Roll · No. 121: Nguyen Trung Duc' : 'Bảng vàng NQH · STT 121: Nguyễn Trung Đức'}
                     </div>
                   </div>
                 </div>
@@ -468,7 +480,7 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-red-600 text-white hover:bg-red-700 transition-all shadow-sm hover:scale-105"
                     >
                       <Play className="w-3.5 h-3.5 fill-white" />
-                      Video Demo
+                      {t('achieveBtnVideo')}
                     </button>
                   )}
                   {act.media?.imageUrl && (
@@ -483,7 +495,7 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-sm hover:scale-105"
                     >
                       <ZoomIn className="w-3.5 h-3.5" />
-                      Xem Ảnh
+                      {t('achieveBtnPhotos')}
                     </button>
                   )}
                   {act.media?.projectUrl && (
@@ -494,7 +506,7 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:text-red-600 border border-slate-200 transition-colors"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
-                      Website
+                      {t('achieveBtnWebsite')}
                     </a>
                   )}
                 </div>
@@ -520,7 +532,7 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({
                   <div className="pt-2 flex flex-wrap items-center gap-2">
                     <span className="text-xs text-slate-500 font-bold flex items-center gap-1">
                       <Tag className="w-3.5 h-3.5 text-red-600" />
-                      Kỹ năng mềm:
+                      {t('achieveSoftSkillsLabel')}
                     </span>
                     {act.tags.map((tag, idx) => (
                       <span
